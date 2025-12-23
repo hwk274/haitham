@@ -14,9 +14,26 @@ header {
   background: linear-gradient(135deg,#1e3c72,#2a5298);
   color: #fff; text-align: center;
   padding: 80px 20px; position: sticky; top: 0; z-index: 1000;
+  overflow: hidden;
 }
-header h1 { font-size: 2.5rem; margin-bottom: 10px; }
-header p { font-size: 1.2rem; }
+header h1 { 
+  font-size: 2.5rem; margin-bottom: 10px; 
+  animation: slideDown 1s ease forwards;
+}
+header p { 
+  font-size: 1.2rem; 
+  animation: slideUp 1s ease forwards;
+}
+
+@keyframes slideDown {
+  0% { opacity:0; transform: translateY(-50px);}
+  100% { opacity:1; transform: translateY(0);}
+}
+@keyframes slideUp {
+  0% { opacity:0; transform: translateY(50px);}
+  100% { opacity:1; transform: translateY(0);}
+}
+
 nav {
   background: #fff; display: flex; justify-content: center; gap: 10px; 
   box-shadow: 0 2px 8px rgba(0,0,0,.1); position: sticky; top: 0; z-index: 1001;
@@ -28,12 +45,23 @@ nav a {
 nav a:hover { background: #1e3c72; color: #fff; }
 
 #alerts-section {
-  max-width: 1000px; margin: 20px auto; background: #ffeaea;
+  max-width: 1000px; margin: 20px auto; background: #fff3f3;
   border-radius: 15px; padding: 20px 25px; box-shadow: 0 6px 18px rgba(0,0,0,0.12);
-  text-align: center;
+  text-align: center; position: relative; overflow: hidden;
 }
-#alerts-section h2 { color: #e74c3c; margin-bottom: 12px; }
-#alerts-section p { font-weight: bold; line-height: 1.5; margin: 5px 0; }
+#alerts-section h2 { color: #e74c3c; margin-bottom: 12px; font-size: 1.5rem; }
+
+.alert-item {
+  background: #fef1f1; border-radius: 10px; padding: 10px 12px; margin: 6px auto;
+  max-width: 600px; font-weight: bold; display: flex; justify-content: space-between;
+  align-items: center; animation: fadeIn 0.8s ease forwards;
+}
+.alert-item span { font-weight: normal; color: #555; font-size: 0.95rem; }
+
+@keyframes fadeIn {
+  0% { opacity:0; transform: translateY(-10px);}
+  100% { opacity:1; transform: translateY(0);}
+}
 
 .controls { display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; margin-bottom: 15px; }
 .controls input, .controls select { padding: 8px 12px; border-radius: 8px; border: 1px solid #ccc; font-size: 1rem; }
@@ -63,6 +91,7 @@ nav a:hover { background: #1e3c72; color: #fff; }
 }
 .alert-residence { background: #f0ad4e; }
 .alert-passport { background: #5bc0de; }
+.alert-contract { background: #f39c12; }
 .alert-inactive { background: #6c757d; }
 
 .details-btn {
@@ -83,7 +112,7 @@ footer { background: #1e3c72; color: #fff; text-align: center; padding: 25px; ma
 
 <header>
 <h1>مرحبا بكم في إدارة الموظفين</h1>
-<p>متابعة الإقامات والجوازات وتنبيهات قرب الانتهاء</p>
+<p>متابعة الإقامات والجوازات والعقود مع تنبيهات الأيام المتبقية</p>
 </header>
 
 <nav>
@@ -93,8 +122,10 @@ footer { background: #1e3c72; color: #fff; text-align: center; padding: 25px; ma
 </nav>
 
 <div id="alerts-section">
-<h2>تنبيهات قرب انتهاء الإقامة والجواز</h2>
-<p id="alertsText">جاري تحميل البيانات...</p>
+<h2>تنبيهات قرب انتهاء الإقامة والجواز والعقد</h2>
+<div id="alertsContainer">
+<p>جاري تحميل البيانات...</p>
+</div>
 </div>
 
 <div class="controls">
@@ -131,9 +162,10 @@ function daysUntil(date){
 
 function renderCards(data){
   const cardsContainer=document.getElementById("cards");
+  const alertsContainer=document.getElementById("alertsContainer");
   cardsContainer.innerHTML="";
-  let saudiCount=0, nonSaudiCount=0, expiringResidences=0, expiringPassports=0;
-  let expiringResidencesList=[], expiringPassportsList=[];
+  alertsContainer.innerHTML="";
+  let saudiCount=0, nonSaudiCount=0;
 
   data.forEach(rawRow=>{
     const row={}; for(let key in rawRow) row[key.trim()]=rawRow[key]?.trim();
@@ -141,16 +173,30 @@ function renderCards(data){
     const isActive=!isInactive;
     if(isActive){ if(row["الجنسية"]==="سعودي") saudiCount++; else if(row["الجنسية"]) nonSaudiCount++; }
 
+    // التنبيهات مع الأيام المتبقية
     const alerts=[];
     const resDays=daysUntil(parseDate(row["تاريخ انتهاء الاقامة"]));
     const passDays=daysUntil(parseDate(row["تاريخ انتهاء جواز السفر"]));
+    const contractDays=daysUntil(parseDate(row["تاريخ انتهاء العقد"]));
 
     if(isInactive) alerts.push({text:"❌ غير نشط", class:"alert-inactive"});
     else{
-      if(resDays!==null && resDays<=30){alerts.push({text:"⚠️ الإقامة قرب الانتهاء", class:"alert-residence"}); expiringResidences++; expiringResidencesList.push(row["الاسم"]); }
-      if(passDays!==null && passDays<=30){alerts.push({text:"⚠️ الجواز قرب الانتهاء", class:"alert-passport"}); expiringPassports++; expiringPassportsList.push(row["الاسم"]); }
+      if(resDays!==null && resDays<=30) alerts.push({text:`⚠️ الإقامة قرب الانتهاء (${resDays} يوم)` , class:"alert-residence"});
+      if(passDays!==null && passDays<=30) alerts.push({text:`⚠️ الجواز قرب الانتهاء (${passDays} يوم)`, class:"alert-passport"});
+      if(contractDays!==null && contractDays<=30) alerts.push({text:`⚠️ العقد قرب الانتهاء (${contractDays} يوم)`, class:"alert-contract"});
     }
 
+    // عرض التنبيهات أعلى الصفحة
+    alerts.forEach(a=>{
+      if(a.class!=="alert-inactive"){
+        const alertDiv=document.createElement("div");
+        alertDiv.className="alert-item "+a.class;
+        alertDiv.innerHTML=`${row["الاسم"]||"-"} <span>${a.text}</span>`;
+        alertsContainer.appendChild(alertDiv);
+      }
+    });
+
+    // إنشاء الكرت
     let card=document.createElement("div"); card.className="card";
     const alertsDiv=document.createElement("div");
     alerts.forEach(a=>{let d=document.createElement("div"); d.className="alert-label "+a.class; d.innerText=a.text; alertsDiv.appendChild(d);});
@@ -166,10 +212,12 @@ function renderCards(data){
       <p><strong>الجنسية:</strong> ${row["الجنسية"]||"-"}</p>
       <p><strong>تاريخ الميلاد:</strong> ${row["تاريخ الميلاد"]||"-"}</p>
       <p><strong>رقم الجواز:</strong> ${row["رقم الجواز"]||"-"}</p>
+      <p><strong>رقم العقد:</strong> ${row["رقم العقد"]||"-"}</p>
       <p><strong>تاريخ التعين:</strong> ${row["تاريخ التعين"]||"-"}</p>
       <p><strong>القسم:</strong> ${row["القسم"]||"-"}</p>
       <p><strong>تاريخ انتهاء الإقامة:</strong> ${row["تاريخ انتهاء الاقامة"]||"-"}</p>
       <p><strong>تاريخ انتهاء الجواز:</strong> ${row["تاريخ انتهاء جواز السفر"]||"-"}</p>
+      <p><strong>تاريخ انتهاء العقد:</strong> ${row["تاريخ انتهاء العقد"]||"-"}</p>
       <p><strong>تاريخ نهاية الخدمة:</strong> ${row["تاريخ نهاية الخدمة"]||"-"}</p>`;
     card.appendChild(extraDiv);
 
@@ -183,7 +231,6 @@ function renderCards(data){
   });
 
   document.getElementById("counters").innerText=`السعوديون النشطون: ${saudiCount} | غير السعوديين النشطين: ${nonSaudiCount}`;
-  document.getElementById("alertsText").innerHTML=`الإقامات التي قاربت على الانتهاء (${expiringResidences}): ${expiringResidencesList.join(", ")}<br>الجوازات التي قاربت على الانتهاء (${expiringPassports}): ${expiringPassportsList.join(", ")}`;
 }
 
 function applyFilters(){
