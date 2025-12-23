@@ -4,34 +4,147 @@
 <meta charset="UTF-8">
 <title>بيانات الموظفين والتنبيهات</title>
 <style>
-body { font-family: Arial, sans-serif; background: #eef3ff; padding: 20px; }
-h1 { text-align: center; color: #1e3c72; margin-bottom: 20px; }
+body {
+  font-family: 'Arial', sans-serif;
+  background: #eef3ff;
+  padding: 20px;
+  margin: 0;
+}
+h1 {
+  text-align: center;
+  color: #1e3c72;
+  margin-bottom: 20px;
+  font-size: 2.5rem;
+}
+.controls {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  margin-bottom: 25px;
+  flex-wrap: wrap;
+}
+input, select {
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+}
 
-.controls { display: flex; gap: 15px; justify-content: center; margin-bottom: 20px; flex-wrap: wrap; }
-input, select { padding: 6px 10px; border-radius: 5px; border: 1px solid #ccc; }
+.counters, .expiring {
+  text-align: center;
+  font-weight: bold;
+  line-height: 1.6;
+  margin-bottom: 25px;
+  background: #fff;
+  display: inline-block;
+  padding: 15px 20px;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+}
 
-.counters, .expiring { text-align: center; margin-bottom: 15px; font-weight: bold; line-height:1.4; }
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
 
-.cards { display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; }
+.card {
+  width: 340px;
+  background: #fff;
+  border-radius: 15px;
+  padding: 18px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+  position: relative;
+  line-height: 1.4;
+  transition: transform .3s, box-shadow .3s;
+}
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 22px rgba(0,0,0,0.18);
+}
 
-.card { width: 340px; background: #fff; border-radius: 15px; padding: 15px 18px; box-shadow: 0 6px 18px rgba(0,0,0,0.12); position: relative; line-height: 1.4; transition: transform .3s, box-shadow .3s; }
-.card:hover { transform: translateY(-5px); box-shadow: 0 12px 22px rgba(0,0,0,0.18); }
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+.card h3 {
+  margin: 0;
+  font-size: 18px;
+  color: #1e3c72;
+}
+.card-id {
+  font-size: 14px;
+  color: #555;
+}
 
-.card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
-.card h3 { margin:0; font-size: 17px; color:#1e3c72; }
-.card-id { font-size: 14px; color:#555; }
-
-.alert-label { padding: 4px 10px; border-radius: 6px; color: white; font-weight: bold; font-size: 13px; margin-bottom: 4px; display:inline-block; }
+.alert-label {
+  padding: 6px 12px;
+  border-radius: 8px;
+  color: white;
+  font-weight: bold;
+  font-size: 13px;
+  margin-bottom: 6px;
+  display: inline-block;
+}
 
 .alert-residence { background: #f0ad4e; }   /* أصفر */
 .alert-passport { background: #5bc0de; }    /* أزرق فاتح */
 .alert-contract { background: #f39c12; }   /* برتقالي */
 .alert-inactive { background: #6c757d; }   /* رمادي */
 
-.details-btn { width: 100%; padding: 8px; margin-top: 10px; border: none; background: linear-gradient(135deg,#1e3c72,#2a65c8); color: white; border-radius: 6px; font-weight: bold; cursor: pointer; font-size: 14px; }
+.details-btn {
+  width: 100%;
+  padding: 10px;
+  margin-top: 12px;
+  border: none;
+  background: linear-gradient(135deg,#1e3c72,#2a65c8);
+  color: white;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 15px;
+  transition: 0.3s;
+}
+.details-btn:hover {
+  background: linear-gradient(135deg,#2a5298,#1e3c72);
+}
 
-.extra { display: none; margin-top: 8px; border-top: 1px solid #ddd; padding-top: 8px; font-size: 14px; }
-.extra p { margin: 3px 0; }
+.extra {
+  display: none;
+  margin-top: 10px;
+  border-top: 1px solid #ddd;
+  padding-top: 10px;
+  font-size: 14px;
+}
+.extra p { margin: 4px 0; }
+
+/* تحسين عرض التنبيهات */
+#alerts-section {
+  max-width: 1000px;
+  margin: 30px auto;
+  background: #ffeaea;
+  border-radius: 15px;
+  padding: 20px 25px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+}
+#alerts-section h2 {
+  color: #e74c3c;
+  text-align: center;
+  margin-bottom: 20px;
+}
+#alerts-section p {
+  text-align: center;
+  margin: 5px 0;
+  font-weight: bold;
+  font-size: 1rem;
+  line-height: 1.5;
+}
 </style>
 
 <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
@@ -40,9 +153,10 @@ input, select { padding: 6px 10px; border-radius: 5px; border: 1px solid #ccc; }
 
 <h1>بيانات الموظفين</h1>
 
-<div class="expiring" id="expiringCounters">
-  الإقامات التي قاربت على الانتهاء خلال شهر: 0<br>
-  الجوازات التي قاربت على الانتهاء خلال شهر: 0
+<!-- قسم التنبيهات -->
+<div id="alerts-section">
+<h2>تنبيهات قرب انتهاء الإقامة والجواز</h2>
+<p id="alertsText">جاري تحميل البيانات...</p>
 </div>
 
 <div class="controls">
@@ -85,7 +199,7 @@ function renderCards(data){
 
   data.forEach(rawRow=>{
     const row={}; 
-    for(let key in rawRow) row[key.trim()]=rawRow[key]?.trim(); // تنظيف البيانات
+    for(let key in rawRow) row[key.trim()]=rawRow[key]?.trim();
 
     const isInactive=!!row["تاريخ نهاية الخدمة"];
     const isActive=!isInactive;
@@ -94,27 +208,22 @@ function renderCards(data){
     const alerts=[];
     const resDays=daysUntil(parseDate(row["تاريخ انتهاء الاقامة"]));
     const passDays=daysUntil(parseDate(row["تاريخ انتهاء جواز السفر"]));
-    const contractDays=daysUntil(parseDate(row["تاريخ انتهاء العقد"]));
 
     if(isInactive) alerts.push({text:"❌ غير نشط", class:"alert-inactive"});
     else{
-      if(resDays!==null){ if(resDays<=30){alerts.push({text:"⚠️ الإقامة قرب الانتهاء", class:"alert-residence"}); expiringResidences++; expiringResidencesList.push(row["الاسم"]); } else if(resDays<=60) alerts.push({text:"⚠️ الإقامة ستنتهي قريبًا", class:"alert-residence"});}
-      if(passDays!==null){ if(passDays<=30){alerts.push({text:"⚠️ الجواز قرب الانتهاء", class:"alert-passport"}); expiringPassports++; expiringPassportsList.push(row["الاسم"]); } else if(passDays<=60) alerts.push({text:"⚠️ الجواز سينتهي قريبًا", class:"alert-passport"});}
-      if(contractDays!==null){ if(contractDays<=30) alerts.push({text:"⚠️ العقد قرب الانتهاء", class:"alert-contract"}); else if(contractDays<=60) alerts.push({text:"⚠️ العقد سينتهي قريبًا", class:"alert-contract"});}
+      if(resDays!==null && resDays<=30){alerts.push({text:"⚠️ الإقامة قرب الانتهاء", class:"alert-residence"}); expiringResidences++; expiringResidencesList.push(row["الاسم"]); }
+      if(passDays!==null && passDays<=30){alerts.push({text:"⚠️ الجواز قرب الانتهاء", class:"alert-passport"}); expiringPassports++; expiringPassportsList.push(row["الاسم"]); }
     }
 
     let card=document.createElement("div"); card.className="card";
-
     const alertsDiv=document.createElement("div");
     alerts.forEach(a=>{let d=document.createElement("div"); d.className="alert-label "+a.class; d.innerText=a.text; alertsDiv.appendChild(d);});
     card.appendChild(alertsDiv);
 
-    // الجزء الأساسي دائمًا ظاهر
     const headerDiv=document.createElement("div"); headerDiv.className="card-header";
     headerDiv.innerHTML=`<h3>${row["الاسم"]||"-"}</h3><span class="card-id">${row["رقم الهوية"]||"-"}</span>`;
     card.appendChild(headerDiv);
 
-    // البيانات المخفية
     const extraDiv=document.createElement("div"); extraDiv.className="extra";
     extraDiv.innerHTML=`
       <p><strong>المهنة:</strong> ${row["المهنة"]||"-"}</p>
@@ -129,7 +238,6 @@ function renderCards(data){
       <p><strong>القسم:</strong> ${row["القسم"]||"-"}</p>
       <p><strong>تاريخ انتهاء الإقامة:</strong> ${row["تاريخ انتهاء الاقامة"]||"-"}</p>
       <p><strong>تاريخ انتهاء الجواز:</strong> ${row["تاريخ انتهاء جواز السفر"]||"-"}</p>
-      <p><strong>تاريخ انتهاء العقد:</strong> ${row["تاريخ انتهاء العقد"]||"-"}</p>
       <p><strong>تاريخ نهاية الخدمة:</strong> ${row["تاريخ نهاية الخدمة"]||"-"}</p>`;
     card.appendChild(extraDiv);
 
@@ -143,44 +251,4 @@ function renderCards(data){
     cardsContainer.appendChild(card);
   });
 
-  document.getElementById("counters").innerText=`السعوديون النشطون: ${saudiCount} | غير السعوديين النشطين: ${nonSaudiCount}`;
-  document.getElementById("expiringCounters").innerHTML=`الإقامات التي قاربت على الانتهاء خلال شهر: ${expiringResidences}<br>${expiringResidencesList.join(", ")}<br><br>الجوازات التي قاربت على الانتهاء خلال شهر: ${expiringPassports}<br>${expiringPassportsList.join(", ")}`;
-}
-
-function applyFilters(){
-  const searchVal=document.getElementById("searchInput").value.toLowerCase();
-  const nationalityVal=document.getElementById("nationalityFilter").value;
-  let filtered=allData.filter(rawRow=>{
-    const row={}; for(let key in rawRow) row[key.trim()]=rawRow[key]?.trim();
-    return (row["الاسم"]?.toLowerCase().includes(searchVal) || (row["رقم الهوية"] && row["رقم الهوية"].includes(searchVal))) &&
-           (nationalityVal==="" || row["الجنسية"]===nationalityVal);
-  });
-  renderCards(filtered);
-}
-
-Papa.parse(csvUrl, { 
-  download:true, 
-  header:true, 
-  complete:function(results){
-    allData = results.data.map(r=>{
-      const cleanRow = {};
-      for(let key in r){
-        cleanRow[key.trim()] = r[key]?.trim();
-      }
-      return cleanRow;
-    });
-
-    const nationalitySelect = document.getElementById("nationalityFilter");
-    let uniqueNationalities = Array.from(new Set(allData.map(r=> (r["الجنسية"]||"").trim()).filter(x=>x)));
-    uniqueNationalities.forEach(n=>{let o=document.createElement("option"); o.value=n; o.innerText=n; nationalitySelect.appendChild(o);});
-
-    renderCards(allData);
-  }
-});
-
-document.getElementById("searchInput").addEventListener("input", applyFilters);
-document.getElementById("nationalityFilter").addEventListener("change", applyFilters);
-</script>
-
-</body>
-</html>
+  document.getElementById("counters").innerText=`ا
