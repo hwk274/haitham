@@ -3,108 +3,111 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>الموقع الاحترافي لإدارة الموظفين</title>
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800&display=swap" rel="stylesheet">
-
+<title>الموقع الاحترافي لإدارة الموظفين والمخزون</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800&family=Scheherazade&display=swap" rel="stylesheet">
 <style>
-*{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'Cairo',sans-serif;background:#f4f6fb;color:#333}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Cairo',sans-serif;background:#f4f6fb;color:#333;line-height:1.6;scroll-behavior:smooth;}
+a{text-decoration:none;color:inherit;}
 
 /* الهيدر */
 header{
-  background:linear-gradient(135deg,#1e3c72,#2a5298,#4069d8);
-  color:#fff;
-  padding:120px 20px 90px;
-  text-align:center;
   position:relative;
+  background:#1e3c72;
+  height:250px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  color:#fff;
   overflow:hidden;
 }
+header h1{font-size:2.5rem;margin-bottom:10px;}
+header p{font-size:1.2rem;opacity:.9;margin-bottom:15px;}
 
-/* النص المتحرك */
+/* النص الديني المتحرك */
 .moving-text{
-  font-size:22px;
-  font-weight:700;
-  margin-top:25px;
-  color:#fff;
-  letter-spacing:1px;
+  font-family:'Scheherazade', serif;
+  font-size:24px;
+  color:#FFD700;
+  white-space:nowrap;
+  overflow:hidden;
+  box-sizing:border-box;
+}
+.moving-text span{
   display:inline-block;
-  animation:floatText 7s infinite ease-in-out;
+  padding-left:100%;
+  animation:moveText 15s linear infinite;
 }
-
-@keyframes floatText{
-  0%{transform:translateY(0);opacity:1}
-  50%{transform:translateY(-12px);opacity:.9}
-  100%{transform:translateY(0);opacity:1}
+@keyframes moveText{
+  0% {transform:translateX(0);}
+  100% {transform:translateX(-100%);}
 }
-
-header h1{font-size:38px;margin-bottom:10px}
-header p{font-size:18px;opacity:.9}
 
 /* التنقل */
 nav{
-  position:fixed;
-  top:0;
-  width:100%;
-  background:#ffffffef;
-  box-shadow:0 4px 15px rgba(0,0,0,.15);
-  padding:12px 0;
-  display:flex;
-  justify-content:center;
-  gap:12px;
-  z-index:1000;
+  position:fixed;top:0;left:0;width:100%;display:flex;justify-content:center;gap:15px;
+  background:rgba(255,255,255,0.95);backdrop-filter:blur(10px);
+  box-shadow:0 3px 15px rgba(0,0,0,.15);padding:12px 0;z-index:1000;
 }
 nav a{
-  color:#1e3c72;
-  font-weight:700;
-  padding:10px 22px;
-  background:#eef2ff;
-  border-radius:10px;
-  transition:.3s;
+  padding:12px 28px;font-weight:600;border-radius:8px;color:#1e3c72;transition:0.3s;
 }
-nav a:hover{background:#1e3c72;color:#fff}
+nav a:hover{background:#1e3c72;color:#fff;}
 
 /* أقسام */
-section{max-width:1100px;margin:50px auto;padding:20px;text-align:center}
-section h2{color:#1e3c72;margin-bottom:25px}
+section{max-width:1150px;margin:60px auto;padding:40px 20px;text-align:center;}
+section h2{font-size:2.3rem;margin-bottom:35px;color:#1e3c72;position:relative;display:inline-block;}
+section h2::after{content:"";width:60px;height:3px;background:#1e3c72;display:block;margin:10px auto;border-radius:2px;}
 
-/* كروت */
+/* كروت الخدمات */
 .cards{
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
   gap:25px;
+  margin-top:30px;
 }
 .card{
   background:linear-gradient(145deg,#ffffff,#e6edff);
-  padding:25px;
-  border-radius:18px;
-  box-shadow:0 7px 20px rgba(0,0,0,.1);
-  transition:.4s;
+  padding:20px 15px;border-radius:20px;
+  box-shadow:0 8px 20px rgba(0,0,0,.1);
+  transition:transform .4s ease,box-shadow .4s ease,background .4s ease,opacity 0.6s,transform 0.6s;
+  position:relative;text-align:center;
+  opacity:0; transform: translateY(20px);
 }
-.card:hover{
-  transform:translateY(-10px);
-  box-shadow:0 18px 35px rgba(0,0,0,.25);
-}
-.card .icon{font-size:40px;margin-bottom:10px}
-.card h3{color:#1e3c72}
+.card.visible{opacity:1; transform: translateY(0);}
+.card:hover{transform:translateY(-10px) scale(1.03); box-shadow:0 12px 30px rgba(0,0,0,.2);}
+.card h3{margin-bottom:8px;color:#1e3c72;font-size:1.2rem;font-weight:700;}
+.card p{font-size:0.95rem;color:#555;margin-bottom:5px;}
+.card .icon{font-size:2.5rem;margin-bottom:10px;display:block;transition:transform .5s,color .3s;}
+.card:hover .icon{transform:rotate(360deg);color:#1e3c72;}
+.card small{color:#888;font-size:0.8rem;display:block;margin-top:3px;}
 
-/* التنبيهات */
-#alerts{background:#fff3f0;border-radius:16px;padding:30px;margin-bottom:40px}
-#alerts h2{color:#e74c3c;margin-bottom:20px}
-.card.warn{background:#ffe6e6}
+/* قسم التنبيهات */
+#alerts{background:#fff3f0;padding:25px 15px;border-radius:15px;margin-bottom:40px;box-shadow:0 6px 18px rgba(0,0,0,.1);}
+#alerts h2{color:#e74c3c;margin-bottom:20px;font-size:1.6rem;}
+#alerts .card{background:#fdecea;padding:10px;border-radius:12px; font-size:0.9rem;}
 
-/* زر */
-.btn{
-  display:inline-block;
-  margin-top:15px;
-  padding:12px 30px;
-  background:#1e3c72;
-  color:#fff;
-  border-radius:10px;
-}
+/* أزرار */
+.btn{display:inline-block;margin-top:20px;padding:12px 28px;background:#1e3c72;color:#fff;border-radius:8px;transition:0.3s;font-weight:600;}
+.btn:hover{background:#203a43;}
+
+/* الفوتر */
+footer{background:#1e3c72;color:#fff;text-align:center;padding:25px;font-size:0.95rem;letter-spacing:0.5px;}
+
+/* أيقونة واتساب */
+.whatsapp{position:fixed;bottom:25px;left:25px;width:60px;height:60px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 20px rgba(0,0,0,.4);z-index:1000}
+.whatsapp img{width:36px;}
 </style>
 </head>
-
 <body>
+
+<header>
+  <h1>مرحباً بكم في نظام إدارة الشركة</h1>
+  <p>إدارة احترافية للموظفين والمعلومات بشكل مركزي ومنظم</p>
+  <div class="moving-text"><span>لا إله إلا الله سبحانك إني كنت من الظالمين</span></div>
+</header>
 
 <nav>
 <a href="#home">الرئيسية</a>
@@ -114,67 +117,80 @@ section h2{color:#1e3c72;margin-bottom:25px}
 <a href="#contact">التواصل</a>
 </nav>
 
-<header id="home">
-  <h1>مرحباً بكم في نظام إدارة الشركة</h1>
-  <p>إدارة احترافية للموظفين والمعلومات بشكل مركزي ومنظم</p>
-
-  <div class="moving-text">
-    لا إله إلا أنت سبحانك إني كنت من الظالمين
-  </div>
-</header>
-
+<!-- قسم التنبيهات -->
 <section id="alerts">
-<h2>تنبيهات قرب انتهاء الإقامة / الجواز / العقد</h2>
-<div class="cards" id="alertCards"></div>
+<h2>تنبيهات قرب انتهاء الإقامة</h2>
+<div class="cards" id="alertCards">
+  <!-- سيتم إنشاء الكروت ديناميكياً بواسطة جافاسكربت -->
+</div>
 </section>
 
+<!-- كروت الخدمات -->
 <section id="services">
 <h2>الخدمات</h2>
 <div class="cards">
-<div class="card"><a href="employees.html"><span class="icon">👥</span><h3>الموظفين</h3></a></div>
-<div class="card"><a href="table.html"><span class="icon">📅</span><h3>انتهاء الإقامات</h3></a></div>
-<div class="card"><a href="records.html"><span class="icon">📂</span><h3>السجلات الرسمية</h3></a></div>
-<div class="card"><a href="vehicles.html"><span class="icon">🚗</span><h3>السيارات</h3></a></div>
+<div class="card"><a href="employees.html"><span class="icon">👥</span><h3>الموظفين</h3><small>الصفحة: employees.html</small></a></div>
+<div class="card"><a href="table.html"><span class="icon">📅</span><h3>انتهاء الإقامات</h3><small>الصفحة: table.html</small></a></div>
+<div class="card"><a href="records.html"><span class="icon">📂</span><h3>السجلات الرسمية</h3><small>الصفحة: records.html</small></a></div>
+<div class="card"><a href="cars.html"><span class="icon">🚗</span><h3>السيارات</h3><small>الصفحة: cars.html</small></a></div>
 </div>
 </section>
+
+<section id="contact">
+<h2>تواصل معنا</h2>
+<a class="btn" href="mailto:hwk2@hotmail.com">راسلنا عبر البريد</a>
+</section>
+
+<footer>جميع الحقوق محفوظة © 2025</footer>
+
+<a class="whatsapp" href="https://wa.me/966558020154" target="_blank">
+<img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
+</a>
 
 <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
 <script>
 const csvUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRWS2KglkUT8Pc3L39dcKFosvR3LWKNQv_EVmYbsLZKx2MBVS33EZQGjk6Yb1mmR9XKKaPK_6qVzbi5/pub?output=csv";
+let allData = [];
 
-function parseDate(str){
-  if(!str) return null;
-  str=str.trim();
-  let d = Date.parse(str);
-  if(!isNaN(d)) return new Date(d);
-  if(str.includes("/")){let p=str.split("/");return new Date(p[2],p[1]-1,p[0]);}
-  if(str.includes("-")){let p=str.split("-");return new Date(p[0],p[1]-1,p[2]);}
+function parseDate(str) {
+  if (!str) return null;
+  str = str.toString().trim();
+  let d = Date.parse(str); if(!isNaN(d)) return new Date(d);
+  if(str.includes("/")) { let p=str.split("/").map(x=>parseInt(x)); if(p.length===3) return new Date(p[2],p[1]-1,p[0]); }
+  if(str.includes("-")) { let p=str.split("-").map(x=>parseInt(x)); if(p.length===3) return new Date(p[2],p[1]-1,p[0]); }
   return null;
 }
 
-function daysUntil(date){
-  if(!date) return null;
-  const t=new Date();t.setHours(0,0,0,0);
-  date.setHours(0,0,0,0);
-  return Math.ceil((date-t)/(1000*60*60*24));
-}
+function daysUntil(date){ if(!date) return null; const t=new Date(); t.setHours(0,0,0,0); date.setHours(0,0,0,0); return Math.ceil((date-t)/(1000*60*60*24)); }
 
 function renderAlerts(data){
-  const c=document.getElementById("alertCards");
-  c.innerHTML="";
-  data.forEach(r=>{
-    const name=r["الاسم"];
-    const res=daysUntil(parseDate(r["تاريخ انتهاء الاقامة"]));
-    if(res!==null && res<=30){
-      let div=document.createElement("div");
-      div.className="card "+(res<=3?"warn":"");
-      div.innerHTML=`<span class='icon'>⚠️</span><h3>${name}</h3><p>الإقامة ستنتهي بعد ${res} يوم</p>`;
-      c.appendChild(div);
+  const container=document.getElementById("alertCards");
+  container.innerHTML="";
+  data.forEach(row=>{
+    const resDays=daysUntil(parseDate(row["تاريخ انتهاء الاقامة"]));
+    if(resDays!==null && resDays<=30){
+      const card=document.createElement("div");
+      card.className="card";
+      card.innerHTML=`<span class="icon">⚠️</span><h3>${row["الاسم"]||"-"}</h3><p>تنتهي إقامته بعد ${resDays} أيام</p>`;
+      container.appendChild(card);
     }
   });
 }
 
-Papa.parse(csvUrl,{download:true,header:true,complete:(r)=>renderAlerts(r.data)});
+/* تحميل البيانات */
+Papa.parse(csvUrl,{
+  download:true,header:true,complete:function(results){
+    allData=results.data.map(r=>{const clean={};for(let k in r){clean[k.trim()]=r[k]?.trim();}return clean;});
+    renderAlerts(allData);
+  }
+});
+
+/* ظهور الكروت عند التمرير */
+const cards = document.querySelectorAll('.card');
+const observer = new IntersectionObserver(entries=>{
+  entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('visible');}});
+},{threshold:0.2});
+cards.forEach(card=>observer.observe(card));
 </script>
 
 </body>
