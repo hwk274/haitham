@@ -1,125 +1,22 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>موقع احترافي ديناميكي</title>
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800&display=swap" rel="stylesheet">
-<style>
-*{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'Cairo',sans-serif;background:#f4f6fb;color:#333;line-height:1.6}
-a{text-decoration:none;color:inherit;}
-header{
-  background: linear-gradient(135deg,#1e3c72,#2a5298);
-  color:#fff;text-align:center;padding:100px 20px;position:relative;
-  overflow:hidden;
-}
-header h1{font-size:3rem;margin-bottom:15px;animation:fadeInDown 1s ease-out;}
-header p{font-size:1.3rem;animation:fadeInUp 1s ease-out;}
-@keyframes fadeInDown{from {opacity:0;transform:translateY(-30px);}to{opacity:1;transform:translateY(0);}}
-@keyframes fadeInUp{from {opacity:0;transform:translateY(30px);}to{opacity:1;transform:translateY(0);}}
-
-nav{background:#fff;display:flex;justify-content:center;gap:10px;box-shadow:0 2px 8px rgba(0,0,0,.1);position:sticky;top:0;z-index:1000}
-nav a{padding:15px 25px;font-weight:600;border-radius:6px;color:#1e3c72;transition:0.3s;}
-nav a:hover{background:#1e3c72;color:#fff}
-
-.slider{position:relative;overflow:hidden;border-radius:18px;box-shadow:0 10px 25px rgba(0,0,0,.15);margin:30px auto;max-width:1100px}
-.slides{display:flex;transition:0.6s}
-.slide{min-width:100%;position:relative}
-.slide img{width:100%;display:block;border-radius:18px}
-
-/* تعديل النصوص داخل السلايدر */
-.overlay-text{
-  position:absolute;
-  top:50%;
-  right:50%;
-  transform:translate(50%,-50%);
-  color:#fff;             
-  text-align:center;
-  background:rgba(0,0,0,0.4);
-  padding:10px 20px;      
-  border-radius:12px;
-  font-size:0.95rem;      
-  line-height:1.3;
-  animation:slideUp 1s ease-out;
-}
-.overlay-text h2{
-  font-size:1.5rem;       
-  margin-bottom:5px;
-}
-.overlay-text p{
-  font-size:0.9rem;       
-}
-
-@keyframes slideUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
-
-section{max-width:1100px;margin:60px auto;padding:20px;text-align:center}
-section h2{font-size:2.2rem;margin-bottom:25px;color:#1e3c72}
-.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:25px;margin-top:40px}
-.card{
-  background:#fff;padding:30px;border-radius:15px;
-  box-shadow:0 6px 15px rgba(0,0,0,.1);
-  transition:transform .3s ease,box-shadow .3s ease,background .3s ease;
-  position:relative;overflow:hidden;
-}
-.card:hover{transform:translateY(-10px) scale(1.03);box-shadow:0 12px 25px rgba(0,0,0,.2);background:#f0f4ff}
-.card h3{margin-bottom:12px}
-.card p{font-size:0.95rem;color:#555}
-.card .icon{font-size:2.5rem;margin-bottom:12px;display:block;transition:transform .5s,color .3s}
-.card:hover .icon{transform:rotate(360deg);color:#1e3c72}
-
-.btn{display:inline-block;margin-top:25px;padding:14px 32px;background:#1e3c72;color:#fff;border-radius:8px;transition:0.3s}
-.btn:hover{background:#203a43}
-
-footer{background:#1e3c72;color:#fff;text-align:center;padding:35px}
-
-.whatsapp{position:fixed;bottom:20px;left:20px;width:60px;height:60px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 5px 15px rgba(0,0,0,.4);z-index:1000}
-.whatsapp img{width:34px}
-
-.popup{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.7);display:none;align-items:center;justify-content:center;z-index:2000}
-.popup-content{background:#fff;padding:30px;border-radius:12px;max-width:500px;width:90%;text-align:center;position:relative}
-.popup-close{position:absolute;top:10px;right:15px;font-size:1.5rem;cursor:pointer}
-</style>
-</head>
-<body>
-
-<header>
-<h1>مرحبا بكم في الموقع الاحترافي</h1>
-<p>حلول احترافية لإدارة الموظفين والمخزون</p>
-</header>
-
-<nav>
-<a href="#home">الرئيسية</a>
-<a href="#services">الخدمات</a>
-<a href="idea.html">الفكرة</a>
-<a href="#contact">التواصل</a>
-</nav>
-
-<!-- سلايدر -->
-<section id="home">
-<div class="slider">
-  <div class="slides">
-    <div class="slide">
-      <img src="images/slide1.jfif" alt="صورة رئيسية" loading="lazy">
-      <div class="overlay-text">
-        <h2>إدارة سهلة ومركزية</h2>
-        <p>تابع الموظفين، المخزون، العقود والمزيد بسهولة</p>
-      </div>
-    </div>
-  </div>
-</div>
-</section>
-
-<!-- كروت الخدمات -->
 <section id="services">
 <h2>خدماتنا</h2>
 <div class="cards">
+
+<div class="card">
+  <a href="employees.html">
+    <span class="icon">👥</span>
+    <h3>الموظفين</h3>
+    <p>عرض جميع بيانات الموظفين الأساسية</p>
+    <small style="color:#888;font-size:0.85rem;">الصفحة: employees.html</small>
+  </a>
+</div>
 
 <div class="card">
   <a href="table.html">
     <span class="icon">📅</span>
     <h3>انتهاء الإقامات</h3>
     <p>عرض تواريخ انتهاء الإقامات للموظفين</p>
+    <small style="color:#888;font-size:0.85rem;">الصفحة: table.html</small>
   </a>
 </div>
 
@@ -128,6 +25,7 @@ footer{background:#1e3c72;color:#fff;text-align:center;padding:35px}
     <span class="icon">📝</span>
     <h3>عقود الموظفين</h3>
     <p>الاطلاع على جميع العقود الرسمية للموظفين</p>
+    <small style="color:#888;font-size:0.85rem;">الصفحة: contracts.html</small>
   </a>
 </div>
 
@@ -136,6 +34,7 @@ footer{background:#1e3c72;color:#fff;text-align:center;padding:35px}
     <span class="icon">🛂</span>
     <h3>جوازات الموظفين</h3>
     <p>بيانات الجوازات والتأشيرات</p>
+    <small style="color:#888;font-size:0.85rem;">الصفحة: passports.html</small>
   </a>
 </div>
 
@@ -144,6 +43,7 @@ footer{background:#1e3c72;color:#fff;text-align:center;padding:35px}
     <span class="icon">📂</span>
     <h3>سجلات رسمية</h3>
     <p>مستندات وسجلات الموظفين الرسمية</p>
+    <small style="color:#888;font-size:0.85rem;">الصفحة: records.html</small>
   </a>
 </div>
 
@@ -152,6 +52,7 @@ footer{background:#1e3c72;color:#fff;text-align:center;padding:35px}
     <span class="icon">🔑</span>
     <h3>كلمات مرور</h3>
     <p>عرض جميع كلمات المرور المهمة</p>
+    <small style="color:#888;font-size:0.85rem;">الصفحة: passwords.html</small>
   </a>
 </div>
 
@@ -160,6 +61,7 @@ footer{background:#1e3c72;color:#fff;text-align:center;padding:35px}
     <span class="icon">🚗</span>
     <h3>سيارات</h3>
     <p>بيانات المركبات الخاصة بالشركة</p>
+    <small style="color:#888;font-size:0.85rem;">الصفحة: vehicles.html</small>
   </a>
 </div>
 
@@ -168,6 +70,7 @@ footer{background:#1e3c72;color:#fff;text-align:center;padding:35px}
     <span class="icon">🏠</span>
     <h3>عقود إيجار</h3>
     <p>عرض جميع عقود الإيجار الحالية</p>
+    <small style="color:#888;font-size:0.85rem;">الصفحة: rent_contracts.html</small>
   </a>
 </div>
 
@@ -176,6 +79,7 @@ footer{background:#1e3c72;color:#fff;text-align:center;padding:35px}
     <span class="icon">🎨</span>
     <h3>عن المصمم</h3>
     <p>تعرف على فكرة وتنفيذ الموقع بواسطة المصمم</p>
+    <small style="color:#888;font-size:0.85rem;">الصفحة: idea.html</small>
   </a>
 </div>
 
@@ -184,57 +88,9 @@ footer{background:#1e3c72;color:#fff;text-align:center;padding:35px}
     <span class="icon">📦</span>
     <h3>المخزون</h3>
     <p>عرض تفاصيل المخزون والمنتجات</p>
+    <small style="color:#888;font-size:0.85rem;">الصفحة: inventory.html</small>
   </a>
 </div>
 
 </div>
 </section>
-
-<section id="idea">
-<h2>الفكرة والتنفيذ</h2>
-<p>فكرة وتنفيذ: <strong>هيثم واشحت قرشي</strong></p>
-<p><a href="idea.html" class="btn">اضغط هنا لمعرفة التفاصيل الكاملة</a></p>
-</section>
-
-<section id="contact">
-<h2>تواصل معنا</h2>
-<a class="btn" href="mailto:hwk2@hotmail.com">راسلنا عبر البريد</a>
-</section>
-
-<footer>
-جميع الحقوق محفوظة © 2025
-</footer>
-
-<a class="whatsapp" href="https://wa.me/966558020154" target="_blank">
-<img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
-</a>
-
-<div class="popup" id="popup">
-<div class="popup-content">
-<span class="popup-close" onclick="closePopup()">&times;</span>
-<h3 id="popup-title"></h3>
-<p id="popup-text"></p>
-</div>
-</div>
-
-<script>
-let i=0;
-const slides=document.querySelector('.slides');
-const total=document.querySelectorAll('.slide').length;
-function update(){slides.style.transform=`translateX(-${i*100}%)`;}
-function next(){i=(i+1)%total;update();}
-function prev(){i=(i-1+total)%total;update();}
-setInterval(next,4000);
-
-function openPopup(title,text){
- document.getElementById('popup-title').innerText=title;
- document.getElementById('popup-text').innerText=text;
- document.getElementById('popup').style.display='flex';
-}
-function closePopup(){
- document.getElementById('popup').style.display='none';
-}
-</script>
-
-</body>
-</html>
