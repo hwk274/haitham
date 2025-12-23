@@ -14,7 +14,7 @@ a{text-decoration:none;color:inherit;}
 header{
   position:relative;
   background:url('images/header-bg.jpg') center/cover no-repeat;
-  height:100vh;
+  height:90vh;
   display:flex;
   align-items:center;
   justify-content:center;
@@ -91,18 +91,17 @@ nav a:hover{background:#1e3c72;color:#fff;}
 section{max-width:1150px;margin:60px auto;padding:40px 20px;text-align:center;}
 section h2{font-size:2.3rem;margin-bottom:35px;color:#1e3c72;position:relative;display:inline-block;}
 section h2::after{content:"";width:60px;height:3px;background:#1e3c72;display:block;margin:10px auto;border-radius:2px;}
-#services{background:#ffffff;}
 
-/* كروت الخدمات */
+/* كروت */
 .cards{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-  gap:30px;
+  gap:25px;
   margin-top:30px;
 }
 .card{
   background:linear-gradient(145deg,#ffffff,#e6edff);
-  padding:30px 20px;border-radius:20px;
+  padding:25px 18px;border-radius:20px;
   box-shadow:0 8px 20px rgba(0,0,0,.1);
   transition:transform .4s ease,box-shadow .4s ease,background .4s ease,opacity 0.6s,transform 0.6s;
   position:relative;text-align:center;
@@ -116,20 +115,12 @@ section h2::after{content:"";width:60px;height:3px;background:#1e3c72;display:bl
   box-shadow:0 16px 35px rgba(0,0,0,.25);
   background:linear-gradient(145deg,#e6f0ff,#dbe8ff);
 }
-.card h3{margin-bottom:12px;color:#1e3c72;font-size:1.3rem;font-weight:700;}
-.card p{font-size:1rem;color:#555;margin-bottom:8px;}
+.card h3{margin-bottom:10px;color:#1e3c72;font-size:1.3rem;font-weight:700;}
+.card p{font-size:1rem;color:#555;margin-bottom:10px;}
 .card .icon{font-size:3.2rem;margin-bottom:12px;display:block;transition:transform .6s,color .3s;}
 .card:hover .icon{transform:rotate(360deg);color:#1e3c72;}
 .card small{color:#888;font-size:0.85rem;display:block;margin-top:5px;}
-
-/* قسم التنبيهات */
-#alerts{background:#fff3f0;padding:40px 20px;border-radius:20px;margin-bottom:40px;box-shadow:0 8px 20px rgba(0,0,0,.1);}
-#alerts h2{color:#e74c3c;margin-bottom:30px;}
-#alerts .card{background:#fdecea;}
-
-/* أزرار */
-.btn{display:inline-block;margin-top:20px;padding:14px 32px;background:#1e3c72;color:#fff;border-radius:10px;transition:0.3s;font-weight:600;}
-.btn:hover{background:#203a43;}
+.details-btn{width:100%;padding:8px;margin-top:10px;border:none;background:linear-gradient(135deg,#1e3c72,#2a65c8);color:#fff;border-radius:6px;font-weight:bold;cursor:pointer;font-size:14px;}
 
 /* الفوتر */
 footer{background:#1e3c72;color:#fff;text-align:center;padding:40px;font-size:0.95rem;letter-spacing:0.5px;}
@@ -179,23 +170,9 @@ footer{background:#1e3c72;color:#fff;text-align:center;padding:40px;font-size:0.
 
 <!-- قسم التنبيهات -->
 <section id="alerts">
-<h2>تنبيهات قرب انتهاء الإقامة</h2>
-<div class="cards">
-  <div class="card">
-    <span class="icon">⚠️</span>
-    <h3>موظف 1</h3>
-    <p>تنتهي إقامته بعد 7 أيام</p>
-  </div>
-  <div class="card">
-    <span class="icon">⚠️</span>
-    <h3>موظف 2</h3>
-    <p>تنتهي إقامته بعد 10 أيام</p>
-  </div>
-  <div class="card">
-    <span class="icon">⚠️</span>
-    <h3>موظف 3</h3>
-    <p>تنتهي إقامته بعد 12 يوم</p>
-  </div>
+<h2>تنبيهات قرب الانتهاء</h2>
+<div class="cards" id="alertsCards">
+  <p>جاري تحميل البيانات...</p>
 </div>
 </section>
 
@@ -227,29 +204,83 @@ footer{background:#1e3c72;color:#fff;text-align:center;padding:40px;font-size:0.
 <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
 </a>
 
+<script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
 <script>
 /* سلايدر */
 let currentSlide = 0;
 const slides = document.querySelectorAll('.slide');
-function showSlide(i){
-  slides.forEach((slide,index)=>slide.style.display=(index===i?'block':'none'));
-}
+function showSlide(i){slides.forEach((s,index)=>s.style.display=(index===i?'block':'none'));}
 showSlide(currentSlide);
-setInterval(()=>{
-  currentSlide = (currentSlide+1)%slides.length;
-  showSlide(currentSlide);
-},4000);
+setInterval(()=>{currentSlide=(currentSlide+1)%slides.length; showSlide(currentSlide);},4000);
 
 /* ظهور الكروت عند التمرير */
-const cards = document.querySelectorAll('.card');
 const observer = new IntersectionObserver(entries=>{
   entries.forEach(entry=>{
-    if(entry.isIntersecting){
-      entry.target.classList.add('visible');
-    }
+    if(entry.isIntersecting){entry.target.classList.add('visible');}
   });
 },{threshold:0.2});
-cards.forEach(card=>observer.observe(card));
+document.querySelectorAll('.card').forEach(card=>observer.observe(card));
+
+/* التنبيهات */
+const csvUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRWS2KglkUT8Pc3L39dcKFosvR3LWKNQv_EVmYbsLZKx2MBVS33EZQGjk6Yb1mmR9XKKaPK_6qVzbi5/pub?output=csv";
+
+function parseDate(str){
+  if(!str) return null;
+  str=str.toString().trim().replace(/[\u200B-\u200D\uFEFF]/g,'');
+  let d=Date.parse(str); if(!isNaN(d)) return new Date(d);
+  if(str.includes("/")) { let p=str.split("/").map(x=>parseInt(x)); if(p.length===3) return new Date(p[2],p[1]-1,p[0]); }
+  if(str.includes("-")) { let p=str.split("-").map(x=>parseInt(x)); if(p.length===3) return new Date(p[2],p[1]-1,p[0]); }
+  return null;
+}
+function daysUntil(date){if(!date||isNaN(date)) return null; const t=new Date(); t.setHours(0,0,0,0); date.setHours(0,0,0,0); return Math.ceil((date-t)/(1000*60*60*24));}
+
+function renderAlerts(data){
+  const alertsContainer=document.getElementById("alertsCards");
+  alertsContainer.innerHTML="";
+  data.forEach(rawRow=>{
+    const row={}; for(let key in rawRow) row[key.trim()]=rawRow[key]?.trim();
+    const isInactive=!!row["تاريخ نهاية الخدمة"]; if(isInactive) return;
+
+    const resDays=daysUntil(parseDate(row["تاريخ انتهاء الاقامة"]));
+    const passDays=daysUntil(parseDate(row["تاريخ انتهاء جواز السفر"]));
+    const contractDays=daysUntil(parseDate(row["تاريخ انتهاء العقد"]));
+
+    const alerts=[];
+    if(resDays!==null && resDays<=30) alerts.push({text:`الإقامة تنتهي بعد ${resDays} يوم`, days:resDays});
+    if(passDays!==null && passDays<=30) alerts.push({text:`الجواز ينتهي بعد ${passDays} يوم`, days:passDays});
+    if(contractDays!==null && contractDays<=30) alerts.push({text:`العقد ينتهي بعد ${contractDays} يوم`, days:contractDays});
+
+    alerts.forEach(a=>{
+      const card=document.createElement("div"); card.className="card";
+      let color='#fdecea'; if(a.days<=3) color='#f8d7da';
+      card.style.background=color;
+      card.innerHTML=`
+        <span class="icon">⚠️</span>
+        <h3>${row["الاسم"]||"-"}</h3>
+        <p>${a.text}</p>
+        <div class="extra" style="display:none">
+          <p><strong>المهنة:</strong> ${row["المهنة"]||"-"}</p>
+          <p><strong>الجنسية:</strong> ${row["الجنسية"]||"-"}</p>
+          <p><strong>تاريخ الميلاد:</strong> ${row["تاريخ الميلاد"]||"-"}</p>
+          <p><strong>رقم الجواز:</strong> ${row["رقم الجواز"]||"-"}</p>
+          <p><strong>رقم العقد:</strong> ${row["رقم العقد"]||"-"}</p>
+          <p><strong>رقم الموظف:</strong> ${row["رقم الموظف"]||"-"}</p>
+          <p><strong>رقم الهاتف:</strong> ${row["رقم الهاتف"]||"-"}</p>
+          <p><strong>الايميل:</strong> ${row["الايميل"]||"-"}</p>
+          <p><strong>تاريخ التعين:</strong> ${row["تاريخ التعين"]||"-"}</p>
+          <p><strong>القسم:</strong> ${row["القسم"]||"-"}</p>
+        </div>
+      `;
+      const btn=document.createElement("button"); btn.className="details-btn"; btn.innerText="عرض التفاصيل";
+      btn.onclick=()=>{const extra=card.querySelector(".extra"); extra.style.display=extra.style.display==="block"?"none":"block"; btn.innerText=extra.style.display==="block"?"إخفاء التفاصيل":"عرض التفاصيل";};
+      card.appendChild(btn);
+      alertsContainer.appendChild(card);
+    });
+  });
+  if(alertsContainer.innerHTML.trim()==="") alertsContainer.innerHTML="<p>لا توجد تنبيهات حالية</p>";
+}
+
+Papa.parse(csvUrl,{download:true,header:true,complete:function(results){renderAlerts(results.data);}});
 </script>
 
 </body>
