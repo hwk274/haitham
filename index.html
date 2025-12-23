@@ -122,6 +122,11 @@ section h2::after{content:"";width:60px;height:3px;background:#1e3c72;display:bl
 .card:hover .icon{transform:rotate(360deg);color:#1e3c72;}
 .card small{color:#888;font-size:0.85rem;display:block;margin-top:5px;}
 
+/* قسم التنبيهات */
+#alerts{background:#fff3f0;padding:40px 20px;border-radius:20px;margin-bottom:40px;box-shadow:0 8px 20px rgba(0,0,0,.1);}
+#alerts h2{color:#e74c3c;margin-bottom:30px;}
+#alerts .card{background:#fdecea;}
+
 /* أزرار */
 .btn{display:inline-block;margin-top:20px;padding:14px 32px;background:#1e3c72;color:#fff;border-radius:10px;transition:0.3s;font-weight:600;}
 .btn:hover{background:#203a43;}
@@ -146,6 +151,7 @@ footer{background:#1e3c72;color:#fff;text-align:center;padding:40px;font-size:0.
 
 <nav>
 <a href="#home">الرئيسية</a>
+<a href="#alerts">التنبيهات</a>
 <a href="#services">الخدمات</a>
 <a href="idea.html">الفكرة</a>
 <a href="#contact">التواصل</a>
@@ -171,14 +177,34 @@ footer{background:#1e3c72;color:#fff;text-align:center;padding:40px;font-size:0.
   </div>
 </div>
 
+<!-- قسم التنبيهات -->
+<section id="alerts">
+<h2>تنبيهات قرب انتهاء الإقامة</h2>
+<div class="cards">
+  <div class="card">
+    <span class="icon">⚠️</span>
+    <h3>موظف 1</h3>
+    <p>تنتهي إقامته بعد 7 أيام</p>
+  </div>
+  <div class="card">
+    <span class="icon">⚠️</span>
+    <h3>موظف 2</h3>
+    <p>تنتهي إقامته بعد 10 أيام</p>
+  </div>
+  <div class="card">
+    <span class="icon">⚠️</span>
+    <h3>موظف 3</h3>
+    <p>تنتهي إقامته بعد 12 يوم</p>
+  </div>
+</div>
+</section>
+
 <!-- كروت الخدمات -->
 <section id="services">
 <h2>خدماتنا</h2>
 <div class="cards">
 <div class="card"><a href="employees.html"><span class="icon">👥</span><h3>الموظفين</h3><p>عرض جميع بيانات الموظفين الأساسية</p><small>الصفحة: employees.html</small></a></div>
 <div class="card"><a href="table.html"><span class="icon">📅</span><h3>انتهاء الإقامات</h3><p>عرض تواريخ انتهاء الإقامات للموظفين</p><small>الصفحة: table.html</small></a></div>
-<div class="card"><a href="contracts.html"><span class="icon">📝</span><h3>عقود الموظفين</h3><p>الاطلاع على جميع العقود الرسمية للموظفين</p><small>الصفحة: contracts.html</small></a></div>
-<div class="card"><a href="passports.html"><span class="icon">🛂</span><h3>جوازات الموظفين</h3><p>بيانات الجوازات والتأشيرات</p><small>الصفحة: passports.html</small></a></div>
 <div class="card"><a href="records.html"><span class="icon">📂</span><h3>سجلات رسمية</h3><p>مستندات وسجلات الموظفين الرسمية</p><small>الصفحة: records.html</small></a></div>
 <div class="card"><a href="passwords.html"><span class="icon">🔑</span><h3>كلمات مرور</h3><p>عرض جميع كلمات المرور المهمة</p><small>الصفحة: passwords.html</small></a></div>
 <div class="card"><a href="vehicles.html"><span class="icon">🚗</span><h3>سيارات</h3><p>بيانات المركبات الخاصة بالشركة</p><small>الصفحة: vehicles.html</small></a></div>
