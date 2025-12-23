@@ -8,60 +8,52 @@
 <style>
 /* أساسيات */
 *{margin:0;padding:0;box-sizing:border-box;}
-body{font-family:'Cairo',sans-serif;background:#f4f6fb;color:#333;line-height:1.6;}
+body{font-family:'Cairo',sans-serif;background:#f4f6fb;color:#333;line-height:1.6;scroll-behavior:smooth;}
 a{text-decoration:none;color:inherit;}
 
 /* الهيدر */
 header{
-  background: linear-gradient(135deg,#1e3c72,#2a5298);
-  color:#fff;text-align:center;padding:120px 20px;overflow:hidden;
+  position:relative;
+  background:url('images/header-bg.jpg') center/cover no-repeat;
+  height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  color:#fff;
+}
+header::after{
+  content:"";
+  position:absolute;
+  top:0;left:0;width:100%;height:100%;
+  background:rgba(0,0,0,0.45);
+}
+header .content{
+  position:relative;
+  z-index:2;
+  max-width:900px;
 }
 header h1{font-size:3rem;margin-bottom:15px;animation:fadeInDown 1s ease-out;}
 header p{font-size:1.4rem;animation:fadeInUp 1s ease-out;opacity:.9;}
 @keyframes fadeInDown{from {opacity:0;transform:translateY(-30px);}to{opacity:1;transform:translateY(0);}}
 @keyframes fadeInUp{from {opacity:0;transform:translateY(30px);}to{opacity:1;transform:translateY(0);}}
 
-/* قائمة التنقل */
+/* التنقل */
 nav{
-  background:#fff;display:flex;justify-content:center;gap:15px;
-  box-shadow:0 3px 10px rgba(0,0,0,.15);position:sticky;top:0;z-index:1000;
+  position:fixed;top:0;left:0;width:100%;display:flex;justify-content:center;gap:15px;
+  background:rgba(255,255,255,0.95);backdrop-filter:blur(10px);
+  box-shadow:0 3px 15px rgba(0,0,0,.15);padding:12px 0;z-index:1000;
 }
 nav a{
   padding:12px 28px;font-weight:600;border-radius:8px;color:#1e3c72;transition:0.3s;
 }
 nav a:hover{background:#1e3c72;color:#fff;}
 
-/* السلايدر */
-.slider{position:relative;overflow:hidden;border-radius:20px;box-shadow:0 12px 30px rgba(0,0,0,.15);margin:40px auto;max-width:1100px;}
-.slides{display:flex;transition:0.6s;}
-.slide{min-width:100%;position:relative;}
-.slide img{width:100%;display:block;border-radius:20px;}
-
-/* نصوص السلايدر */
-.overlay-text{
-  position:absolute;top:50%;right:50%;
-  transform:translate(50%,-50%);
-  color:#fff;text-align:center;
-  background:rgba(0,0,0,0.5);
-  padding:20px 35px;border-radius:15px;
-  font-size:1rem;line-height:1.5;
-  animation:slideUp 1s ease-out;
-}
-.overlay-text h2{font-size:2rem;margin-bottom:10px;font-weight:800;}
-.overlay-text p{font-size:1.1rem;}
-@keyframes slideUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
-
-/* الأقسام */
-section{max-width:1150px;margin:60px auto;padding:40px 20px;text-align:center;border-radius:15px;}
+/* كروت الخدمات */
+section{max-width:1150px;margin:60px auto;padding:40px 20px;text-align:center;}
 section h2{font-size:2.3rem;margin-bottom:35px;color:#1e3c72;position:relative;display:inline-block;}
 section h2::after{content:"";width:60px;height:3px;background:#1e3c72;display:block;margin:10px auto;border-radius:2px;}
-
-/* خلفيات الأقسام بالتناوب */
 #services{background:#ffffff;}
-#idea{background:#f0f4ff;}
-#contact{background:#ffffff;}
-
-/* كروت الخدمات */
 .cards{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
@@ -96,18 +88,16 @@ footer{background:#1e3c72;color:#fff;text-align:center;padding:40px;font-size:0.
 /* أيقونة واتساب */
 .whatsapp{position:fixed;bottom:25px;left:25px;width:65px;height:65px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 20px rgba(0,0,0,.4);z-index:1000}
 .whatsapp img{width:36px;}
-
-/* البوب أب */
-.popup{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.7);display:none;align-items:center;justify-content:center;z-index:2000}
-.popup-content{background:#fff;padding:35px;border-radius:15px;max-width:500px;width:90%;text-align:center;position:relative}
-.popup-close{position:absolute;top:10px;right:15px;font-size:1.6rem;cursor:pointer}
 </style>
 </head>
 <body>
 
 <header>
+<div class="content">
 <h1>مرحبا بكم في الموقع الاحترافي</h1>
-<p>حلول احترافية لإدارة الموظفين والمخزون بسهولة ومرونة</p>
+<p>حلول احترافية لإدارة الموظفين والمخزون بطريقة سهلة ومركزية</p>
+<a href="#services" class="btn">اكتشف خدماتنا</a>
+</div>
 </header>
 
 <nav>
@@ -116,21 +106,6 @@ footer{background:#1e3c72;color:#fff;text-align:center;padding:40px;font-size:0.
 <a href="idea.html">الفكرة</a>
 <a href="#contact">التواصل</a>
 </nav>
-
-<!-- سلايدر -->
-<section id="home">
-<div class="slider">
-  <div class="slides">
-    <div class="slide">
-      <img src="images/slide1.jfif" alt="صورة رئيسية" loading="lazy">
-      <div class="overlay-text">
-        <h2>إدارة الموظفين والمخزون</h2>
-        <p>تابع جميع بيانات الموظفين والمخزون والعقود بطريقة سهلة ومركزية</p>
-      </div>
-    </div>
-  </div>
-</div>
-</section>
 
 <!-- كروت الخدمات -->
 <section id="services">
@@ -230,12 +205,6 @@ footer{background:#1e3c72;color:#fff;text-align:center;padding:40px;font-size:0.
 </div>
 </section>
 
-<section id="idea">
-<h2>الفكرة والتنفيذ</h2>
-<p>فكرة وتنفيذ: <strong>هيثم واشحت قرشي</strong></p>
-<p><a href="idea.html" class="btn">اضغط هنا لمعرفة التفاصيل الكاملة</a></p>
-</section>
-
 <section id="contact">
 <h2>تواصل معنا</h2>
 <a class="btn" href="mailto:hwk2@hotmail.com">راسلنا عبر البريد</a>
@@ -248,32 +217,5 @@ footer{background:#1e3c72;color:#fff;text-align:center;padding:40px;font-size:0.
 <a class="whatsapp" href="https://wa.me/966558020154" target="_blank">
 <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
 </a>
-
-<div class="popup" id="popup">
-<div class="popup-content">
-<span class="popup-close" onclick="closePopup()">&times;</span>
-<h3 id="popup-title"></h3>
-<p id="popup-text"></p>
-</div>
-</div>
-
-<script>
-let i=0;
-const slides=document.querySelector('.slides');
-const total=document.querySelectorAll('.slide').length;
-function update(){slides.style.transform=`translateX(-${i*100}%)`;}
-function next(){i=(i+1)%total;update();}
-setInterval(next,4000);
-
-function openPopup(title,text){
- document.getElementById('popup-title').innerText=title;
- document.getElementById('popup-text').innerText=text;
- document.getElementById('popup').style.display='flex';
-}
-function closePopup(){
- document.getElementById('popup').style.display='none';
-}
-</script>
-
 </body>
 </html>
