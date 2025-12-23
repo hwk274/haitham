@@ -6,100 +6,108 @@
 <title>الموقع الاحترافي لإدارة الموظفين والمخزون</title>
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800&display=swap" rel="stylesheet">
 <style>
-*{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'Cairo',sans-serif;background:#f4f6fb;color:#333;line-height:1.6}
-
-/* الروابط */
+/* أساسيات */
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Cairo',sans-serif;background:#f4f6fb;color:#333;line-height:1.6;}
 a{text-decoration:none;color:inherit;}
 
 /* الهيدر */
 header{
   background: linear-gradient(135deg,#1e3c72,#2a5298);
-  color:#fff;text-align:center;padding:100px 20px;position:relative;overflow:hidden;
+  color:#fff;text-align:center;padding:120px 20px;overflow:hidden;
 }
 header h1{font-size:3rem;margin-bottom:15px;animation:fadeInDown 1s ease-out;}
-header p{font-size:1.3rem;animation:fadeInUp 1s ease-out;}
+header p{font-size:1.4rem;animation:fadeInUp 1s ease-out;opacity:.9;}
 @keyframes fadeInDown{from {opacity:0;transform:translateY(-30px);}to{opacity:1;transform:translateY(0);}}
 @keyframes fadeInUp{from {opacity:0;transform:translateY(30px);}to{opacity:1;transform:translateY(0);}}
 
 /* قائمة التنقل */
 nav{
-  background:#fff;display:flex;justify-content:center;gap:10px;
-  box-shadow:0 2px 8px rgba(0,0,0,.1);position:sticky;top:0;z-index:1000;
+  background:#fff;display:flex;justify-content:center;gap:15px;
+  box-shadow:0 3px 10px rgba(0,0,0,.15);position:sticky;top:0;z-index:1000;
 }
 nav a{
-  padding:15px 25px;font-weight:600;border-radius:6px;color:#1e3c72;transition:0.3s;
+  padding:12px 28px;font-weight:600;border-radius:8px;color:#1e3c72;transition:0.3s;
 }
-nav a:hover{background:#1e3c72;color:#fff}
+nav a:hover{background:#1e3c72;color:#fff;}
 
 /* السلايدر */
-.slider{position:relative;overflow:hidden;border-radius:18px;box-shadow:0 10px 25px rgba(0,0,0,.15);margin:30px auto;max-width:1100px}
-.slides{display:flex;transition:0.6s}
-.slide{min-width:100%;position:relative}
-.slide img{width:100%;display:block;border-radius:18px}
+.slider{position:relative;overflow:hidden;border-radius:20px;box-shadow:0 12px 30px rgba(0,0,0,.15);margin:40px auto;max-width:1100px;}
+.slides{display:flex;transition:0.6s;}
+.slide{min-width:100%;position:relative;}
+.slide img{width:100%;display:block;border-radius:20px;}
 
-/* النصوص داخل السلايدر */
+/* نصوص السلايدر */
 .overlay-text{
-  position:absolute;
-  top:50%;
-  right:50%;
+  position:absolute;top:50%;right:50%;
   transform:translate(50%,-50%);
   color:#fff;text-align:center;
-  background:rgba(0,0,0,0.4);
-  padding:15px 25px;border-radius:12px;
-  font-size:1rem;line-height:1.4;
+  background:rgba(0,0,0,0.5);
+  padding:20px 35px;border-radius:15px;
+  font-size:1rem;line-height:1.5;
   animation:slideUp 1s ease-out;
 }
-.overlay-text h2{font-size:1.8rem;margin-bottom:8px;}
-.overlay-text p{font-size:1rem;}
+.overlay-text h2{font-size:2rem;margin-bottom:10px;font-weight:800;}
+.overlay-text p{font-size:1.1rem;}
 @keyframes slideUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
 
-/* أقسام الصفحة */
-section{max-width:1100px;margin:60px auto;padding:20px;text-align:center}
-section h2{font-size:2.2rem;margin-bottom:25px;color:#1e3c72}
+/* الأقسام */
+section{max-width:1150px;margin:60px auto;padding:40px 20px;text-align:center;border-radius:15px;}
+section h2{font-size:2.3rem;margin-bottom:35px;color:#1e3c72;position:relative;display:inline-block;}
+section h2::after{content:"";width:60px;height:3px;background:#1e3c72;display:block;margin:10px auto;border-radius:2px;}
+
+/* خلفيات الأقسام بالتناوب */
+#services{background:#ffffff;}
+#idea{background:#f0f4ff;}
+#contact{background:#ffffff;}
 
 /* كروت الخدمات */
 .cards{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-  gap:25px;
-  margin-top:40px;
+  gap:30px;
+  margin-top:30px;
 }
 .card{
-  background:#fff;padding:25px 20px;border-radius:15px;
-  box-shadow:0 6px 15px rgba(0,0,0,.1);
-  transition:transform .3s ease,box-shadow .3s ease,background .3s ease;
-  position:relative;overflow:hidden;text-align:center;
+  background:linear-gradient(145deg,#ffffff,#e6edff);
+  padding:30px 20px;border-radius:20px;
+  box-shadow:0 8px 20px rgba(0,0,0,.1);
+  transition:transform .4s ease,box-shadow .4s ease,background .4s ease;
+  position:relative;text-align:center;
 }
-.card:hover{transform:translateY(-10px) scale(1.03);box-shadow:0 12px 25px rgba(0,0,0,.2);background:#f0f4ff}
-.card h3{margin-bottom:12px;color:#1e3c72;font-size:1.2rem;}
-.card p{font-size:0.95rem;color:#555;margin-bottom:8px}
-.card .icon{font-size:3rem;margin-bottom:12px;display:block;transition:transform .5s,color .3s}
-.card:hover .icon{transform:rotate(360deg);color:#1e3c72}
-.card small{color:#888;font-size:0.85rem;display:block;margin-top:5px}
+.card:hover{
+  transform:translateY(-12px) scale(1.05);
+  box-shadow:0 16px 35px rgba(0,0,0,.25);
+  background:linear-gradient(145deg,#e6f0ff,#dbe8ff);
+}
+.card h3{margin-bottom:12px;color:#1e3c72;font-size:1.3rem;font-weight:700;}
+.card p{font-size:1rem;color:#555;margin-bottom:8px;}
+.card .icon{font-size:3.2rem;margin-bottom:12px;display:block;transition:transform .6s,color .3s;}
+.card:hover .icon{transform:rotate(360deg);color:#1e3c72;}
+.card small{color:#888;font-size:0.85rem;display:block;margin-top:5px;}
 
 /* أزرار */
-.btn{display:inline-block;margin-top:15px;padding:12px 28px;background:#1e3c72;color:#fff;border-radius:8px;transition:0.3s}
-.btn:hover{background:#203a43}
+.btn{display:inline-block;margin-top:20px;padding:14px 32px;background:#1e3c72;color:#fff;border-radius:10px;transition:0.3s;font-weight:600;}
+.btn:hover{background:#203a43;}
 
 /* الفوتر */
-footer{background:#1e3c72;color:#fff;text-align:center;padding:35px}
+footer{background:#1e3c72;color:#fff;text-align:center;padding:40px;font-size:0.95rem;letter-spacing:0.5px;}
 
 /* أيقونة واتساب */
-.whatsapp{position:fixed;bottom:20px;left:20px;width:60px;height:60px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 5px 15px rgba(0,0,0,.4);z-index:1000}
-.whatsapp img{width:34px}
+.whatsapp{position:fixed;bottom:25px;left:25px;width:65px;height:65px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 20px rgba(0,0,0,.4);z-index:1000}
+.whatsapp img{width:36px;}
 
 /* البوب أب */
 .popup{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.7);display:none;align-items:center;justify-content:center;z-index:2000}
-.popup-content{background:#fff;padding:30px;border-radius:12px;max-width:500px;width:90%;text-align:center;position:relative}
-.popup-close{position:absolute;top:10px;right:15px;font-size:1.5rem;cursor:pointer}
+.popup-content{background:#fff;padding:35px;border-radius:15px;max-width:500px;width:90%;text-align:center;position:relative}
+.popup-close{position:absolute;top:10px;right:15px;font-size:1.6rem;cursor:pointer}
 </style>
 </head>
 <body>
 
 <header>
 <h1>مرحبا بكم في الموقع الاحترافي</h1>
-<p>حلول احترافية لإدارة الموظفين والمخزون</p>
+<p>حلول احترافية لإدارة الموظفين والمخزون بسهولة ومرونة</p>
 </header>
 
 <nav>
@@ -116,8 +124,8 @@ footer{background:#1e3c72;color:#fff;text-align:center;padding:35px}
     <div class="slide">
       <img src="images/slide1.jfif" alt="صورة رئيسية" loading="lazy">
       <div class="overlay-text">
-        <h2>إدارة سهلة ومركزية</h2>
-        <p>تابع الموظفين، المخزون، العقود والمزيد بسهولة</p>
+        <h2>إدارة الموظفين والمخزون</h2>
+        <p>تابع جميع بيانات الموظفين والمخزون والعقود بطريقة سهلة ومركزية</p>
       </div>
     </div>
   </div>
