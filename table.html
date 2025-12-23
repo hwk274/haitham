@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<title>جدول الإقامات</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+body{
+  font-family:'Cairo',sans-serif;
+  background:#f4f6fb;
+  padding:20px;
+}
+.container{
+  max-width:1100px;
+  margin:auto;
+  background:#fff;
+  padding:20px;
+  border-radius:12px;
+  box-shadow:0 6px 20px rgba(0,0,0,.15);
+}
+h1{
+  text-align:center;
+  color:#1e3c72;
+  margin-bottom:20px;
+}
+#search{
+  width:100%;
+  padding:10px;
+  font-size:16px;
+  border:2px solid #1e3c72;
+  border-radius:8px;
+  margin-bottom:15px;
+}
+table{
+  width:100%;
+  border-collapse:collapse;
+  text-align:center;
+}
+th{
+  background:#1e3c72;
+  color:white;
+  padding:10px;
+}
+td{
+  padding:8px;
+  border:1px solid #ddd;
+}
+tr:hover{
+  background:#f1f1f1;
+}
+.status{
+  font-weight:bold;
+}
+</style>
+</head>
+
+<body>
+<div class="container">
+<h1>جدول الإقامات</h1>
+
+<input type="text" id="search" placeholder="ابحث باسم الموظف أو رقم الإقامة ...">
+
+<table id="iqamaTable">
+<thead>
+<tr>
+<th>تاريخ انتهاء الإقامة</th>
+<th>الاسم</th>
+<th>الجنسية</th>
+<th>رقم الإقامة</th>
+<th>الحالة</th>
+</tr>
+</thead>
+
+<tbody>
+
+<tr><td>30/12/2025</td><td>ماجد محسن ذيبان</td><td>يمني</td><td>2286959891</td></tr>
+<tr><td>07/01/2026</td><td>محمد اشرف شاه</td><td>باكستاني</td><td>2070116955</td></tr>
+<tr><td>24/01/2026</td><td>حيدر على بشير</td><td>هندي</td><td>2566886434</td></tr>
+<tr><td>26/02/2026</td><td>ناصر صالح باخميس</td><td>يمني</td><td>2285574550</td></tr>
+<tr><td>26/02/2026</td><td>هيثم واشحت قرشي</td><td>مصري</td><td>2251753832</td></tr>
+<tr><td>10/03/2026</td><td>نورشاد بوتور فالابيل</td><td>هندي</td><td>2260068123</td></tr>
+<tr><td>22/04/2026</td><td>حسن جمعة شاكر</td><td>مصري</td><td>2417982705</td></tr>
+<tr><td>23/04/2026</td><td>اسلام انور عبد المنعم</td><td>مصري</td><td>2417898497</td></tr>
+<tr><td>08/05/2026</td><td>سالم عبد الله بن دويس</td><td>يمني</td><td>2176008916</td></tr>
+<tr><td>08/06/2026</td><td>محمد فاروق حاجي خورشيد</td><td>بنجلاديشي</td><td>2164263309</td></tr>
+<tr><td>12/06/2026</td><td>لطفي عبود المنصوري</td><td>يمني</td><td>2293122129</td></tr>
+<tr><td>27/06/2026</td><td>عبد الله احمد باحسن</td><td>يمني</td><td>2139786210</td></tr>
+<tr><td>11/07/2026</td><td>عبدالله عبد الحميد جعفر</td><td>مصري</td><td>2176415715</td></tr>
+<tr><td>30/07/2026</td><td>سعد احمد بادويس</td><td>يمني</td><td>2148723501</td></tr>
+<tr><td>31/07/2026</td><td>ابراهيم علي كرامة جيزان</td><td>يمني</td><td>2292098098</td></tr>
+<tr><td>06/08/2026</td><td>يوسف بلولة على احمد</td><td>سوداني</td><td>2439896594</td></tr>
+<tr><td>07/08/2026</td><td>عارف سعيد بادبيان</td><td>يمني</td><td>2192180384</td></tr>
+<tr><td>12/08/2026</td><td>سعيد عوض المعاري</td><td>يمني</td><td>2078134539</td></tr>
+<tr><td>16/08/2026</td><td>مسعد عادل عبدالله مصطفى صيام</td><td>مصري</td><td>2527472126</td></tr>
+<tr><td>19/08/2026</td><td>احمد محمد بامجبور</td><td>يمني</td><td>2054318163</td></tr>
+<tr><td>24/08/2026</td><td>محمد مصطفي كمال سيد</td><td>هندي</td><td>2279143404</td></tr>
+<tr><td>18/09/2026</td><td>جميل عبد الله الجابري</td><td>يمني</td><td>2357683263</td></tr>
+<tr><td>05/12/2026</td><td>جسيم عبداللطيف</td><td>بنجلاديشي</td><td>2166876868</td></tr>
+
+</tbody>
+</table>
+</div>
+
+<script>
+// ----------------- البحث -----------------
+document.getElementById("search").addEventListener("keyup", function(){
+  let value = this.value.toLowerCase();
+  let rows = document.querySelectorAll("#iqamaTable tbody tr");
+
+  rows.forEach(row=>{
+    row.style.display = row.innerText.toLowerCase().includes(value) ? "" : "none";
+  });
+});
+
+// ------------- تحليل تواريخ الإقامات -----------------
+function parseDate(dateStr){
+  const parts = dateStr.split("/");
+  return new Date(parts[2], parts[1]-1, parts[0]);
+}
+
+const rows = document.querySelectorAll("#iqamaTable tbody tr");
+const today = new Date();
+
+rows.forEach(row=>{
+  const dateText = row.children[0].innerText.trim();
+  const expDate = parseDate(dateText);
+
+  const diffTime = expDate - today;
+  const diffDays = Math.ceil(diffTime / (1000*60*60*24));
+
+  let status = "";
+  let color = "";
+
+  if(diffDays < 0){
+    status = "❌ منتهية";
+    color = "#ffb3b3";
+  } 
+  else if(diffDays <= 30){
+    status = "🟠 قاربت على الانتهاء";
+    color = "#ffe0b3";
+  }
+  else if(diffDays <= 60){
+    status = "🟡 قريب الانتهاء";
+    color = "#fff6b3";
+  }
+  else{
+    status = "🟢 سارية";
+    color = "#bfffc4";
+  }
+
+  let statusCell = document.createElement("td");
+  statusCell.className = "status";
+  statusCell.innerText = status;
+  row.appendChild(statusCell);
+
+  row.style.background = color;
+});
+</script>
+
+</body>
+</html>

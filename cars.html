@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<title>بيانات السيارات</title>
+<style>
+body{
+  font-family:Arial;
+  background:#f4f6f8;
+  padding:20px;
+}
+h2{
+  text-align:center;
+  color:#1e3c72;
+}
+table{
+  width:100%;
+  border-collapse:collapse;
+  background:white;
+}
+th, td{
+  border:1px solid #ddd;
+  padding:8px;
+  text-align:center;
+  font-size:14px;
+}
+th{
+  background:#1e3c72;
+  color:white;
+}
+tr:hover{
+  background:#f1f1f1;
+}
+</style>
+</head>
+<body>
+
+<h2>🚗 سجل السيارات</h2>
+
+<table id="carsTable">
+  <thead>
+    <tr>
+      <th>اسم السيارة</th>
+      <th>الاستخدام</th>
+      <th>اسم المفوض</th>
+      <th>انتهاء التفويض</th>
+      <th>رقم اللوحة</th>
+      <th>نوع السيارة</th>
+      <th>رقم التسلسل</th>
+      <th>الموديل</th>
+      <th>انتهاء الفحص</th>
+      <th>انتهاء الاستمارة</th>
+      <th>انتهاء بطاقة التشغيل</th>
+      <th>انتهاء التأمين</th>
+    </tr>
+  </thead>
+  <tbody></tbody>
+</table>
+
+<script>
+const csvUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRB0P_xju8oG-LTgbRxdlcGlBXjCHvLxO9SVAyyvZg6LWqskbZBEFXG5sQa9Zgaik2ZXEmFtXO4xu8f/pub?output=csv";
+
+fetch(csvUrl)
+  .then(res => res.text())
+  .then(csv => {
+    const rows = csv.split("\n").slice(1); // حذف العناوين
+    const tbody = document.querySelector("#carsTable tbody");
+
+    rows.forEach(row => {
+      if(row.trim() === "") return;
+
+      const cols = row.split(",");
+      let tr = "<tr>";
+
+      cols.forEach(col => {
+        tr += `<td>${col.replace(/"/g, "")}</td>`;
+      });
+
+      tr += "</tr>";
+      tbody.innerHTML += tr;
+    });
+  });
+</script>
+
+</body>
+</html>
+
