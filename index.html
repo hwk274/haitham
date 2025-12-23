@@ -116,17 +116,20 @@ footer{background:#1e3c72;color:#fff;text-align:center;padding:25px;font-size:0.
 <!-- قسم التنبيهات -->
 <section id="alerts">
 <h2>تنبيهات قرب انتهاء الإقامة</h2>
-<div class="cards" id="alertCards"></div>
+<div class="cards" id="alertCards">
+  <!-- كروت مؤقتة قبل تحميل البيانات -->
+  <div class="card visible"><span class="icon">ℹ️</span><h3>تحميل البيانات...</h3><p>يرجى الانتظار</p></div>
+</div>
 </section>
 
 <!-- كروت الخدمات -->
 <section id="services">
 <h2>خدماتنا</h2>
 <div class="cards">
-  <div class="card"><a href="employees.html"><span class="icon">👥</span><h3>الموظفين</h3><p>عرض جميع بيانات الموظفين الأساسية</p><small>الصفحة: employees.html</small></a></div>
-  <div class="card"><a href="cars.html"><span class="icon">🚗</span><h3>السيارات</h3><p>بيانات المركبات الخاصة بالشركة</p><small>الصفحة: cars.html</small></a></div>
-  <div class="card"><a href="records.html"><span class="icon">📂</span><h3>السجلات الرسمية</h3><p>مستندات وسجلات الموظفين الرسمية</p><small>الصفحة: records.html</small></a></div>
-  <div class="card"><a href="table.html"><span class="icon">📅</span><h3>انتهاء الإقامات</h3><p>عرض تواريخ انتهاء الإقامات للموظفين</p><small>الصفحة: table.html</small></a></div>
+  <div class="card visible"><a href="employees.html"><span class="icon">👥</span><h3>الموظفين</h3><p>عرض جميع بيانات الموظفين الأساسية</p><small>الصفحة: employees.html</small></a></div>
+  <div class="card visible"><a href="cars.html"><span class="icon">🚗</span><h3>السيارات</h3><p>بيانات المركبات الخاصة بالشركة</p><small>الصفحة: cars.html</small></a></div>
+  <div class="card visible"><a href="records.html"><span class="icon">📂</span><h3>السجلات الرسمية</h3><p>مستندات وسجلات الموظفين الرسمية</p><small>الصفحة: records.html</small></a></div>
+  <div class="card visible"><a href="table.html"><span class="icon">📅</span><h3>انتهاء الإقامات</h3><p>عرض تواريخ انتهاء الإقامات للموظفين</p><small>الصفحة: table.html</small></a></div>
 </div>
 </section>
 
@@ -146,12 +149,12 @@ footer{background:#1e3c72;color:#fff;text-align:center;padding:25px;font-size:0.
 <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
 <script>
 const csvUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRWS2KglkUT8Pc3L39dcKFosvR3LWKNQv_EVmYbsLZKx2MBVS33EZQGjk6Yb1mmR9XKKaPK_6qVzbi5/pub?output=csv";
-let allData = [];
 
 function parseDate(str) {
-  if (!str) return null;
+  if(!str) return null;
   str = str.toString().trim();
-  let d = Date.parse(str); if(!isNaN(d)) return new Date(d);
+  let d = Date.parse(str);
+  if(!isNaN(d)) return new Date(d);
   if(str.includes("/")) { let p=str.split("/").map(x=>parseInt(x)); if(p.length===3) return new Date(p[2],p[1]-1,p[0]); }
   if(str.includes("-")) { let p=str.split("-").map(x=>parseInt(x)); if(p.length===3) return new Date(p[2],p[1]-1,p[0]); }
   return null;
@@ -166,6 +169,7 @@ function daysUntil(date){
 function renderAlerts(data){
   const container = document.getElementById("alertCards");
   container.innerHTML = "";
+  let count=0;
   data.forEach(row=>{
     const resDays = daysUntil(parseDate(row["تاريخ انتهاء الاقامة"]));
     if(resDays !== null && resDays <= 30){
@@ -176,8 +180,12 @@ function renderAlerts(data){
                         <h3>${row["الاسم"]||"-"}</h3>
                         <p>${warnText}</p>`;
       container.appendChild(card);
+      count++;
     }
   });
+  if(count===0){
+    container.innerHTML = `<div class="card visible"><span class="icon">✅</span><h3>لا توجد تنبيهات</h3><p>جميع الإقامات صالحة</p></div>`;
+  }
 
   const alertCards = container.querySelectorAll('.card');
   const observer = new IntersectionObserver(entries=>{
@@ -194,7 +202,11 @@ Papa.parse(csvUrl, {
   download:true, 
   header:true, 
   complete:function(results){
-    allData = results.data.map(r=>{ const cleanRow={}; for(let key in r){ cleanRow[key.trim()] = r[key]?.trim(); } return cleanRow; });
+    const allData = results.data.map(r=>{
+      const cleanRow={}; 
+      for(let key in r){ cleanRow[key.trim()] = r[key]?.trim(); } 
+      return cleanRow; 
+    });
     renderAlerts(allData);
   }
 });
