@@ -6,7 +6,6 @@
 <title>الموقع الاحترافي لإدارة الموظفين والمخزون</title>
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800&display=swap" rel="stylesheet">
 <style>
-/* أساسيات */
 *{margin:0;padding:0;box-sizing:border-box;}
 body{font-family:'Cairo',sans-serif;background:#f4f6fb;color:#333;line-height:1.6;scroll-behavior:smooth;}
 a{text-decoration:none;color:inherit;}
@@ -21,6 +20,7 @@ header{
   justify-content:center;
   text-align:center;
   color:#fff;
+  overflow:hidden;
 }
 header::after{
   content:"";
@@ -49,11 +49,51 @@ nav a{
 }
 nav a:hover{background:#1e3c72;color:#fff;}
 
-/* كروت الخدمات */
+/* السلايدر */
+.slider{
+  position:relative;
+  max-width:1100px;
+  margin:40px auto;
+  overflow:hidden;
+  border-radius:20px;
+  box-shadow:0 12px 30px rgba(0,0,0,.15);
+}
+.slides{
+  display:flex;
+  transition:0.6s;
+}
+.slide{
+  min-width:100%;
+  position:relative;
+}
+.slide img{
+  width:100%;
+  display:block;
+  border-radius:20px;
+}
+/* نصوص السلايدر */
+.overlay-text{
+  position:absolute;
+  top:50%;
+  right:50%;
+  transform:translate(50%,-50%);
+  color:#fff;text-align:center;
+  background:rgba(0,0,0,0.5);
+  padding:20px 35px;border-radius:15px;
+  font-size:1rem;line-height:1.5;
+  animation:slideUp 1s ease-out;
+}
+.overlay-text h2{font-size:2rem;margin-bottom:10px;font-weight:800;}
+.overlay-text p{font-size:1.1rem;}
+@keyframes slideUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
+
+/* أقسام */
 section{max-width:1150px;margin:60px auto;padding:40px 20px;text-align:center;}
 section h2{font-size:2.3rem;margin-bottom:35px;color:#1e3c72;position:relative;display:inline-block;}
 section h2::after{content:"";width:60px;height:3px;background:#1e3c72;display:block;margin:10px auto;border-radius:2px;}
 #services{background:#ffffff;}
+
+/* كروت الخدمات */
 .cards{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
@@ -64,8 +104,12 @@ section h2::after{content:"";width:60px;height:3px;background:#1e3c72;display:bl
   background:linear-gradient(145deg,#ffffff,#e6edff);
   padding:30px 20px;border-radius:20px;
   box-shadow:0 8px 20px rgba(0,0,0,.1);
-  transition:transform .4s ease,box-shadow .4s ease,background .4s ease;
+  transition:transform .4s ease,box-shadow .4s ease,background .4s ease,opacity 0.6s,transform 0.6s;
   position:relative;text-align:center;
+  opacity:0; transform: translateY(30px);
+}
+.card.visible{
+  opacity:1; transform: translateY(0);
 }
 .card:hover{
   transform:translateY(-12px) scale(1.05);
@@ -107,101 +151,40 @@ footer{background:#1e3c72;color:#fff;text-align:center;padding:40px;font-size:0.
 <a href="#contact">التواصل</a>
 </nav>
 
+<!-- السلايدر -->
+<div class="slider">
+  <div class="slides">
+    <div class="slide">
+      <img src="images/slide1.jfif" alt="Slide 1">
+      <div class="overlay-text">
+        <h2>إدارة الموظفين والمخزون</h2>
+        <p>تابع جميع بيانات الموظفين والمخزون والعقود بطريقة سهلة ومركزية</p>
+      </div>
+    </div>
+    <div class="slide">
+      <img src="images/slide2.jfif" alt="Slide 2">
+      <div class="overlay-text">
+        <h2>تنظيم العقود والسجلات</h2>
+        <p>كل مستنداتك الرسمية في مكان واحد بشكل مرتب وسهل الوصول</p>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- كروت الخدمات -->
 <section id="services">
 <h2>خدماتنا</h2>
 <div class="cards">
-
-<div class="card">
-  <a href="employees.html">
-    <span class="icon">👥</span>
-    <h3>الموظفين</h3>
-    <p>عرض جميع بيانات الموظفين الأساسية</p>
-    <small>الصفحة: employees.html</small>
-  </a>
-</div>
-
-<div class="card">
-  <a href="table.html">
-    <span class="icon">📅</span>
-    <h3>انتهاء الإقامات</h3>
-    <p>عرض تواريخ انتهاء الإقامات للموظفين</p>
-    <small>الصفحة: table.html</small>
-  </a>
-</div>
-
-<div class="card">
-  <a href="contracts.html">
-    <span class="icon">📝</span>
-    <h3>عقود الموظفين</h3>
-    <p>الاطلاع على جميع العقود الرسمية للموظفين</p>
-    <small>الصفحة: contracts.html</small>
-  </a>
-</div>
-
-<div class="card">
-  <a href="passports.html">
-    <span class="icon">🛂</span>
-    <h3>جوازات الموظفين</h3>
-    <p>بيانات الجوازات والتأشيرات</p>
-    <small>الصفحة: passports.html</small>
-  </a>
-</div>
-
-<div class="card">
-  <a href="records.html">
-    <span class="icon">📂</span>
-    <h3>سجلات رسمية</h3>
-    <p>مستندات وسجلات الموظفين الرسمية</p>
-    <small>الصفحة: records.html</small>
-  </a>
-</div>
-
-<div class="card">
-  <a href="passwords.html">
-    <span class="icon">🔑</span>
-    <h3>كلمات مرور</h3>
-    <p>عرض جميع كلمات المرور المهمة</p>
-    <small>الصفحة: passwords.html</small>
-  </a>
-</div>
-
-<div class="card">
-  <a href="vehicles.html">
-    <span class="icon">🚗</span>
-    <h3>سيارات</h3>
-    <p>بيانات المركبات الخاصة بالشركة</p>
-    <small>الصفحة: vehicles.html</small>
-  </a>
-</div>
-
-<div class="card">
-  <a href="rent_contracts.html">
-    <span class="icon">🏠</span>
-    <h3>عقود إيجار</h3>
-    <p>عرض جميع عقود الإيجار الحالية</p>
-    <small>الصفحة: rent_contracts.html</small>
-  </a>
-</div>
-
-<div class="card">
-  <a href="idea.html">
-    <span class="icon">🎨</span>
-    <h3>عن المصمم</h3>
-    <p>تعرف على فكرة وتنفيذ الموقع بواسطة المصمم</p>
-    <small>الصفحة: idea.html</small>
-  </a>
-</div>
-
-<div class="card">
-  <a href="inventory.html">
-    <span class="icon">📦</span>
-    <h3>المخزون</h3>
-    <p>عرض تفاصيل المخزون والمنتجات</p>
-    <small>الصفحة: inventory.html</small>
-  </a>
-</div>
-
+<div class="card"><a href="employees.html"><span class="icon">👥</span><h3>الموظفين</h3><p>عرض جميع بيانات الموظفين الأساسية</p><small>الصفحة: employees.html</small></a></div>
+<div class="card"><a href="table.html"><span class="icon">📅</span><h3>انتهاء الإقامات</h3><p>عرض تواريخ انتهاء الإقامات للموظفين</p><small>الصفحة: table.html</small></a></div>
+<div class="card"><a href="contracts.html"><span class="icon">📝</span><h3>عقود الموظفين</h3><p>الاطلاع على جميع العقود الرسمية للموظفين</p><small>الصفحة: contracts.html</small></a></div>
+<div class="card"><a href="passports.html"><span class="icon">🛂</span><h3>جوازات الموظفين</h3><p>بيانات الجوازات والتأشيرات</p><small>الصفحة: passports.html</small></a></div>
+<div class="card"><a href="records.html"><span class="icon">📂</span><h3>سجلات رسمية</h3><p>مستندات وسجلات الموظفين الرسمية</p><small>الصفحة: records.html</small></a></div>
+<div class="card"><a href="passwords.html"><span class="icon">🔑</span><h3>كلمات مرور</h3><p>عرض جميع كلمات المرور المهمة</p><small>الصفحة: passwords.html</small></a></div>
+<div class="card"><a href="vehicles.html"><span class="icon">🚗</span><h3>سيارات</h3><p>بيانات المركبات الخاصة بالشركة</p><small>الصفحة: vehicles.html</small></a></div>
+<div class="card"><a href="rent_contracts.html"><span class="icon">🏠</span><h3>عقود إيجار</h3><p>عرض جميع عقود الإيجار الحالية</p><small>الصفحة: rent_contracts.html</small></a></div>
+<div class="card"><a href="idea.html"><span class="icon">🎨</span><h3>عن المصمم</h3><p>تعرف على فكرة وتنفيذ الموقع بواسطة المصمم</p><small>الصفحة: idea.html</small></a></div>
+<div class="card"><a href="inventory.html"><span class="icon">📦</span><h3>المخزون</h3><p>عرض تفاصيل المخزون والمنتجات</p><small>الصفحة: inventory.html</small></a></div>
 </div>
 </section>
 
@@ -217,5 +200,31 @@ footer{background:#1e3c72;color:#fff;text-align:center;padding:40px;font-size:0.
 <a class="whatsapp" href="https://wa.me/966558020154" target="_blank">
 <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
 </a>
+
+<script>
+/* سلايدر */
+let currentSlide = 0;
+const slides = document.querySelectorAll('.slide');
+function showSlide(i){
+  slides.forEach((slide,index)=>slide.style.display=(index===i?'block':'none'));
+}
+showSlide(currentSlide);
+setInterval(()=>{
+  currentSlide = (currentSlide+1)%slides.length;
+  showSlide(currentSlide);
+},4000);
+
+/* ظهور الكروت عند التمرير */
+const cards = document.querySelectorAll('.card');
+const observer = new IntersectionObserver(entries=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){
+      entry.target.classList.add('visible');
+    }
+  });
+},{threshold:0.2});
+cards.forEach(card=>observer.observe(card));
+</script>
+
 </body>
 </html>
