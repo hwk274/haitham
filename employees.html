@@ -3,95 +3,61 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>الموقع الاحترافي لإدارة الموظفين والمخزون</title>
+<title>الموظفين - إدارة الموظفين</title>
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800&display=swap" rel="stylesheet">
-
 <style>
-*{margin:0;padding:0;box-sizing:border-box;}
-body{font-family:'Cairo',sans-serif;background:#f4f6fb;color:#333;line-height:1.6;scroll-behavior:smooth;}
-a{text-decoration:none;color:inherit;}
-header{
-  background:#1e3c72;height:250px;display:flex;align-items:center;justify-content:center;
-  text-align:center;color:#fff;overflow:hidden;
-}
-header .moving-text{font-size:1.8rem;font-weight:700;animation:moveText 12s linear infinite;}
-@keyframes moveText{
-0%{transform:translateX(100%);}50%{transform:translateX(-100%);}100%{transform:translateX(100%);}
-}
-nav{
-position:fixed;top:0;left:0;width:100%;display:flex;justify-content:center;gap:15px;
-background:#fff;box-shadow:0 3px 15px rgba(0,0,0,.15);padding:12px 0;z-index:1000;
-}
-nav a{padding:12px 28px;font-weight:600;border-radius:8px;color:#1e3c72;transition:0.3s;}
+body{font-family:'Cairo',sans-serif;background:#eef3ff;margin:0;}
+header{background:linear-gradient(135deg,#1e3c72,#2a5298);color:#fff;text-align:center;padding:80px 20px;}
+header h1{font-size:2.5rem;margin-bottom:10px;}
+header p{font-size:1.2rem;}
+nav{background:#fff;display:flex;justify-content:center;gap:10px;box-shadow:0 2px 8px rgba(0,0,0,.1);position:sticky;top:0;z-index:1000;}
+nav a{padding:12px 25px;font-weight:600;border-radius:6px;color:#1e3c72;transition:.3s;}
 nav a:hover{background:#1e3c72;color:#fff;}
-section{max-width:1150px;margin:100px auto;padding:40px 20px;text-align:center;}
-section h2{font-size:2.3rem;margin-bottom:35px;color:#1e3c72;}
-#alerts{background:#fff3f0;padding:30px;border-radius:15px;
-box-shadow:0 6px 18px rgba(0,0,0,.12);}
-.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px;}
-.card{background:#fff;padding:18px;border-radius:12px;
-box-shadow:0 6px 18px rgba(0,0,0,.15);opacity:0;transform:translateY(25px);
-transition:.5s;}
+#counters{background:#fff;padding:15px;border-radius:12px;box-shadow:0 6px 18px rgba(0,0,0,.1);margin:20px auto;text-align:center;font-weight:700;max-width:900px;}
+.cards{display:flex;flex-wrap:wrap;gap:20px;justify-content:center;margin-bottom:30px;}
+.card{width:320px;background:#fff;padding:18px;border-radius:12px;box-shadow:0 6px 18px rgba(0,0,0,.15);opacity:0;transform:translateY(25px);transition:.5s;}
 .card.visible{opacity:1;transform:translateY(0);}
-.card h3{color:#1e3c72;}
-.icon{font-size:35px;margin-bottom:10px;}
-.counter-box{
-background:#ffffff;border-radius:12px;padding:20px;margin-top:20px;
-box-shadow:0 6px 18px rgba(0,0,0,.15);font-size:1.1rem;color:#1e3c72;font-weight:700;
-}
-.btn{padding:12px 25px;background:#1e3c72;color:#fff;border-radius:10px;border:none;cursor:pointer;font-weight:700;margin:5px;}
-footer{background:#1e3c72;color:#fff;text-align:center;padding:20px;margin-top:40px;}
+.card h3{color:#1e3c72;margin-bottom:8px;}
+.card p{font-size:0.95rem;margin:4px 0;}
+.btn{padding:10px 20px;background:#1e3c72;color:#fff;border-radius:10px;border:none;font-weight:700;margin:5px;cursor:pointer;}
+footer{background:#1e3c72;color:#fff;text-align:center;padding:20px;}
 </style>
-
 </head>
 <body>
 
 <header>
-<div class="moving-text">لا إله إلا أنت سبحانك إني كنت من الظالمين</div>
+<h1>إدارة الموظفين</h1>
+<p>متابعة الإقامات والجوازات والعقود مع التنبيهات</p>
 </header>
 
 <nav>
-<a href="#alerts">التنبيهات</a>
-<a href="employees.html">الموظفين</a>
-<a href="cars.html">السيارات</a>
-<a href="records.html">السجلات الرسمية</a>
+<a href="#counters">عداد التنبيهات</a>
+<a href="#cards">قائمة الموظفين</a>
+<a href="index.html">الصفحة الرئيسية</a>
 </nav>
 
-<section id="alerts">
-<h2>تنبيهات قرب انتهاء الإقامة</h2>
+<div id="counters">جاري التحميل...</div>
 
-<div class="counter-box" id="counters">
-يتم التحميل...
-</div>
+<div class="cards" id="cards"></div>
 
-<div class="cards" id="alertCards">
-<div class="card visible">
-<span class="icon">ℹ️</span>
-<h3>جاري تحميل البيانات...</h3>
-</div>
-</div>
-
-<div style="text-align:center;margin-top:25px;">
+<div style="text-align:center;margin-bottom:30px;">
 <button class="btn" onclick="exportExcel()">تصدير Excel</button>
 <button class="btn" onclick="exportPDF()">تصدير PDF</button>
 </div>
 
-</section>
-
-<footer>
-جميع الحقوق محفوظة © 2025
-</footer>
+<footer>جميع الحقوق محفوظة © 2025</footer>
 
 <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.19.3/xlsx.full.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
 <script>
-
 const csvUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRWS2KglkUT8Pc3L39dcKFosvR3LWKNQv_EVmYbsLZKx2MBVS33EZQGjk6Yb1mmR9XKKaPK_6qVzbi5/pub?output=csv";
+let globalData=[];
 
 function parseDate(str){
  if(!str) return null;
+ str = str.toString().trim();
  let d=Date.parse(str);
  if(!isNaN(d)) return new Date(d);
  if(str.includes("/")){let p=str.split("/");return new Date(p[2],p[1]-1,p[0]);}
@@ -101,56 +67,61 @@ function parseDate(str){
 
 function daysUntil(date){
  if(!date) return null;
- const t=new Date();t.setHours(0,0,0,0);
+ const t=new Date(); t.setHours(0,0,0,0);
  date.setHours(0,0,0,0);
  return Math.ceil((date-t)/(1000*60*60*24));
 }
 
-let globalData=[];
-
-function renderAlerts(data){
- const container=document.getElementById("alertCards");
+function renderEmployees(data){
+ const container=document.getElementById("cards");
  container.innerHTML="";
- let saudiCount=0,nonSaudiCount=0,alertCount=0;
 
- data.forEach(row=>{
-   if(row["الحالة"]==="نشط"){
-     if(row["الجنسية"]==="سعودي") saudiCount++;
-     else nonSaudiCount++;
-   }
+ let active=[], inactive=[];
+ let saudiCount=0, nonSaudiCount=0;
 
-   const resDays=daysUntil(parseDate(row["تاريخ انتهاء الاقامة"]));
-   if(resDays!==null && resDays<=30){
-     alertCount++;
-     const card=document.createElement("div");
-     card.className="card";
-     card.innerHTML=`<span class="icon">⚠️</span>
-                     <h3>${row["الاسم"]||"-"}</h3>
-                     <p>تنتهي بعد ${resDays} يوم</p>`;
-     container.appendChild(card);
-   }
+ data.forEach(r=>{
+   r=Object.fromEntries(Object.entries(r).map(([k,v])=>[k.trim(),v?.trim()]));
+   const isActive = r["الحالة"]?.toLowerCase() === "نشط";
+   if(isActive){
+     active.push(r);
+     if(r["الجنسية"]==="سعودي") saudiCount++;
+     else if(r["الجنسية"]) nonSaudiCount++;
+   } else inactive.push(r);
  });
 
- if(alertCount===0){
-   container.innerHTML=`<div class="card visible"><span class="icon">✅</span><h3>لا توجد تنبيهات</h3></div>`;
- }
+ const allOrdered=[...active,...inactive];
+
+ allOrdered.forEach(r=>{
+   const alerts=[];
+   if(r["الحالة"]?.toLowerCase()!=="نشط") alerts.push("❌ غير نشط");
+   const resDays = daysUntil(parseDate(r["تاريخ انتهاء الاقامة"]));
+   if(r["الحالة"]?.toLowerCase()==="نشط" && resDays!==null && resDays<=30) alerts.push(`⚠️ الإقامة تنتهي بعد ${resDays} يوم`);
+
+   const card=document.createElement("div");
+   card.className="card";
+   card.innerHTML=`
+     <h3>${r["الاسم"]||"-"}</h3>
+     <p>${alerts.join(" | ")}</p>
+     <p>الجنسية: ${r["الجنسية"]||"-"} | الحالة: ${r["الحالة"]||"-"}</p>
+     <p>رقم الهوية: ${r["رقم الهوية"]||"-"} | رقم الجواز: ${r["رقم الجواز"]||"-"}</p>
+   `;
+   container.appendChild(card);
+ });
 
  const totalActive=saudiCount+nonSaudiCount;
  const saudization = totalActive>0 ? ((saudiCount/totalActive)*100).toFixed(1):0;
-
  document.getElementById("counters").innerText=
- `السعوديون النشطون: ${saudiCount} | غير السعوديين النشطين: ${nonSaudiCount} | نسبة السعودة: ${saudization}%`;
+   `السعوديون النشطون: ${saudiCount} | غير السعوديين النشطين: ${nonSaudiCount} | نسبة السعودة: ${saudization}%`;
 
  document.querySelectorAll(".card").forEach(c=>c.classList.add("visible"));
 }
 
-// تحميل البيانات
 Papa.parse(csvUrl,{
  download:true,
  header:true,
  complete:function(results){
    globalData=results.data;
-   renderAlerts(results.data);
+   renderEmployees(globalData);
  }
 });
 
@@ -166,22 +137,25 @@ async function exportPDF(){
  const doc=new jsPDF();
  let y=10;
  doc.setFontSize(14);
- doc.text("تقرير تنبيهات انتهاء الاقامات",10,y);
- y+=10;
+ doc.text("تقرير الموظفين",10,y); y+=10;
 
  globalData.forEach(r=>{
-   const date=parseDate(r["تاريخ انتهاء الاقامة"]);
-   const days=daysUntil(date);
-   if(days!==null && days<=30){
-     doc.text(`الاسم: ${r["الاسم"]}`,10,y); y+=7;
-     doc.text(`تنتهي بعد: ${days} يوم`,10,y); y+=10;
-     if(y>270){doc.addPage();y=10;}
-   }
+   r=Object.fromEntries(Object.entries(r).map(([k,v])=>[k.trim(),v?.trim()]));
+   const alerts=[];
+   if(r["الحالة"]?.toLowerCase()!=="نشط") alerts.push("غير نشط");
+   const resDays = daysUntil(parseDate(r["تاريخ انتهاء الاقامة"]));
+   if(r["الحالة"]?.toLowerCase()==="نشط" && resDays!==null && resDays<=30) alerts.push(`الإقامة تنتهي بعد ${resDays} يوم`);
+
+   doc.setFontSize(11);
+   doc.text(`الاسم: ${r["الاسم"]||"-"}`,10,y); y+=6;
+   doc.text(`الجنسية: ${r["الجنسية"]||"-"} | الحالة: ${r["الحالة"]||"-"}`,10,y); y+=6;
+   if(alerts.length>0){ doc.text(`تنبيهات: ${alerts.join(" | ")}`,10,y); y+=6; }
+   y+=4;
+   if(y>270){doc.addPage();y=10;}
  });
 
- doc.save("alerts_report.pdf");
+ doc.save("employees_report.pdf");
 }
-
 </script>
 
 </body>
