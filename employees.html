@@ -45,6 +45,23 @@ nav a {
 }
 nav a:hover { background: #1e3c72; color: #fff; }
 
+/* زر الرجوع العائم */
+#backHome {
+  display: inline-block;
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  padding: 10px 18px;
+  background: #1e3c72;
+  color: #fff;
+  font-weight: bold;
+  border-radius: 8px;
+  text-decoration: none;
+  z-index: 9999;
+  transition: 0.3s;
+}
+#backHome:hover { background: #2a5298; }
+
 #alerts-section {
   max-width: 1000px; margin: 20px auto; background: #fff3f3;
   border-radius: 15px; padding: 20px 25px; box-shadow: 0 6px 18px rgba(0,0,0,0.12);
@@ -118,6 +135,8 @@ footer { background: #1e3c72; color: #fff; text-align: center; padding: 25px; ma
 </head>
 <body>
 
+<a href="index.html" id="backHome">⬅️ الرجوع إلى الصفحة الرئيسية</a>
+
 <header>
 <h1>مرحبا بكم في إدارة الموظفين</h1>
 <p>متابعة الإقامات والجوازات والعقود مع تنبيهات الأيام المتبقية</p>
@@ -147,7 +166,6 @@ footer { background: #1e3c72; color: #fff; text-align: center; padding: 25px; ma
 
 <div class="cards" id="cards"></div>
 
-<!-- قسم الموظفين الغير نشطين -->
 <div class="inactive-section" id="inactiveSection">
 <h2>الموظفين الغير نشطين</h2>
 <div class="cards" id="inactiveCards"></div>
@@ -181,17 +199,23 @@ function createCard(row){
   const contractDays=daysUntil(parseDate(row["تاريخ انتهاء العقد"]));
   const isInactive=!!row["تاريخ نهاية الخدمة"];
 
-  if(isInactive) alerts.push({text:"❌ غير نشط", class:"alert-inactive"});
+  if(isInactive) alerts.push({text:"❌ غير نشط", class:"alert-inactive", days:9999});
   else{
-    if(resDays!==null && resDays<=30) alerts.push({text:`⚠️ الإقامة قرب الانتهاء (${resDays} يوم)` , class:"alert-residence"});
-    if(passDays!==null && passDays<=30) alerts.push({text:`⚠️ الجواز قرب الانتهاء (${passDays} يوم)`, class:"alert-passport"});
-    if(contractDays!==null && contractDays<=30) alerts.push({text:`⚠️ العقد قرب الانتهاء (${contractDays} يوم)`, class:"alert-contract"});
+    if(resDays!==null && resDays<=30) alerts.push({text:`⚠️ الإقامة قرب الانتهاء (${resDays} يوم)` , class:"alert-residence", days: resDays});
+    if(passDays!==null && passDays<=30) alerts.push({text:`⚠️ الجواز قرب الانتهاء (${passDays} يوم)`, class:"alert-passport", days: passDays});
+    if(contractDays!==null && contractDays<=30) alerts.push({text:`⚠️ العقد قرب الانتهاء (${contractDays} يوم)`, class:"alert-contract", days: contractDays});
   }
 
   // إنشاء الكرت
   let card=document.createElement("div"); card.className="card";
   const alertsDiv=document.createElement("div");
-  alerts.forEach(a=>{let d=document.createElement("div"); d.className="alert-label "+a.class; d.innerText=a.text; alertsDiv.appendChild(d);});
+
+  alerts.sort((a,b)=>a.days-b.days).forEach(a=>{
+    let d=document.createElement("div");
+    d.className="alert-label "+a.class;
+    d.innerText=a.text;
+    alertsDiv.appendChild(d);
+  });
   card.appendChild(alertsDiv);
 
   const headerDiv=document.createElement("div"); headerDiv.className="card-header";
@@ -232,6 +256,8 @@ function renderCards(data){
   alertsContainer.innerHTML="";
   let saudiCount=0, nonSaudiCount=0;
 
+  let allAlerts=[];
+
   data.forEach(rawRow=>{
     const row={}; for(let key in rawRow) row[key.trim()]=rawRow[key]?.trim();
     const isInactive=!!row["تاريخ نهاية الخدمة"];
@@ -240,34 +266,28 @@ function renderCards(data){
 
     const {card, isInactive:isCardInactive} = createCard(row);
 
-    // إضافة التنبيهات للنشطين مع اسم الموظف
+    // جمع التنبيهات للنشطين
     if(!isCardInactive){
-      const resDays=daysUntil(parseDate(row["تاريخ انتهاء الاقامة"]));
-      const passDays=daysUntil(parseDate(row["تاريخ انتهاء جواز السفر"]));
-      const contractDays=daysUntil(parseDate(row["تاريخ انتهاء العقد"]));
+      const resDays=daysUntil(parseDate(row["تاريخ انتهاء الاقامة"])) ?? 9999;
+      const passDays=daysUntil(parseDate(row["تاريخ انتهاء جواز السفر"])) ?? 9999;
+      const contractDays=daysUntil(parseDate(row["تاريخ انتهاء العقد"])) ?? 9999;
 
-      if(resDays!==null && resDays<=30){
-        const alertDiv=document.createElement("div");
-        alertDiv.className="alert-item alert-residence";
-        alertDiv.innerHTML=`${row["الاسم"]||"-"} <span>⚠️ الإقامة قرب الانتهاء (${resDays} يوم)</span>`;
-        alertsContainer.appendChild(alertDiv);
-      }
-      if(passDays!==null && passDays<=30){
-        const alertDiv=document.createElement("div");
-        alertDiv.className="alert-item alert-passport";
-        alertDiv.innerHTML=`${row["الاسم"]||"-"} <span>⚠️ الجواز قرب الانتهاء (${passDays} يوم)</span>`;
-        alertsContainer.appendChild(alertDiv);
-      }
-      if(contractDays!==null && contractDays<=30){
-        const alertDiv=document.createElement("div");
-        alertDiv.className="alert-item alert-contract";
-        alertDiv.innerHTML=`${row["الاسم"]||"-"} <span>⚠️ العقد قرب الانتهاء (${contractDays} يوم)</span>`;
-        alertsContainer.appendChild(alertDiv);
-      }
+      if(resDays<=30) allAlerts.push({text:`${row["الاسم"]} ⚠️ الإقامة قرب الانتهاء (${resDays} يوم)`, class:"alert-residence", days:resDays});
+      if(passDays<=30) allAlerts.push({text:`${row["الاسم"]} ⚠️ الجواز قرب الانتهاء (${passDays} يوم)`, class:"alert-passport", days:passDays});
+      if(contractDays<=30) allAlerts.push({text:`${row["الاسم"]} ⚠️ العقد قرب الانتهاء (${contractDays} يوم)`, class:"alert-contract", days:contractDays});
     }
 
     if(isCardInactive) inactiveContainer.appendChild(card);
     else cardsContainer.appendChild(card);
+  });
+
+  // ترتيب التنبيهات حسب الأيام الأقرب
+  allAlerts.sort((a,b)=>a.days-b.days);
+  allAlerts.forEach(a=>{
+    const alertDiv=document.createElement("div");
+    alertDiv.className="alert-item "+a.class;
+    alertDiv.innerHTML=a.text;
+    alertsContainer.appendChild(alertDiv);
   });
 
   document.getElementById("counters").innerText=`السعوديون النشطون: ${saudiCount} | غير السعوديين النشطين: ${nonSaudiCount}`;
