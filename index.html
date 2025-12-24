@@ -4,288 +4,230 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>موقع احترافي ديناميكي</title>
+
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800&display=swap" rel="stylesheet">
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 body{
   font-family:'Cairo',sans-serif;
-  background:linear-gradient(180deg,#eef2ff,#e7ecff);
-  color:#333;
-  line-height:1.7;
+  line-height:1.6;
+  scroll-behavior:smooth;
+  background:var(--bg);
+  color:var(--text);
 }
 
-/* ===== الهيدر ===== */
+/* 🎨 ثيمات */
+:root{
+ --bg:#f4f6fb;
+ --card-bg:linear-gradient(145deg,#ffffff,#f0f3f8);
+ --text:#333;
+ --title:#1e3c72;
+ --btn:#1e3c72;
+ --shadow:rgba(0,0,0,.1);
+}
+:root[data-theme="dark"]{
+ --bg:#0f172a;
+ --card-bg:linear-gradient(145deg,#0b1220,#111b33);
+ --text:#e5e7eb;
+ --title:#93c5fd;
+ --btn:#2563eb;
+ --shadow:rgba(0,0,0,.6);
+}
+
+/* زر الثيم */
+.theme-toggle{
+ position:fixed;
+ top:10px;
+ left:10px;
+ padding:10px 16px;
+ border-radius:12px;
+ background:var(--btn);
+ color:#fff;
+ cursor:pointer;
+ border:none;
+ font-weight:700;
+ z-index:1200;
+ box-shadow:0 6px 18px rgba(0,0,0,.25);
+ transition:.3s;
+}
+.theme-toggle:hover{transform:scale(1.05)}
+
+/* header */
 header{
-  color:#fff;
-  text-align:center;
-  padding:130px 20px;
-  background:linear-gradient(135deg,#0f172a,#1e3c72);
-  position:relative;
-  overflow:hidden;
+ text-align:center;
+ padding:120px 20px;
+ background:linear-gradient(135deg,#1e3c72,#2a5298);
+ color:#fff;
 }
-header::before{
-  content:"";
-  position:absolute;
-  top:-50px;
-  left:-50px;
-  width:250px;
-  height:250px;
-  border-radius:50%;
-  background:rgba(255,255,255,.08);
-}
-header::after{
-  content:"";
-  position:absolute;
-  bottom:-60px;
-  right:-40px;
-  width:300px;
-  height:300px;
-  border-radius:50%;
-  background:rgba(255,255,255,.06);
-}
-header h1{
-  font-size:3rem;
-  margin-bottom:15px;
-  animation:fadeDown 1s ease forwards;
-}
-header p{
-  font-size:1.3rem;
-  opacity:0;
-  animation:fadeUp 1.2s .4s ease forwards;
-}
-@keyframes fadeDown{from{opacity:0;transform:translateY(-25px)}to{opacity:1}}
-@keyframes fadeUp{from{opacity:0;transform:translateY(25px)}to{opacity:1}}
+header h1{font-size:3rem;margin-bottom:10px}
+header p{font-size:1.2rem;opacity:.9}
 
-/* ===== الناف بار ===== */
+/* nav */
 nav{
-  background:#ffffffd9;
-  backdrop-filter:blur(10px);
-  box-shadow:0 6px 18px rgba(0,0,0,.1);
-  display:flex;
-  justify-content:center;
-  gap:12px;
-  position:sticky;
-  top:0;
-  z-index:1000;
-  padding:10px 0;
+ background:#fff;
+ display:flex;
+ justify-content:center;
+ gap:12px;
+ padding:8px;
+ position:sticky;
+ top:0;
+ z-index:1000;
+ box-shadow:0 4px 12px rgba(0,0,0,.15);
 }
 nav a{
-  padding:10px 22px;
-  border-radius:30px;
-  color:#1e3c72;
-  font-weight:700;
-  transition:.3s;
-  text-decoration:none;
+ padding:12px 26px;
+ border-radius:10px;
+ font-weight:700;
+ color:#1e3c72;
+ text-decoration:none;
+ transition:.3s;
 }
 nav a:hover{
-  background:#1e3c72;
-  color:#fff;
-  transform:translateY(-2px);
+ background:#1e3c72;
+ color:#fff;
+ transform:scale(1.05);
 }
 
-/* ===== شريط التنبيهات ===== */
-.alert-bar{
-  background:#fff;
-  border:2px dashed #ff4d4d;
-  color:#b30000;
-  padding:16px;
-  margin:25px auto;
-  max-width:1050px;
-  border-radius:16px;
-  text-align:center;
-  font-weight:800;
-  display:none;
-  animation:pulse 1.5s infinite;
-}
-@keyframes pulse{
-  0%{transform:scale(1)}
-  50%{transform:scale(1.02)}
-}
-.alert-bar span{
-  font-size:1.5rem;
-  margin-left:6px;
-}
-
-/* ===== الأقسام ===== */
+/* sections */
 section{
-  max-width:1150px;
-  margin:60px auto;
-  padding:10px 20px;
-  text-align:center;
+ max-width:1200px;
+ margin:60px auto;
+ text-align:center;
+ padding:10px;
 }
 section h2{
-  font-size:2rem;
-  margin-bottom:25px;
-  color:#0f172a;
-}
-section h2::after{
-  content:"";
-  width:70px;
-  height:4px;
-  background:#1e3c72;
-  display:block;
-  margin:10px auto;
-  border-radius:3px;
+ font-size:2rem;
+ margin-bottom:25px;
+ color:var(--title);
 }
 
-/* ===== الكروت ===== */
+/* ⭐ تصميم الكروت */
 .cards{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
-  gap:25px;
-  margin-top:20px;
+ display:grid;
+ grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+ gap:28px;
 }
+
 .card{
-  background:#ffffff;
-  padding:30px 20px;
-  border-radius:26px;
-  box-shadow:
-    10px 10px 25px rgba(0,0,0,.15),
-    -5px -5px 25px rgba(255,255,255,.8);
-  transition:.3s;
-  cursor:pointer;
+ background:var(--card-bg);
+ padding:30px 22px;
+ border-radius:28px;
+ text-align:center;
+ position:relative;
+ overflow:hidden;
+ border:1px solid rgba(255,255,255,.12);
+ box-shadow:0 15px 45px var(--shadow);
+ transition:.35s ease;
+ cursor:pointer;
 }
 .card:hover{
-  transform:translateY(-8px) scale(1.02);
-  box-shadow:0 18px 35px rgba(0,0,0,.2);
+ transform:translateY(-8px) scale(1.03);
+ box-shadow:0 18px 55px rgba(0,0,0,.35);
 }
+
 .icon{
-  font-size:3rem;
-  margin-bottom:10px;
+ font-size:3.8rem;
+ margin-bottom:12px;
+ transition:.4s;
 }
+.card:hover .icon{
+ transform:scale(1.25) rotate(-3deg);
+}
+
 .card h3{
-  color:#1e3c72;
-  margin-bottom:10px;
+ font-size:1.3rem;
+ margin-bottom:8px;
+ color:var(--title);
 }
-.card p{
-  color:#444;
-  font-size:.95rem;
+.card p{opacity:.8;font-size:.95rem}
+
+/* ✨ أنيميشن الدخول */
+.hidden-card{
+ opacity:0;
+ transform:translateY(40px) scale(.95);
+}
+.show-card{
+ animation:showCard .7s ease forwards;
+}
+@keyframes showCard{
+ 0%{opacity:0;transform:translateY(40px) scale(.95)}
+ 100%{opacity:1;transform:translateY(0) scale(1)}
 }
 
-/* زر */
+/* button */
 .btn{
-  background:#1e3c72;
-  padding:12px 26px;
-  border-radius:12px;
-  color:#fff;
-  text-decoration:none;
-  font-weight:700;
-  transition:.3s
+ display:inline-block;
+ padding:14px 28px;
+ border-radius:12px;
+ color:#fff;
+ background:var(--btn);
+ text-decoration:none;
+ font-weight:700;
+ transition:.3s;
 }
-.btn:hover{background:#0f172a}
+.btn:hover{transform:scale(1.06)}
 
-/* ===== الفوتر ===== */
 footer{
-  background:#0f172a;
-  color:#fff;
-  text-align:center;
-  padding:30px;
-  margin-top:60px;
+ background:#1e3c72;
+ color:#fff;
+ padding:35px;
+ text-align:center;
+ margin-top:50px;
 }
 
-/* واتساب */
-.whatsapp{
-  position:fixed;
-  bottom:18px;
-  left:18px;
-  width:62px;
-  height:62px;
-  border-radius:50%;
-  background:#25D366;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  box-shadow:0 5px 18px rgba(0,0,0,.3);
-}
-.whatsapp img{width:34px}
-
-/* موبايل */
 @media(max-width:768px){
-  header h1{font-size:2rem}
-  header p{font-size:1.1rem}
+ header h1{font-size:2.2rem}
+ .cards{gap:16px}
 }
 </style>
 </head>
 
 <body>
 
+<button class="theme-toggle" id="themeBtn">تبديل الثيم 🌗</button>
+
 <header>
-  <h1>مرحبا بكم في الموقع الاحترافي</h1>
-  <p>حلول حديثة وذكية لإدارة الموظفين والمخزون</p>
+<h1>مرحبا بكم في الموقع الاحترافي</h1>
+<p>حلول حديثة لإدارة الموظفين والمخزون والسيارات</p>
 </header>
 
 <nav>
 <a href="#home">الرئيسية</a>
 <a href="#services">الخدمات</a>
-<a href="idea.html">الفكرة</a>
 <a href="#contact">التواصل</a>
 </nav>
-
-<div class="alert-bar" id="mainAlert">
-  <span>⚠️</span> جاري تحميل التنبيهات...
-</div>
-
-<section id="home">
-  <h2>الرئيسية</h2>
-  <p>مرحباً بك في منصتنا الحديثة لإدارة كل ما يتعلق بالموظفين، السيارات، المخزون، والسجلات الرسمية بطريقة ذكية واحترافية.</p>
-</section>
 
 <section id="services">
 <h2>خدماتنا</h2>
 
 <div class="cards">
 
-<a class="card" href="employees.html">
+<a class="card hidden-card" href="employees.html">
 <span class="icon">🧑‍💼</span>
 <h3>الموظفين</h3>
-<p>عرض الجوازات، انتهاء الإقامات وعقود الموظفين</p>
+<p>إدارة بيانات الموظفين والتنبيهات</p>
 </a>
 
-<a class="card" id="recordsCard">
+<a class="card hidden-card" href="documents.html">
 <span class="icon">📂</span>
-<h3>سجلات رسمية</h3>
+<h3>السجلات الرسمية</h3>
+<p>ملفات وتصاريح الشركة</p>
 </a>
 
-<a class="card" href="login.php">
-<span class="icon">🔑</span>
-<h3>كلمات مرور</h3>
-<p>دخول محمي بكلمة سر</p>
-</a>
-
-<a class="card" href="cars.html" id="vehiclesCard">
+<a class="card hidden-card" href="cars.html">
 <span class="icon">🚗</span>
-<h3>سيارات</h3>
-<p>عرض بيانات السيارات</p>
+<h3>السيارات</h3>
+<p>عرض وإدارة بيانات المركبات</p>
 </a>
 
-<a class="card" href="rent_contracts.html">
-<span class="icon">🏠</span>
-<h3>عقود إيجار</h3>
-</a>
-
-<a class="card" href="idea.html">
-<span class="icon">🎨</span>
-<h3>عن المصمم</h3>
-</a>
-
-<a class="card" href="inventory.php">
+<a class="card hidden-card" href="inventory.php">
 <span class="icon">📦</span>
 <h3>المخزون</h3>
-</a>
-
-<a class="card" href="corporate_inventory.php">
-<span class="icon">🏢</span>
-<h3>مخزون المؤسسة</h3>
+<p>إدارة المنتجات والمخزون</p>
 </a>
 
 </div>
-</section>
-
-<section id="idea">
-<h2>الفكرة والتنفيذ</h2>
-<p>فكرة وتنفيذ: <strong>هيثم واشحت قرشي</strong></p>
-<p><a href="idea.html" class="btn">اضغط هنا لمعرفة التفاصيل</a></p>
 </section>
 
 <section id="contact">
@@ -293,61 +235,33 @@ footer{
 <a class="btn" href="mailto:hwk2@hotmail.com">راسلنا عبر البريد</a>
 </section>
 
-<footer>جميع الحقوق محفوظة © 2025</footer>
+<footer>© جميع الحقوق محفوظة 2025</footer>
 
-<a class="whatsapp" href="https://wa.me/966558020154" target="_blank">
-  <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg">
-</a>
-
-<script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
 <script>
-// كروت الضغط
-document.querySelectorAll('.card').forEach(card=>{
-  card.addEventListener('mousedown',()=>card.style.transform='scale(0.97)');
-  card.addEventListener('mouseup',()=>card.style.transform='');
-  card.addEventListener('mouseleave',()=>card.style.transform='');
-});
-
-// ربط الكروت
-document.getElementById('vehiclesCard').addEventListener('click',()=>{window.location.href='cars.html'});
-document.getElementById('recordsCard').addEventListener('click',()=>{window.location.href='documents.html'});
-
-// التنبيهات
-const alertBar=document.getElementById("mainAlert");
-const csvUrl="https://docs.google.com/spreadsheets/d/e/2PACX-1vRWS2KglkUT8Pc3L39dcKFosvR3LWKNQv_EVmYbsLZKx2MBVS33EZQGjk6Yb1mmR9XKKaPK_6qVzbi5/pub?output=csv";
-
-function parseDate(dateStr){
- if(!dateStr) return null;
- const p=dateStr.split('/');
- if(p.length===3)return new Date(parseInt(p[0]),parseInt(p[1])-1,parseInt(p[2]));
- return null;
+// زر الثيم
+const btn = document.getElementById("themeBtn");
+if(localStorage.getItem("theme")){
+ document.documentElement.setAttribute("data-theme",localStorage.getItem("theme"));
 }
-function daysUntil(date){
- if(!date)return 9999;
- const t=new Date();t.setHours(0,0,0,0);
- date.setHours(0,0,0,0);
- return Math.ceil((date-t)/(1000*60*60*24));
-}
+btn.onclick = ()=>{
+ let current = document.documentElement.getAttribute("data-theme");
+ let newTheme = current==="dark" ? "" : "dark";
+ document.documentElement.setAttribute("data-theme",newTheme);
+ localStorage.setItem("theme",newTheme);
+};
 
-Papa.parse(csvUrl,{
- download:true,
- header:true,
- skipEmptyLines:true,
- complete:function(results){
-  let alertsCount=0;
-  results.data.forEach(row=>{
-   if(daysUntil(parseDate(row["تاريخ انتهاء الاقامة"]))<=30 ||
-      daysUntil(parseDate(row["تاريخ انتهاء جواز السفر"]))<=30 ||
-      daysUntil(parseDate(row["تاريخ انتهاء العقد"]))<=30)
-      alertsCount++;
-  });
-  if(alertsCount>0){
-   alertBar.style.display="block";
-   alertBar.innerHTML=`<span>⚠️</span> يوجد ${alertsCount} تنبيه/تنبيهات قرب الانتهاء — اضغط هنا`;
-  }
- }
-});
-alertBar.addEventListener("click",()=>window.location.href="employees.html");
+// ✨ إظهار الكروت بالأنيميشن عند الظهور
+const cards = document.querySelectorAll(".hidden-card");
+const observer = new IntersectionObserver(entries=>{
+ entries.forEach(entry=>{
+   if(entry.isIntersecting){
+     entry.target.classList.add("show-card");
+     observer.unobserve(entry.target);
+   }
+ });
+},{threshold:0.2});
+
+cards.forEach(card=>observer.observe(card));
 </script>
 
 </body>
