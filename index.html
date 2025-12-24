@@ -5,200 +5,214 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>موقع احترافي ديناميكي</title>
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800&display=swap" rel="stylesheet">
+
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'Cairo',sans-serif;background:#f4f6fb;color:#333;line-height:1.6;scroll-behavior:smooth}
+body{
+  font-family:'Cairo',sans-serif;
+  background:linear-gradient(180deg,#eef2ff,#e7ecff);
+  color:#333;
+  line-height:1.7;
+}
 
-/* الرأس */
+/* ===== الهيدر ===== */
 header{
   color:#fff;
   text-align:center;
-  padding:120px 20px;
-  background:linear-gradient(135deg,#1e3c72,#2a5298);
+  padding:130px 20px;
+  background:linear-gradient(135deg,#0f172a,#1e3c72);
   position:relative;
   overflow:hidden;
+}
+header::before{
+  content:"";
+  position:absolute;
+  top:-50px;
+  left:-50px;
+  width:250px;
+  height:250px;
+  border-radius:50%;
+  background:rgba(255,255,255,.08);
+}
+header::after{
+  content:"";
+  position:absolute;
+  bottom:-60px;
+  right:-40px;
+  width:300px;
+  height:300px;
+  border-radius:50%;
+  background:rgba(255,255,255,.06);
 }
 header h1{
   font-size:3rem;
   margin-bottom:15px;
-  animation:fadeInDown 1s ease forwards;
+  animation:fadeDown 1s ease forwards;
 }
 header p{
   font-size:1.3rem;
   opacity:0;
-  animation:fadeInUp 1s 0.5s ease forwards;
+  animation:fadeUp 1.2s .4s ease forwards;
 }
-@keyframes fadeInDown{from{opacity:0;transform:translateY(-20px)}to{opacity:1;transform:translateY(0)}}
-@keyframes fadeInUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeDown{from{opacity:0;transform:translateY(-25px)}to{opacity:1}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(25px)}to{opacity:1}}
 
-/* القوائم */
+/* ===== الناف بار ===== */
 nav{
-  background:#fff;
+  background:#ffffffd9;
+  backdrop-filter:blur(10px);
+  box-shadow:0 6px 18px rgba(0,0,0,.1);
   display:flex;
   justify-content:center;
   gap:12px;
-  box-shadow:0 4px 12px rgba(0,0,0,.1);
   position:sticky;
   top:0;
   z-index:1000;
-  padding:8px 0;
+  padding:10px 0;
 }
 nav a{
-  padding:12px 26px;
-  font-weight:600;
-  border-radius:8px;
+  padding:10px 22px;
+  border-radius:30px;
   color:#1e3c72;
-  transition:0.3s;
+  font-weight:700;
+  transition:.3s;
   text-decoration:none;
 }
 nav a:hover{
-  background:#1e3c72;color:#fff;transform:scale(1.05);
+  background:#1e3c72;
+  color:#fff;
+  transform:translateY(-2px);
 }
 
-/* 🔔 شريط التنبيه */
+/* ===== شريط التنبيهات ===== */
 .alert-bar{
-  background:#fff4f4;
-  border:2px solid #ff4d4d;
+  background:#fff;
+  border:2px dashed #ff4d4d;
   color:#b30000;
   padding:16px;
-  margin:20px auto;
-  max-width:1100px;
+  margin:25px auto;
+  max-width:1050px;
   border-radius:16px;
   text-align:center;
-  font-weight:700;
-  font-size:1.1rem;
+  font-weight:800;
   display:none;
   animation:pulse 1.5s infinite;
-  cursor:pointer;
 }
-@keyframes pulse{0%{transform:scale(1)}50%{transform:scale(1.02)}100%{transform:scale(1)}}
-.alert-bar span{font-size:1.4rem;margin-left:8px}
+@keyframes pulse{
+  0%{transform:scale(1)}
+  50%{transform:scale(1.02)}
+}
+.alert-bar span{
+  font-size:1.5rem;
+  margin-left:6px;
+}
 
-/* الأقسام */
+/* ===== الأقسام ===== */
 section{
-  max-width:1200px;
+  max-width:1150px;
   margin:60px auto;
-  padding:20px;
+  padding:10px 20px;
   text-align:center;
 }
 section h2{
   font-size:2rem;
-  margin-bottom:30px;
-  color:#1e3c72;
-  position:relative;
+  margin-bottom:25px;
+  color:#0f172a;
 }
 section h2::after{
   content:"";
-  width:60px;
+  width:70px;
   height:4px;
   background:#1e3c72;
   display:block;
-  margin:10px auto 0;
-  border-radius:2px;
+  margin:10px auto;
+  border-radius:3px;
 }
 
-/* الكروت */
+/* ===== الكروت ===== */
 .cards{
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
   gap:25px;
-  margin-top:30px;
+  margin-top:20px;
 }
 .card{
-  background:linear-gradient(145deg,#fff,#f0f3f8);
+  background:#ffffff;
   padding:30px 20px;
-  border-radius:24px;
-  box-shadow:0 8px 28px rgba(0,0,0,.1);
-  transition:transform .3s ease,box-shadow .3s ease,background .3s ease;
-  position:relative;
-  overflow:hidden;
+  border-radius:26px;
+  box-shadow:
+    10px 10px 25px rgba(0,0,0,.15),
+    -5px -5px 25px rgba(255,255,255,.8);
+  transition:.3s;
   cursor:pointer;
-  text-align:center;
 }
 .card:hover{
-  transform:translateY(-8px) scale(1.03);
-  box-shadow:0 14px 32px rgba(0,0,0,.2);
-  background:linear-gradient(145deg,#e0e5f1,#fff);
+  transform:translateY(-8px) scale(1.02);
+  box-shadow:0 18px 35px rgba(0,0,0,.2);
 }
-.card .icon{
-  font-size:3.5rem;
-  margin-bottom:15px;
-  display:block;
-  transition:transform .5s,color .3s;
-  color:#2563eb;
-}
-.card:hover .icon{
-  transform:rotate(360deg) scale(1.2);
-  color:#1e3c72;
+.icon{
+  font-size:3rem;
+  margin-bottom:10px;
 }
 .card h3{
-  margin-bottom:12px;
-  font-size:1.2rem;
   color:#1e3c72;
-  transition:color .3s;
+  margin-bottom:10px;
 }
 .card p{
-  font-size:0.95rem;
-  color:#555;
-  transition:color .3s;
+  color:#444;
+  font-size:.95rem;
 }
-.card:hover h3,.card:hover p{color:#0f172a}
 
-/* الأزرار */
+/* زر */
 .btn{
-  display:inline-block;
-  margin-top:20px;
-  padding:14px 30px;
   background:#1e3c72;
+  padding:12px 26px;
+  border-radius:12px;
   color:#fff;
-  border-radius:10px;
-  font-weight:600;
-  transition:0.3s;
   text-decoration:none;
+  font-weight:700;
+  transition:.3s
 }
-.btn:hover{background:#203a43;transform:scale(1.05)}
+.btn:hover{background:#0f172a}
 
-/* الفوتر */
+/* ===== الفوتر ===== */
 footer{
-  background:#1e3c72;
+  background:#0f172a;
   color:#fff;
   text-align:center;
-  padding:40px 20px;
-  margin-top:50px;
-  font-size:0.95rem;
+  padding:30px;
+  margin-top:60px;
 }
 
-/* أيقونة واتساب */
+/* واتساب */
 .whatsapp{
   position:fixed;
-  bottom:20px;
-  left:20px;
-  width:60px;
-  height:60px;
-  background:#25D366;
+  bottom:18px;
+  left:18px;
+  width:62px;
+  height:62px;
   border-radius:50%;
+  background:#25D366;
   display:flex;
-  align-items:center;
   justify-content:center;
-  box-shadow:0 5px 20px rgba(0,0,0,.35);
-  z-index:1000;
+  align-items:center;
+  box-shadow:0 5px 18px rgba(0,0,0,.3);
 }
 .whatsapp img{width:34px}
 
-/* Responsive */
+/* موبايل */
 @media(max-width:768px){
   header h1{font-size:2rem}
   header p{font-size:1.1rem}
-  nav{flex-wrap:wrap}
-  .cards{grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:15px}
 }
 </style>
 </head>
+
 <body>
 
 <header>
-<h1>مرحبا بكم في الموقع الاحترافي</h1>
-<p>حلول حديثة وذكية لإدارة الموظفين والمخزون</p>
+  <h1>مرحبا بكم في الموقع الاحترافي</h1>
+  <p>حلول حديثة وذكية لإدارة الموظفين والمخزون</p>
 </header>
 
 <nav>
@@ -208,64 +222,63 @@ footer{
 <a href="#contact">التواصل</a>
 </nav>
 
-<!-- 🔔 شريط التنبيه -->
 <div class="alert-bar" id="mainAlert">
-  <span>⚠️</span>
-  جاري تحميل التنبيهات...
+  <span>⚠️</span> جاري تحميل التنبيهات...
 </div>
 
 <section id="home">
-<h2>الرئيسية</h2>
-<p>مرحباً بك في منصتنا الحديثة لإدارة كل ما يتعلق بالموظفين، السيارات، المخزون، والسجلات الرسمية بطريقة ذكية واحترافية.</p>
+  <h2>الرئيسية</h2>
+  <p>مرحباً بك في منصتنا الحديثة لإدارة كل ما يتعلق بالموظفين، السيارات، المخزون، والسجلات الرسمية بطريقة ذكية واحترافية.</p>
 </section>
 
 <section id="services">
 <h2>خدماتنا</h2>
+
 <div class="cards">
-  <a class="card" href="employees.html">
-    <span class="icon">🧑‍💼</span>
-    <h3>الموظفين</h3>
-    <p>عرض الجوازات، انتهاء الإقامات وعقود الموظفين</p>
-  </a>
 
-  <a class="card" id="recordsCard">
-    <span class="icon">📂</span>
-    <h3>سجلات رسمية</h3>
-  </a>
+<a class="card" href="employees.html">
+<span class="icon">🧑‍💼</span>
+<h3>الموظفين</h3>
+<p>عرض الجوازات، انتهاء الإقامات وعقود الموظفين</p>
+</a>
 
-  <a class="card" href="login.php">
-    <span class="icon">🔑</span>
-    <h3>كلمات مرور</h3>
-    <p>دخول محمي بكلمة سر</p>
-  </a>
+<a class="card" id="recordsCard">
+<span class="icon">📂</span>
+<h3>سجلات رسمية</h3>
+</a>
 
-  <a class="card" href="cars.html" id="vehiclesCard">
-    <span class="icon">🚗</span>
-    <h3>سيارات</h3>
-    <p>عرض بيانات السيارات</p>
-  </a>
+<a class="card" href="login.php">
+<span class="icon">🔑</span>
+<h3>كلمات مرور</h3>
+<p>دخول محمي بكلمة سر</p>
+</a>
 
-  <a class="card" href="rent_contracts.html">
-    <span class="icon">🏠</span>
-    <h3>عقود إيجار</h3>
-  </a>
+<a class="card" href="cars.html" id="vehiclesCard">
+<span class="icon">🚗</span>
+<h3>سيارات</h3>
+<p>عرض بيانات السيارات</p>
+</a>
 
-  <a class="card" href="idea.html">
-    <span class="icon">🎨</span>
-    <h3>عن المصمم</h3>
-  </a>
+<a class="card" href="rent_contracts.html">
+<span class="icon">🏠</span>
+<h3>عقود إيجار</h3>
+</a>
 
-  <a class="card" href="inventory.php">
-    <span class="icon">📦</span>
-    <h3>المخزون</h3>
-    <p>عرض بيانات المخزون</p>
-  </a>
+<a class="card" href="idea.html">
+<span class="icon">🎨</span>
+<h3>عن المصمم</h3>
+</a>
 
-  <a class="card" href="corporate_inventory.php">
-    <span class="icon">🏢</span>
-    <h3>مخزون المؤسسة</h3>
-    <p>عرض بيانات المخزون من جوجل شيت</p>
-  </a>
+<a class="card" href="inventory.php">
+<span class="icon">📦</span>
+<h3>المخزون</h3>
+</a>
+
+<a class="card" href="corporate_inventory.php">
+<span class="icon">🏢</span>
+<h3>مخزون المؤسسة</h3>
+</a>
+
 </div>
 </section>
 
@@ -283,64 +296,58 @@ footer{
 <footer>جميع الحقوق محفوظة © 2025</footer>
 
 <a class="whatsapp" href="https://wa.me/966558020154" target="_blank">
-<img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg">
+  <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg">
 </a>
 
 <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
 <script>
-// الكروت
+// كروت الضغط
 document.querySelectorAll('.card').forEach(card=>{
   card.addEventListener('mousedown',()=>card.style.transform='scale(0.97)');
   card.addEventListener('mouseup',()=>card.style.transform='');
   card.addEventListener('mouseleave',()=>card.style.transform='');
 });
 
-// الروابط
+// ربط الكروت
 document.getElementById('vehiclesCard').addEventListener('click',()=>{window.location.href='cars.html'});
 document.getElementById('recordsCard').addEventListener('click',()=>{window.location.href='documents.html'});
 
-// 🔔 شريط التنبيه
-const alertBar = document.getElementById("mainAlert");
-const csvUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRWS2KglkUT8Pc3L39dcKFosvR3LWKNQv_EVmYbsLZKx2MBVS33EZQGjk6Yb1mmR9XKKaPK_6qVzbi5/pub?output=csv";
+// التنبيهات
+const alertBar=document.getElementById("mainAlert");
+const csvUrl="https://docs.google.com/spreadsheets/d/e/2PACX-1vRWS2KglkUT8Pc3L39dcKFosvR3LWKNQv_EVmYbsLZKx2MBVS33EZQGjk6Yb1mmR9XKKaPK_6qVzbi5/pub?output=csv";
 
 function parseDate(dateStr){
-  if(!dateStr) return null;
-  const parts = dateStr.split('/');
-  if(parts.length === 3){
-    const year=parseInt(parts[0],10);
-    const month=parseInt(parts[1],10)-1;
-    const day=parseInt(parts[2],10);
-    return new Date(year,month,day);
-  }
-  return null;
+ if(!dateStr) return null;
+ const p=dateStr.split('/');
+ if(p.length===3)return new Date(parseInt(p[0]),parseInt(p[1])-1,parseInt(p[2]));
+ return null;
 }
 function daysUntil(date){
-  if(!date) return 9999;
-  const today=new Date(); today.setHours(0,0,0,0);
-  date.setHours(0,0,0,0);
-  return Math.ceil((date-today)/(1000*60*60*24));
+ if(!date)return 9999;
+ const t=new Date();t.setHours(0,0,0,0);
+ date.setHours(0,0,0,0);
+ return Math.ceil((date-t)/(1000*60*60*24));
 }
 
 Papa.parse(csvUrl,{
-  download:true,
-  header:true,
-  skipEmptyLines:true,
-  complete:function(results){
-    const data = results.data;
-    let alertsCount = 0;
-    data.forEach(row=>{
-      const resDays=daysUntil(parseDate(row["تاريخ انتهاء الاقامة"]));
-      const passDays=daysUntil(parseDate(row["تاريخ انتهاء جواز السفر"]));
-      const contractDays=daysUntil(parseDate(row["تاريخ انتهاء العقد"]));
-      if(resDays<=30 || passDays<=30 || contractDays<=30) alertsCount++;
-    });
-    if(alertsCount>0){
-      alertBar.style.display="block";
-      alertBar.innerHTML=`<span>⚠️</span> يوجد ${alertsCount} تنبيه/تنبيهات قرب الانتهاء — اضغط هنا لعرض التفاصيل`;
-    }
+ download:true,
+ header:true,
+ skipEmptyLines:true,
+ complete:function(results){
+  let alertsCount=0;
+  results.data.forEach(row=>{
+   if(daysUntil(parseDate(row["تاريخ انتهاء الاقامة"]))<=30 ||
+      daysUntil(parseDate(row["تاريخ انتهاء جواز السفر"]))<=30 ||
+      daysUntil(parseDate(row["تاريخ انتهاء العقد"]))<=30)
+      alertsCount++;
+  });
+  if(alertsCount>0){
+   alertBar.style.display="block";
+   alertBar.innerHTML=`<span>⚠️</span> يوجد ${alertsCount} تنبيه/تنبيهات قرب الانتهاء — اضغط هنا`;
   }
+ }
 });
-alertBar.addEventListener("click",()=>{window.location.href="employees.html"});
+alertBar.addEventListener("click",()=>window.location.href="employees.html");
 </script>
 
 </body>
