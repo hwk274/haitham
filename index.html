@@ -7,12 +7,16 @@
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'Cairo',sans-serif;background:#f9f9f9;color:#333;line-height:1.6;}
-header{color:#1e3c72;text-align:center;padding:80px 20px;}
-header h1{font-size:2.8rem;margin-bottom:12px;}
-header p{font-size:1.2rem;}
-nav{background:#fff;display:flex;justify-content:center;gap:10px;box-shadow:0 2px 8px rgba(0,0,0,.1);position:sticky;top:0;z-index:1000;}
-nav a{padding:12px 22px;font-weight:600;border-radius:6px;color:#1e3c72;transition:0.3s;}
+body{font-family:'Cairo',sans-serif;background:#f9f9f9;color:#333;line-height:1.6}
+
+/* الرأس */
+header{color:#1e3c72;text-align:center;padding:80px 20px}
+header h1{font-size:2.8rem;margin-bottom:12px}
+header p{font-size:1.2rem}
+
+/* القوائم */
+nav{background:#fff;display:flex;justify-content:center;gap:10px;box-shadow:0 2px 8px rgba(0,0,0,.1);position:sticky;top:0;z-index:1000}
+nav a{padding:12px 22px;font-weight:600;border-radius:6px;color:#1e3c72;transition:0.3s}
 nav a:hover{background:#1e3c72;color:#fff}
 
 /* 🔔 شريط التنبيه */
@@ -31,42 +35,46 @@ nav a:hover{background:#1e3c72;color:#fff}
   animation:pulse 1.5s infinite;
   cursor:pointer;
 }
-@keyframes pulse{0%{transform:scale(1)}50%{transform:scale(1.02)}100%{transform:scale(1)}}
-.alert-bar span{font-size:1.4rem;margin-left:8px;}
+@keyframes pulse{
+  0%{transform:scale(1)}
+  50%{transform:scale(1.02)}
+  100%{transform:scale(1)}
+}
+.alert-bar span{font-size:1.4rem;margin-left:8px}
 
 /* السلايدر */
-.slider{position:relative;overflow:hidden;border-radius:18px;box-shadow:0 8px 20px rgba(0,0,0,.1);margin:30px auto;max-width:1100px;}
-.slides{display:flex;transition:0.6s;}
-.slide{min-width:100%;position:relative;}
-.slide img{width:90%;max-height:400px;display:block;margin:0 auto;border-radius:18px;object-fit:cover;}
+.slider{position:relative;overflow:hidden;border-radius:18px;box-shadow:0 8px 20px rgba(0,0,0,.1);margin:30px auto;max-width:1100px}
+.slides{display:flex;transition:0.6s}
+.slide{min-width:100%;position:relative}
+.slide img{width:90%;max-height:400px;display:block;margin:0 auto;border-radius:18px;object-fit:cover}
 
 /* الأقسام */
-section{max-width:1200px;margin:60px auto;padding:20px;text-align:center;}
-section h2{font-size:2rem;margin-bottom:25px;color:#1e3c72;}
-.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px;margin-top:30px;}
+section{max-width:1200px;margin:60px auto;padding:20px;text-align:center}
+section h2{font-size:2rem;margin-bottom:25px;color:#1e3c72}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px;margin-top:30px}
 
 /* الكروت */
-.card{background:#fff;padding:30px 20px;border-radius:22px;box-shadow:0 6px 20px rgba(0,0,0,.08);transition:transform .3s ease,box-shadow .3s ease,background .3s ease;position:relative;overflow:hidden;cursor:pointer;text-align:center;}
-.card:hover{transform:translateY(-6px) scale(1.03);box-shadow:0 12px 28px rgba(0,0,0,.15);}
-.card .icon{font-size:3.5rem;margin-bottom:15px;display:block;transition:transform .5s,color .3s;color:#2563eb;}
-.card:hover .icon{transform:rotate(360deg) scale(1.1);color:#1e3c72;}
-.card h3{margin-bottom:12px;font-size:1.2rem;color:#1e3c72;transition:color .3s;}
-.card p{font-size:0.95rem;color:#555;transition:color .3s;}
-.card:hover h3, .card:hover p{color:#0f172a}
+.card{background:#fff;padding:30px 20px;border-radius:22px;box-shadow:0 6px 20px rgba(0,0,0,.08);transition:transform .3s ease,box-shadow .3s ease,background .3s ease;position:relative;overflow:hidden;cursor:pointer;text-align:center}
+.card:hover{transform:translateY(-6px) scale(1.03);box-shadow:0 12px 28px rgba(0,0,0,.15)}
+.card .icon{font-size:3.5rem;margin-bottom:15px;display:block;transition:transform .5s,color .3s;color:#2563eb}
+.card:hover .icon{transform:rotate(360deg) scale(1.1);color:#1e3c72}
+.card h3{margin-bottom:12px;font-size:1.2rem;color:#1e3c72;transition:color .3s}
+.card p{font-size:0.95rem;color:#555;transition:color .3s}
+.card:hover h3,.card:hover p{color:#0f172a}
 
 /* الأزرار */
-.btn{display:inline-block;margin-top:20px;padding:12px 28px;background:#1e3c72;color:#fff;border-radius:8px;transition:0.3s;}
+.btn{display:inline-block;margin-top:20px;padding:12px 28px;background:#1e3c72;color:#fff;border-radius:8px;transition:0.3s}
 .btn:hover{background:#203a43}
 
 /* الفوتر */
-footer{background:#1e3c72;color:#fff;text-align:center;padding:30px;margin-top:50px;}
+footer{background:#1e3c72;color:#fff;text-align:center;padding:30px;margin-top:50px}
 
 /* أيقونة واتساب */
-.whatsapp{position:fixed;bottom:20px;left:20px;width:55px;height:55px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 5px 15px rgba(0,0,0,.35);z-index:1000;}
+.whatsapp{position:fixed;bottom:20px;left:20px;width:55px;height:55px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 5px 15px rgba(0,0,0,.35);z-index:1000}
 .whatsapp img{width:32px}
 
 /* Responsive */
-@media(max-width:768px){header h1{font-size:1.8rem;}header p{font-size:1rem;}nav{flex-wrap:wrap}}
+@media(max-width:768px){header h1{font-size:1.8rem}header p{font-size:1rem}nav{flex-wrap:wrap}}
 </style>
 </head>
 <body>
@@ -168,7 +176,7 @@ footer{background:#1e3c72;color:#fff;text-align:center;padding:30px;margin-top:5
 
 <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
 <script>
-/* السلايدر */
+// السلايدر
 let i=0;
 const slides=document.querySelector('.slides');
 const total=document.querySelectorAll('.slide').length;
@@ -176,78 +184,61 @@ function update(){slides.style.transform=`translateX(-${i*100}%)`;}
 function next(){i=(i+1)%total;update();}
 setInterval(next,4000);
 
-/* حركة الكروت */
-document.querySelectorAll('.card').forEach(card => {
-  card.addEventListener('mousedown', () => card.style.transform = 'scale(0.97)');
-  card.addEventListener('mouseup', () => card.style.transform = '');
-  card.addEventListener('mouseleave', () => card.style.transform = '');
+// الكروت
+document.querySelectorAll('.card').forEach(card=>{
+  card.addEventListener('mousedown',()=>card.style.transform='scale(0.97)');
+  card.addEventListener('mouseup',()=>card.style.transform='');
+  card.addEventListener('mouseleave',()=>card.style.transform='');
 });
 
-/* الروابط */
-document.getElementById('vehiclesCard').addEventListener('click', function(){
-    window.location.href = 'cars.html';
-});
-document.getElementById('recordsCard').addEventListener('click', function(){
-    window.location.href = 'documents.html';
-});
+// الروابط
+document.getElementById('vehiclesCard').addEventListener('click',()=>{window.location.href='cars.html'});
+document.getElementById('recordsCard').addEventListener('click',()=>{window.location.href='documents.html'});
 
-/* 🔔 نظام التنبيه الديناميكي */
+// 🔔 شريط التنبيه
 const alertBar = document.getElementById("mainAlert");
-const employeeCSV = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRWS2KglkUT8Pc3L39dcKFosvR3LWKNQv_EVmYbsLZKx2MBVS33EZQGjk6Yb1mmR9XKKaPK_6qVzbi5/pub?output=csv";
-const carsCSV = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRB0P_xju8oG-LTgbRxdlcGlBXjCHvLxO9SVAyyvZg6LWqskbZBEFXG5sQa9Zgaik2ZXEmFtXO4xu8f/pub?output=csv";
+const csvUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRWS2KglkUT8Pc3L39dcKFosvR3LWKNQv_EVmYbsLZKx2MBVS33EZQGjk6Yb1mmR9XKKaPK_6qVzbi5/pub?output=csv";
 
 function parseDate(dateStr){
   if(!dateStr) return null;
-  if(dateStr.includes('/')){
-    const parts = dateStr.split('/');
-    return new Date(parts[2], parts[1]-1, parts[0]);
+  const parts = dateStr.split('/');
+  if(parts.length === 3){
+    const year=parseInt(parts[0],10);
+    const month=parseInt(parts[1],10)-1;
+    const day=parseInt(parts[2],10);
+    return new Date(year,month,day);
   }
-  return new Date(dateStr);
-}
-function daysUntil(date){
-  if(!date) return 9999;
-  const today = new Date(); today.setHours(0,0,0,0);
-  date.setHours(0,0,0,0);
-  return Math.ceil((date - today) / (1000*60*60*24));
-}
-function collectAlerts(data, type){
-  let alertsArr = [];
-  data.forEach(row=>{
-    const resDays = daysUntil(parseDate(row["تاريخ انتهاء الاقامة"]));
-    const passDays = daysUntil(parseDate(row["تاريخ انتهاء جواز السفر"]));
-    const contractDays = daysUntil(parseDate(row["تاريخ انتهاء العقد"]));
-    if(resDays<=30) alertsArr.push(`${type}: ${row["الاسم"]} ⚠️ الإقامة (${resDays} يوم)` );
-    if(passDays<=30) alertsArr.push(`${type}: ${row["الاسم"]} ⚠️ الجواز (${passDays} يوم)` );
-    if(contractDays<=30) alertsArr.push(`${type}: ${row["الاسم"]} ⚠️ العقد (${contractDays} يوم)` );
-  });
-  return alertsArr;
-}
-function showAlerts(alertsList){
-  if(alertsList.length === 0){alertBar.style.display = "none"; return;}
-  alertBar.style.display = "block";
-  let index = 0;
-  alertBar.innerHTML = `<span>⚠️</span> ${alertsList[index]}`;
-  setInterval(()=>{
-    index = (index + 1) % alertsList.length;
-    alertBar.innerHTML = `<span>⚠️</span> ${alertsList[index]}`;
-  },4000);
-}
-function fetchCSV(url, callback){
-  Papa.parse(url,{download:true,header:true,skipEmptyLines:true,complete:function(results){ 
-    const data = results.data.map(r=>{const clean={};for(let k in r) clean[k.trim()]=r[k]?.trim(); return clean;});
-    callback(data);
-  }});
+  return null;
 }
 
-let allAlerts = [];
-fetchCSV(employeeCSV, data=>{
-  allAlerts = allAlerts.concat(collectAlerts(data,"موظف"));
-  fetchCSV(carsCSV, data2=>{
-    allAlerts = allAlerts.concat(collectAlerts(data2,"سيارة"));
-    showAlerts(allAlerts);
-  });
+function daysUntil(date){
+  if(!date) return 9999;
+  const today=new Date(); today.setHours(0,0,0,0);
+  date.setHours(0,0,0,0);
+  return Math.ceil((date-today)/(1000*60*60*24));
+}
+
+Papa.parse(csvUrl,{
+  download:true,
+  header:true,
+  skipEmptyLines:true,
+  complete:function(results){
+    const data = results.data;
+    let alertsCount = 0;
+    data.forEach(row=>{
+      const resDays=daysUntil(parseDate(row["تاريخ انتهاء الاقامة"]));
+      const passDays=daysUntil(parseDate(row["تاريخ انتهاء جواز السفر"]));
+      const contractDays=daysUntil(parseDate(row["تاريخ انتهاء العقد"]));
+      if(resDays<=30 || passDays<=30 || contractDays<=30) alertsCount++;
+    });
+    if(alertsCount>0){
+      alertBar.style.display="block";
+      alertBar.innerHTML=`<span>⚠️</span> يوجد ${alertsCount} تنبيه/تنبيهات قرب الانتهاء — اضغط هنا لعرض التفاصيل`;
+    }
+  }
 });
-alertBar.addEventListener("click", ()=>{ window.location.href="employees.html"; });
+
+alertBar.addEventListener("click",()=>{window.location.href="employees.html"});
 </script>
 
 </body>
