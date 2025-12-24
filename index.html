@@ -184,6 +184,9 @@ section h2::after{
 }
 #alerts .card.visible{opacity:1;transform:translateY(0);}
 #alerts .card h3{color:#b00020;margin-bottom:6px;}
+#alerts .card p{font-size:0.95rem;}
+
+/* أيقونات */
 #alerts .icon svg{width:45px;height:45px;fill:#ff5c5c;margin-bottom:10px;}
 
 /* كروت الخدمات */
@@ -279,7 +282,7 @@ footer{
 </nav>
 
 <section id="alerts">
-<h2>تنبيهات قرب انتهاء الإقامة</h2>
+<h2>تنبيهات قرب انتهاء الإقامة والسيارات</h2>
 
 <div class="alert-counter-box">
   🔔 عدد التنبيهات الحالية :
@@ -354,45 +357,75 @@ footer{
 
 <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
 <script>
-const csvUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRWS2KglkUT8Pc3L39dcKFosvR3LWKNQv_EVmYbsLZKx2MBVS33EZQGjk6Yb1mmR9XKKaPK_6qVzbi5/pub?output=csv";
+const csvUrlResidency = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRWS2KglkUT8Pc3L39dcKFosvR3LWKNQv_EVmYbsLZKx2MBVS33EZQGjk6Yb1mmR9XKKaPK_6qVzbi5/pub?output=csv";
+const csvUrlCars = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRB0P_xju8oG-LTgbRxdlcGlBXjCHvLxO9SVAyyvZg6LWqskbZBEFXG5sQa9Zgaik2ZXEmFtXO4xu8f/pub?output=csv";
 
 function parseDate(str){ if(!str) return null; let d=Date.parse(str); if(!isNaN(d)) return new Date(d); return null; }
 function daysUntil(date){ if(!date) return null; const t=new Date(); t.setHours(0,0,0,0); date.setHours(0,0,0,0); return Math.ceil((date-t)/(86400000)); }
 
-function renderAlerts(data){
-  const container=document.getElementById("alertCards");
-  const counter=document.getElementById("alertCount");
-  container.innerHTML="";
-  let count=0;
-  data.forEach(row=>{
-    const res=daysUntil(parseDate(row["تاريخ انتهاء الاقامة"]));
+function renderAlerts(residencyData, carsData){
+  const container = document.getElementById("alertCards");
+  const counter = document.getElementById("alertCount");
+  container.innerHTML = "";
+  let count = 0;
+
+  // تنبيهات الإقامة
+  residencyData.forEach(row=>{
+    const res = daysUntil(parseDate(row["تاريخ انتهاء الاقامة"]));
     if(res!==null && res<=30){
       count++;
-      let card=document.createElement("div");
-      card.className="card";
-      card.innerHTML=`
+      const card = document.createElement("div");
+      card.className = "card";
+      card.innerHTML = `
       <div class="icon"><svg viewBox="0 0 24 24"><path d="M1 21h22L12 2 1 21z"/></svg></div>
       <h3>${row["الاسم"]||"-"}</h3>
-      <p>تنتهي بعد ${res} يوم</p>`;
+      <p>تنتهي الإقامة بعد ${res} يوم</p>`;
       container.appendChild(card);
     }
   });
-  counter.textContent=count;
+
+  // تنبيهات السيارات
+  carsData.forEach(car=>{
+    const fields = ["انتهاء الفحص","انتهاء الاستمارة","انتهاء بطاقة التشغيل","انتهاء التامين"];
+    fields.forEach(field=>{
+      const days = daysUntil(parseDate(car[field]));
+      if(days!==null && days<=30){
+        count++;
+        const card = document.createElement("div");
+        card.className = "card";
+        const status = days < 0 ? "انتهت" : `تنتهي بعد ${days} يوم`;
+        card.innerHTML = `
+        <div class="icon"><svg viewBox="0 0 24 24"><path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.21.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99z"/></svg></div>
+        <h3>${car["اسم السيارة"]||"-"} - ${car["رقم اللوحة"]||"-"}</h3>
+        <p>${field}: ${status}</p>`;
+        container.appendChild(card);
+      }
+    });
+  });
+
+  counter.textContent = count;
   if(count===0){
     container.innerHTML = `<div class="card visible"><div class="icon"><svg viewBox="0 0 24 24"><path d="M9 16.17 4.83 12 3.41 13.41 9 19l12-12-1.41-1.41z"/></svg></div><h3>لا توجد تنبيهات</h3><p>كل شيء سليم</p></div>`;
   }
-  document.querySelectorAll('.card').forEach(c=>{ setTimeout(()=>c.classList.add('visible'),300); });
+
+  document.querySelectorAll('#alertCards .card').forEach(c=>{ setTimeout(()=>c.classList.add('visible'),300); });
 }
 
-// تحميل تنبيهات CSV
-Papa.parse(csvUrl,{download:true, header:true, complete:function(results){ renderAlerts(results.data); } });
+// تحميل CSV
+let residencyData=[], carsData=[];
+Papa.parse(csvUrlResidency,{download:true, header:true, complete:function(results){ residencyData=results.data; if(carsData.length) renderAlerts(residencyData,carsData); } });
+Papa.parse(csvUrlCars,{download:true, header:true, complete:function(results){ carsData=results.data; if(residencyData.length) renderAlerts(residencyData,carsData); } });
 
-// Dark Mode مع حفظ الوضع المفضل
+// Dark Mode
 const toggle = document.getElementById("darkModeToggle");
 if(localStorage.getItem("darkMode") === "true"){ document.body.classList.add("dark"); }
 function updateButtonText(){ toggle.textContent = document.body.classList.contains("dark") ? "الوضع الفاتح" : "الوضع الداكن"; }
 updateButtonText();
-toggle.addEventListener("click", ()=>{ document.body.classList.toggle("dark"); localStorage.setItem("darkMode", document.body.classList.contains("dark")); updateButtonText(); });
+toggle.addEventListener("click", ()=>{
+  document.body.classList.toggle("dark");
+  localStorage.setItem("darkMode", document.body.classList.contains("dark"));
+  updateButtonText();
+});
 </script>
 
 </body>
