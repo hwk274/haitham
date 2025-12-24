@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<title>الأوراق الرسمية للشركة</title>
+
+<style>
+/* الخطوط والخلفية */
+body{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #f0f4f8;
+    min-height:100vh;
+    margin:0;
+    padding:35px;
+}
+
+/* العنوان الرئيسي */
+h1{
+    text-align:center;
+    color:#1e293b;
+    font-size:2.5rem;
+    margin-bottom:40px;
+    letter-spacing:1px;
+}
+
+/* شبكة الكروت */
+.cards{
+    max-width:1300px;
+    margin:auto;
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:25px;
+}
+
+/* الكرت الاحترافي */
+.card{
+    position:relative;
+    background:#ffffff;
+    border-radius:20px;
+    padding:25px 20px;
+    text-align:center;
+    box-shadow:0 10px 25px rgba(0,0,0,0.12);
+    transition:0.3s ease;
+}
+
+.card:hover{
+    transform:translateY(-6px);
+    box-shadow:0 20px 40px rgba(0,0,0,0.15);
+}
+
+/* خط علوي للكرت */
+.card::before{
+    content:"";
+    position:absolute;
+    top:0;
+    left:0;
+    height:5px;
+    width:100%;
+    border-radius:20px 20px 0 0;
+    background:linear-gradient(90deg,#3b82f6,#2563eb,#8b5cf6);
+}
+
+/* الأيقونة */
+.icon{
+    width:70px;
+    height:70px;
+    margin:auto;
+    border-radius:15px;
+    background:linear-gradient(135deg,#60a5fa,#3b82f6);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:36px;
+    color:white;
+    margin-bottom:15px;
+    box-shadow:0 6px 15px rgba(0,0,0,0.1);
+}
+
+/* عنوان الكرت */
+.card h3{
+    color:#1e293b;
+    font-size:1.25rem;
+    margin:10px 0;
+}
+
+/* زر فتح الملف */
+.card a{
+    display:inline-block;
+    margin-top:12px;
+    padding:10px 28px;
+    border-radius:50px;
+    color:white;
+    text-decoration:none;
+    font-weight:bold;
+    background:linear-gradient(90deg,#2563eb,#3b82f6);
+    transition:0.3s;
+}
+.card a:hover{
+    background:linear-gradient(90deg,#3b82f6,#2563eb);
+    letter-spacing:1px;
+}
+
+/* زر الرجوع */
+.back-button{
+    position:fixed;
+    bottom:25px;
+    right:25px;
+    background:#3b82f6;
+    color:white;
+    padding:15px 28px;
+    border-radius:50px;
+    text-decoration:none;
+    font-weight:bold;
+    box-shadow:0 8px 20px rgba(0,0,0,0.12);
+}
+.back-button:hover{
+    background:#2563eb;
+}
+
+</style>
+</head>
+
+<body>
+
+<h1>الأوراق الرسمية للشركة</h1>
+
+<div class="cards">
+
+    <div class="card">
+        <div class="icon">📑</div>
+        <h3>السجل التجاري</h3>
+        <a href="uploads/docs/sijil_tijari.pdf" target="_blank">فتح الملف</a>
+    </div>
+
+    <div class="card">
+        <div class="icon">🧾</div>
+        <h3>شهادة التسجيل الضريبي</h3>
+        <a href="uploads/docs/license1.PDF" target="_blank">فتح الملف</a>
+    </div>
+
+    <div class="card">
+        <div class="icon">📍</div>
+        <h3>العنوان الوطني</h3>
+        <a href="uploads/docs/NationalAddress.png" target="_blank">فتح الملف</a>
+    </div>
+
+    <div class="card">
+        <div class="icon">📄</div>
+        <h3>شهادة الزكاة</h3>
+        <a href="uploads/docs/ZakatCertificate.PDF" target="_blank">فتح الملف</a>
+    </div>
+
+    <div class="card">
+        <div class="icon">📄</div>
+        <h3>السجل الفرعي</h3>
+        <a href="uploads/docs/SubRegister.pdf" target="_blank">فتح الملف</a>
+    </div>
+
+    <div class="card">
+        <div class="icon">🏢</div>
+        <h3>بلدية الملز</h3>
+        <a href="uploads/docs/AlMalazMunicipality.pdf" target="_blank">فتح الملف</a>
+    </div>
+
+    <div class="card">
+        <div class="icon">🏢</div>
+        <h3>بلدية الغرابي</h3>
+        <a href="uploads/docs/AlRaghabiMunicipality.pdf" target="_blank">فتح الملف</a>
+    </div>
+
+    <div class="card">
+        <div class="icon">🏢</div>
+        <h3>بلدية المستودع</h3>
+        <a href="uploads/docs/AlMustawdaMunicipality.pdf" target="_blank">فتح الملف</a>
+    </div>
+
+    <div class="card">
+        <div class="icon">📑</div>
+        <h3>عقد إيجار الملز</h3>
+        <a href="uploads/docs/AlMalazLeaseContract.pdf" target="_blank">فتح الملف</a>
+    </div>
+
+    <div class="card">
+        <div class="icon">📑</div>
+        <h3>عقد إيجار الغرابي</h3>
+        <a href="uploads/docs/AlRaghabiLeaseContract.pdf" target="_blank">فتح الملف</a>
+    </div>
+
+    <div class="card">
+        <div class="icon">📑</div>
+        <h3>عقد إيجار المستودع 2</h3>
+        <a href="uploads/docs/WarehouseLeaseContract2.pdf" target="_blank">فتح الملف</a>
+    </div>
+
+    <div class="card">
+        <div class="icon">📑</div>
+        <h3>عقد إيجار المستودع وحدة 3</h3>
+        <a href="uploads/docs/WarehouseLeaseContractUnit3.pdf" target="_blank">فتح الملف</a>
+    </div>
+
+    <div class="card">
+        <div class="icon">🏠</div>
+        <h3>سكن العمال</h3>
+        <a href="uploads/docs/WorkersHousingLeaseContract.pdf" target="_blank">فتح الملف</a>
+    </div>
+
+    <div class="card">
+        <div class="icon">🚒</div>
+        <h3>الدفاع المدني الملز</h3>
+        <a href="uploads/docs/AlMalazCivilDefense.pdf" target="_blank">فتح الملف</a>
+    </div>
+
+    <div class="card">
+        <div class="icon">🚒</div>
+        <h3>الدفاع المدني الغرابي</h3>
+        <a href="uploads/docs/AlRaghabiCivilDefense.pdf" target="_blank">فتح الملف</a>
+    </div>
+
+    <div class="card">
+        <div class="icon">🚒</div>
+        <h3>الدفاع المدني المستودع</h3>
+        <a href="uploads/docs/AlMustawdaCivilDefense.pdf" target="_blank">فتح الملف</a>
+    </div>
+
+</div>
+
+<a href="index.html" class="back-button">الرجوع للصفحة الرئيسية</a>
+
+</body>
+</html>
