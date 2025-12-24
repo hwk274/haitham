@@ -3,70 +3,293 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>الموظفين</title>
+<title>الصفحة الرئيسية - إدارة الموظفين</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800&display=swap" rel="stylesheet">
 <style>
-  body { font-family: Arial, sans-serif; background: #f5f5f5; padding: 20px; }
-  h2 { color: #1e3c72; margin-top: 30px; }
-  .btn-home { 
-      display: inline-block; 
-      padding: 10px 20px; 
-      background-color: #1e3c72; 
-      color: white; 
-      text-decoration: none; 
-      border-radius: 5px; 
-      margin: 20px 0;
-  }
-  .cards { display: flex; flex-wrap: wrap; gap: 15px; }
-  .card {
-      background: white; 
-      border-radius: 8px; 
-      padding: 15px; 
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-      width: 200px;
-  }
-  .inactive { opacity: 0.6; } /* لتوضيح غير النشطين */
+body {
+  font-family: 'Cairo', sans-serif;
+  margin: 0; background: #eef3ff;
+}
+header {
+  background: linear-gradient(135deg,#1e3c72,#2a5298);
+  color: #fff; text-align: center;
+  padding: 80px 20px;
+  overflow: hidden;
+}
+header h1 { 
+  font-size: 2.5rem; margin-bottom: 10px; 
+  animation: slideDown 1s ease forwards;
+}
+header p { 
+  font-size: 1.2rem; 
+  animation: slideUp 1s ease forwards;
+}
+@keyframes slideDown {
+  0% { opacity:0; transform: translateY(-50px);}
+  100% { opacity:1; transform: translateY(0);}
+}
+@keyframes slideUp {
+  0% { opacity:0; transform: translateY(50px);}
+  100% { opacity:1; transform: translateY(0);}
+}
+
+nav {
+  background: #fff; display: flex; justify-content: center; gap: 10px; 
+  box-shadow: 0 2px 8px rgba(0,0,0,.1); 
+  position: relative;
+  top: auto; z-index: 1001;
+}
+nav a {
+  padding: 12px 25px; font-weight: 600; border-radius: 6px; color: #1e3c72;
+  transition: 0.3s;
+}
+nav a:hover { background: #1e3c72; color: #fff; }
+
+#alerts-section {
+  max-width: 1000px; margin: 20px auto; background: #fff3f3;
+  border-radius: 15px; padding: 20px 25px; box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+  text-align: center; position: relative; overflow: hidden;
+}
+#alerts-section h2 { color: #e74c3c; margin-bottom: 12px; font-size: 1.5rem; }
+
+.alert-item {
+  background: #fef1f1; border-radius: 10px; padding: 10px 12px; margin: 6px auto;
+  max-width: 600px; font-weight: bold; display: flex; justify-content: space-between;
+  align-items: center; animation: fadeIn 0.8s ease forwards;
+}
+.alert-item span { font-weight: normal; color: #555; font-size: 0.95rem; }
+
+@keyframes fadeIn {
+  0% { opacity:0; transform: translateY(-10px);}
+  100% { opacity:1; transform: translateY(0);}
+}
+
+.controls { display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; margin-bottom: 15px; }
+.controls input, .controls select { padding: 8px 12px; border-radius: 8px; border: 1px solid #ccc; font-size: 1rem; }
+
+.counters {
+  text-align: center; font-weight: bold; margin-bottom: 25px;
+  background: #fff; display: inline-block; padding: 15px 20px; border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+  max-width: 900px; margin-left: auto; margin-right: auto;
+}
+
+.cards { display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; }
+
+.card {
+  width: 340px; background: #fff; border-radius: 15px; padding: 18px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.12); position: relative; line-height: 1.4;
+  transition: transform .3s, box-shadow .3s;
+}
+.card:hover { transform: translateY(-5px); box-shadow: 0 12px 22px rgba(0,0,0,0.18); }
+.card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+.card h3 { margin: 0; font-size: 18px; color: #1e3c72; }
+.card-id { font-size: 14px; color: #555; }
+
+.alert-label {
+  padding: 6px 12px; border-radius: 8px; color: white; font-weight: bold; font-size: 13px;
+  margin-bottom: 6px; display: inline-block;
+}
+.alert-residence { background: #f0ad4e; }
+.alert-passport { background: #5bc0de; }
+.alert-contract { background: #f39c12; }
+.alert-inactive { background: #6c757d; }
+
+.details-btn {
+  width: 100%; padding: 10px; margin-top: 12px; border: none;
+  background: linear-gradient(135deg,#1e3c72,#2a65c8); color: white; border-radius: 8px;
+  font-weight: bold; cursor: pointer; font-size: 15px; transition: 0.3s;
+}
+.details-btn:hover { background: linear-gradient(135deg,#2a5298,#1e3c72); }
+
+.extra { display: none; margin-top: 10px; border-top: 1px solid #ddd; padding-top: 10px; font-size: 14px; }
+.extra p { margin: 4px 0; }
+
+.inactive-section {
+  max-width: 1000px; margin: 30px auto; background: #f5f5f5;
+  border-radius: 15px; padding: 20px; box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  text-align: center;
+}
+.inactive-section h2 { color: #6c757d; margin-bottom: 12px; font-size: 1.5rem; }
+
+footer { background: #1e3c72; color: #fff; text-align: center; padding: 25px; margin-top: 30px; }
 </style>
+<script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
 </head>
 <body>
 
-<h2>الموظفين النشطين</h2>
-<div class="cards" id="active-employees">
-  <!-- الموظفين النشطين ستظهر هنا عبر JS -->
+<header>
+<h1>مرحبا بكم في إدارة الموظفين</h1>
+<p>متابعة الإقامات والجوازات والعقود مع تنبيهات الأيام المتبقية</p>
+</header>
+
+<nav>
+<a href="#alerts-section">التنبيهات</a>
+<a href="#cards">الموظفين</a>
+<a href="employees.html">صفحة الموظفين</a>
+</nav>
+
+<div id="alerts-section">
+<h2>تنبيهات قرب انتهاء الإقامة والجواز والعقد</h2>
+<div id="alertsContainer">
+<p>جاري تحميل البيانات...</p>
+</div>
 </div>
 
-<!-- زر الرجوع للصفحة الرئيسية -->
-<a href="index.html" class="btn-home">العودة للصفحة الرئيسية</a>
+<div class="controls">
+<input type="text" id="searchInput" placeholder="بحث بالاسم أو رقم الهوية">
+<select id="nationalityFilter">
+<option value="">كل الجنسيات</option>
+</select>
+</div>
 
+<div class="counters" id="counters">السعوديون النشطون: 0 | غير السعوديين النشطين: 0</div>
+
+<div class="cards" id="cards"></div>
+
+<!-- قسم الموظفين الغير نشطين -->
+<div class="inactive-section" id="inactiveSection">
 <h2>الموظفين الغير نشطين</h2>
-<div class="cards" id="inactive-employees">
-  <!-- الموظفين الغير نشطين ستظهر هنا عبر JS -->
+<div class="cards" id="inactiveCards"></div>
 </div>
+
+<footer>جميع الحقوق محفوظة © 2025</footer>
 
 <script>
-// بيانات الموظفين كمثال
-const employees = [
-  { name: "أحمد", active: true },
-  { name: "سارة", active: true },
-  { name: "محمد", active: false },
-  { name: "ليلى", active: false }
-];
+const csvUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRWS2KglkUT8Pc3L39dcKFosvR3LWKNQv_EVmYbsLZKx2MBVS33EZQGjk6Yb1mmR9XKKaPK_6qVzbi5/pub?output=csv";
+let allData = [];
 
-// عرض الموظفين
-const activeContainer = document.getElementById('active-employees');
-const inactiveContainer = document.getElementById('inactive-employees');
+function parseDate(str){
+  if(!str) return null;
+  str = str.toString().trim().replace(/[\u200B-\u200D\uFEFF]/g,'');
+  let d = Date.parse(str); if(!isNaN(d)) return new Date(d);
+  if(str.includes("/")) { let p=str.split("/").map(x=>parseInt(x)); if(p.length===3) return new Date(p[2],p[1]-1,p[0]); }
+  if(str.includes("-")) { let p=str.split("-").map(x=>parseInt(x)); if(p.length===3) return new Date(p[2],p[1]-1,p[0]); }
+  return null;
+}
 
-employees.forEach(emp => {
-  const card = document.createElement('div');
-  card.className = 'card';
-  card.textContent = emp.name;
-  
-  if(emp.active) {
-    activeContainer.appendChild(card);
-  } else {
-    card.classList.add('inactive'); // لتوضيح غير النشط
-    inactiveContainer.appendChild(card);
+function daysUntil(date){ 
+  if(!date||isNaN(date)) return null; 
+  const t=new Date(); t.setHours(0,0,0,0); date.setHours(0,0,0,0); 
+  return Math.ceil((date-t)/(1000*60*60*24)); 
+}
+
+function createCard(row){
+  const alerts=[];
+  const resDays=daysUntil(parseDate(row["تاريخ انتهاء الاقامة"]));
+  const passDays=daysUntil(parseDate(row["تاريخ انتهاء جواز السفر"]));
+  const contractDays=daysUntil(parseDate(row["تاريخ انتهاء العقد"]));
+  const isInactive=!!row["تاريخ نهاية الخدمة"];
+
+  if(isInactive) alerts.push({text:"❌ غير نشط", class:"alert-inactive"});
+  else{
+    if(resDays!==null && resDays<=30) alerts.push({text:`⚠️ الإقامة قرب الانتهاء (${resDays} يوم)` , class:"alert-residence"});
+    if(passDays!==null && passDays<=30) alerts.push({text:`⚠️ الجواز قرب الانتهاء (${passDays} يوم)`, class:"alert-passport"});
+    if(contractDays!==null && contractDays<=30) alerts.push({text:`⚠️ العقد قرب الانتهاء (${contractDays} يوم)`, class:"alert-contract"});
+  }
+
+  // إنشاء الكرت
+  let card=document.createElement("div"); card.className="card";
+  const alertsDiv=document.createElement("div");
+  alerts.forEach(a=>{let d=document.createElement("div"); d.className="alert-label "+a.class; d.innerText=a.text; alertsDiv.appendChild(d);});
+  card.appendChild(alertsDiv);
+
+  const headerDiv=document.createElement("div"); headerDiv.className="card-header";
+  headerDiv.innerHTML=`<h3>${row["الاسم"]||"-"}</h3><span class="card-id">${row["رقم الهوية"]||"-"}</span>`;
+  card.appendChild(headerDiv);
+
+  const extraDiv=document.createElement("div"); extraDiv.className="extra";
+  extraDiv.innerHTML=`
+    <p><strong>المهنة:</strong> ${row["المهنة"]||"-"}</p>
+    <p><strong>الجنسية:</strong> ${row["الجنسية"]||"-"}</p>
+    <p><strong>تاريخ الميلاد:</strong> ${row["تاريخ الميلاد"]||"-"}</p>
+    <p><strong>رقم الجواز:</strong> ${row["رقم الجواز"]||"-"}</p>
+    <p><strong>رقم العقد:</strong> ${row["رقم العقد"]||"-"}</p>
+    <p><strong>تاريخ التعين:</strong> ${row["تاريخ التعين"]||"-"}</p>
+    <p><strong>القسم:</strong> ${row["القسم"]||"-"}</p>
+    <p><strong>تاريخ انتهاء الإقامة:</strong> ${row["تاريخ انتهاء الاقامة"]||"-"}</p>
+    <p><strong>تاريخ انتهاء الجواز:</strong> ${row["تاريخ انتهاء جواز السفر"]||"-"}</p>
+    <p><strong>تاريخ انتهاء العقد:</strong> ${row["تاريخ انتهاء العقد"]||"-"}</p>
+    <p><strong>تاريخ نهاية الخدمة:</strong> ${row["تاريخ نهاية الخدمة"]||"-"}</p>`;
+  card.appendChild(extraDiv);
+
+  const btn=document.createElement("button"); btn.className="details-btn"; btn.innerText="عرض التفاصيل";
+  btn.onclick=()=>{ 
+    extraDiv.style.display=extraDiv.style.display==="block"?"none":"block"; 
+    btn.innerText=extraDiv.style.display==="block"?"إخفاء التفاصيل":"عرض التفاصيل"; 
+  };
+  card.appendChild(btn);
+
+  return {card, isInactive};
+}
+
+function renderCards(data){
+  const cardsContainer=document.getElementById("cards");
+  const inactiveContainer=document.getElementById("inactiveCards");
+  const alertsContainer=document.getElementById("alertsContainer");
+  cardsContainer.innerHTML="";
+  inactiveContainer.innerHTML="";
+  alertsContainer.innerHTML="";
+  let saudiCount=0, nonSaudiCount=0;
+
+  data.forEach(rawRow=>{
+    const row={}; for(let key in rawRow) row[key.trim()]=rawRow[key]?.trim();
+    const isInactive=!!row["تاريخ نهاية الخدمة"];
+    const isActive=!isInactive;
+    if(isActive){ if(row["الجنسية"]==="سعودي") saudiCount++; else if(row["الجنسية"]) nonSaudiCount++; }
+
+    const {card, isInactive:isCardInactive} = createCard(row);
+
+    // إضافة التنبيهات للنشطين
+    if(!isCardInactive){
+      const resDays=daysUntil(parseDate(row["تاريخ انتهاء الاقامة"]));
+      const passDays=daysUntil(parseDate(row["تاريخ انتهاء جواز السفر"]));
+      const contractDays=daysUntil(parseDate(row["تاريخ انتهاء العقد"]));
+      if(resDays!==null && resDays<=30) alertsContainer.appendChild(card.querySelector(".alert-residence")?.parentNode.cloneNode(true));
+      if(passDays!==null && passDays<=30) alertsContainer.appendChild(card.querySelector(".alert-passport")?.parentNode.cloneNode(true));
+      if(contractDays!==null && contractDays<=30) alertsContainer.appendChild(card.querySelector(".alert-contract")?.parentNode.cloneNode(true));
+    }
+
+    if(isCardInactive) inactiveContainer.appendChild(card);
+    else cardsContainer.appendChild(card);
+  });
+
+  document.getElementById("counters").innerText=`السعوديون النشطون: ${saudiCount} | غير السعوديين النشطين: ${nonSaudiCount}`;
+}
+
+function applyFilters(){
+  const searchVal=document.getElementById("searchInput").value.toLowerCase();
+  const nationalityVal=document.getElementById("nationalityFilter").value;
+  let filtered=allData.filter(rawRow=>{
+    const row={}; for(let key in rawRow) row[key.trim()]=rawRow[key]?.trim();
+    return (row["الاسم"]?.toLowerCase().includes(searchVal) || (row["رقم الهوية"] && row["رقم الهوية"].includes(searchVal))) &&
+           (nationalityVal==="" || row["الجنسية"]===nationalityVal);
+  });
+  renderCards(filtered);
+}
+
+Papa.parse(csvUrl, { 
+  download:true, 
+  header:true, 
+  complete:function(results){
+    allData = results.data.map(r=>{
+      const cleanRow = {};
+      for(let key in r){
+        cleanRow[key.trim()] = r[key]?.trim();
+      }
+      return cleanRow;
+    });
+
+    const nationalitySelect = document.getElementById("nationalityFilter");
+    let uniqueNationalities = Array.from(new Set(allData.map(r=> (r["الجنسية"]||"").trim()).filter(x=>x)));
+    uniqueNationalities.forEach(n=>{let o=document.createElement("option"); o.value=n; o.innerText=n; nationalitySelect.appendChild(o);});
+
+    renderCards(allData);
   }
 });
+
+document.getElementById("searchInput").addEventListener("input", applyFilters);
+document.getElementById("nationalityFilter").addEventListener("change", applyFilters);
 </script>
 
 </body>
