@@ -25,20 +25,14 @@ h1{text-align:center;color:#1e3c72;margin-bottom:20px;}
     font-size:15px;
 }
 
-.alerts-container{
-    margin-bottom:20px;
-    display:flex;
-    flex-direction:column;
-    gap:5px;
-}
-.alert-top{
-    background:#f1c40f;
-    padding:10px;
-    border-radius:10px;
-    color:#856404;
-    font-weight:bold;
-}
-.alert-top.expired{background:#e74c3c;color:white;}
+/* التنبيهات العلوية */
+.alerts-container{margin-bottom:20px; display:flex; flex-direction:column; gap:5px;}
+.alert-top{padding:10px;border-radius:10px;font-weight:bold;color:white;margin-bottom:5px;}
+.alert-inspection{background:#f39c12;}  /* الفحص */
+.alert-form{background:#3498db;}        /* الاستمارة */
+.alert-operation{background:#2ecc71;}   /* بطاقة التشغيل */
+.alert-insurance{background:#9b59b6;}   /* التأمين */
+.alert-expired{background:#e74c3c;}     /* منتهي */
 
 .filters{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-bottom:20px;}
 .filters select,input{padding:8px 12px;border-radius:8px;border:1px solid #ccc;font-size:0.95rem;}
@@ -172,19 +166,35 @@ function renderCards(data){
   data.forEach(car=>container.appendChild(createCard(car)));
 }
 
-// إنشاء التنبيهات العلوية
+// إنشاء التنبيهات العلوية الملونة
 function renderMainAlerts(data){
   const container = document.getElementById('mainAlerts');
   container.innerHTML = '';
-  const alertFields = ['انتهاء الفحص','انتهاء الاستمارة','انتهاء بطاقة التشغيل','انتهاء التامين'];
 
-  alertFields.forEach(field=>{
-    const alertCars = data.filter(car => getStatus(car[field])==='near-expiry');
-    if(alertCars.length>0){
+  const alertFields = [
+    {field:'انتهاء الفحص', label:'🛠 انتهاء الفحص', class:'alert-inspection'},
+    {field:'انتهاء الاستمارة', label:'📄 انتهاء الاستمارة', class:'alert-form'},
+    {field:'انتهاء بطاقة التشغيل', label:'💳 انتهاء بطاقة التشغيل', class:'alert-operation'},
+    {field:'انتهاء التامين', label:'🛡 انتهاء التأمين', class:'alert-insurance'}
+  ];
+
+  alertFields.forEach(alert=>{
+    const nearExpiry = data.filter(car => getStatus(car[alert.field])==='near-expiry');
+    const expired = data.filter(car => getStatus(car[alert.field])==='expired');
+
+    if(nearExpiry.length > 0){
       const div = document.createElement('div');
-      div.classList.add('alert-top');
-      div.innerHTML = `<strong>${field} قريب الانتهاء (${alertCars.length}):</strong> ` +
-        alertCars.map(c=>`${c['اسم السيارة'] || 'لا يوجد'} (${c['رقم اللوحة'] || 'لا يوجد'})`).join(' | ');
+      div.classList.add('alert-top', alert.class);
+      div.innerHTML = `<strong>${alert.label} قريب الانتهاء (${nearExpiry.length}):</strong> ` +
+        nearExpiry.map(c=>`${c['اسم السيارة'] || 'لا يوجد'} (${c['رقم اللوحة'] || 'لا يوجد'})`).join(' | ');
+      container.appendChild(div);
+    }
+
+    if(expired.length > 0){
+      const div = document.createElement('div');
+      div.classList.add('alert-top','alert-expired');
+      div.innerHTML = `<strong>${alert.label} منتهي (${expired.length}):</strong> ` +
+        expired.map(c=>`${c['اسم السيارة'] || 'لا يوجد'} (${c['رقم اللوحة'] || 'لا يوجد'})`).join(' | ');
       container.appendChild(div);
     }
   });
