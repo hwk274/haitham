@@ -5,257 +5,28 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>الموقع الاحترافي لإدارة الموظفين والمخزون</title>
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800&display=swap" rel="stylesheet">
-
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
-body{
-  font-family:'Cairo',sans-serif;
-  background:#f0f2f8;
-  color:#333;
-  line-height:1.6;
-  scroll-behavior:smooth;
-  transition: background 0.3s, color 0.3s;
-}
-:root{
-  --main:#1e3c72;
-  --second:#4a69ff;
-  --gradient:linear-gradient(135deg,#1e3c72,#4a69ff);
-  --card-bg:#ffffff;
-  --card-hover:#f0f4ff;
-  --alert-bg:#fff5f5;
-  --nav-bg:rgba(255,255,255,.97);
-  --footer-bg:var(--gradient);
-}
-body.dark{
-  --main:#a6c1ff;
-  --second:#5a7dff;
-  --gradient:linear-gradient(135deg,#1a1a2e,#162447);
-  --card-bg:#1f1f2e;
-  --card-hover:#2a2a3c;
-  --alert-bg:#3a3a4f;
-  --nav-bg:rgba(30,30,50,.97);
-  --footer-bg:linear-gradient(135deg,#1a1a2e,#162447);
-  color:#ddd;
-}
-
-/* رأس الصفحة */
-header{
-  height:220px;
-  background:var(--gradient);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  color:#fff;
-  text-align:center;
-  position:relative;
-  border-bottom-left-radius:25px;
-  border-bottom-right-radius:25px;
-  box-shadow:0 5px 15px rgba(0,0,0,0.15);
-}
-header .moving-text{
-  font-size:1.8rem;
-  font-weight:800;
-  animation:moveText 12s linear infinite;
-  white-space:nowrap;
-}
-@keyframes moveText{
-  0%{transform:translateX(100%);}
-  50%{transform:translateX(-100%);}
-  100%{transform:translateX(100%);}
-}
-
-/* شريط التنقل */
-nav{
-  position:fixed;top:0;width:100%;
-  background:var(--nav-bg);
-  box-shadow:0 5px 20px rgba(0,0,0,.12);
-  display:flex;justify-content:center;gap:18px;
-  padding:14px 0;
-  z-index:1000;
-  font-weight:600;
-  border-bottom:1px solid #ddd;
-  transition: background 0.3s;
-}
-nav a{
-  padding:10px 22px;
-  border-radius:12px;
-  color:var(--main);
-  font-weight:600;
-  transition:.3s;
-}
-nav a:hover{
-  background:var(--main);
-  color:#fff;
-}
-
-/* زر التبديل الداكن */
-#darkModeToggle{
-  position:fixed;
-  top:18px;
-  right:20px;
-  padding:10px 16px;
-  background:var(--gradient);
-  color:#fff;
-  border:none;
-  border-radius:10px;
-  font-weight:600;
-  cursor:pointer;
-  z-index:1001;
-  transition:.3s;
-}
-#darkModeToggle:hover{opacity:0.85;}
-
-/* أقسام */
-section{
-  max-width:1150px;
-  margin:120px auto 60px auto;
-  padding:40px 25px;
-  text-align:center;
-  border-radius:20px;
-  transition: background 0.3s, color 0.3s;
-}
-section h2{
-  font-size:2.2rem;
-  margin-bottom:30px;
-  color:var(--main);
-  font-weight:800;
-  position:relative;
-}
-section h2::after{
-  content:"";
-  width:80px;
-  height:4px;
-  background:var(--second);
-  display:block;
-  margin:10px auto 0 auto;
-  border-radius:5px;
-}
-
-/* كرت عداد التنبيهات */
-.alert-counter-box{
-  background:var(--card-bg);
-  border-radius:15px;
-  padding:20px;
-  margin-bottom:30px;
-  box-shadow:0 8px 25px rgba(0,0,0,.12);
-  display:flex;
-  justify-content:center;
-  gap:12px;
-  align-items:center;
-  font-size:1.2rem;
-  font-weight:700;
-  transition: background 0.3s, color 0.3s;
-}
-.alert-number{
-  background:#ff4747;
-  color:#fff;
-  padding:8px 18px;
-  border-radius:50px;
-  font-size:1.1rem;
-}
-
-/* قسم التنبيهات */
-#alerts, #carAlerts{
-  background:var(--card-bg);
-  border-radius:18px;
-  padding:30px 25px;
-  box-shadow:0 8px 25px rgba(0,0,0,.12);
-  margin-bottom:50px;
-}
-#alerts .cards, #carAlerts .cards{
-  display:flex;
-  flex-wrap:wrap;
-  gap:25px;
-  justify-content:center;
-}
-#alerts .card, #carAlerts .card{
-  width:240px;
-  background:var(--alert-bg);
-  padding:18px;
-  border-radius:18px;
-  box-shadow:0 6px 18px rgba(0,0,0,.12);
-  opacity:0;
-  transform:translateY(30px);
-  transition:.6s, background 0.3s, color 0.3s, transform 0.3s;
-}
-#alerts .card.visible, #carAlerts .card.visible{opacity:1;transform:translateY(0);}
-#alerts .card h3, #carAlerts .card h3{color:#b00020;margin-bottom:6px;}
-#alerts .card p, #carAlerts .card p{font-size:0.95rem;}
-#alerts .icon svg, #carAlerts .icon svg{width:45px;height:45px;fill:#ff5c5c;margin-bottom:10px;}
-
-/* كروت الخدمات */
-.cards{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
-  gap:25px;
-}
-.card{
-  background:var(--card-bg);
-  padding:25px;
-  border-radius:20px;
-  box-shadow:0 10px 25px rgba(0,0,0,.12);
-  opacity:0;
-  transform:translateY(30px);
-  transition:.6s, transform .3s ease, background 0.3s, color 0.3s;
-  cursor:pointer;
-}
-.card.visible{opacity:1;transform:translateY(0);}
-.card:hover{
-  transform:translateY(-10px) scale(1.03);
-  background:var(--card-hover);
-}
-.card h3{color:var(--main); font-weight:700;}
-.card p{color:#555; font-size:0.95rem;}
-.card .icon svg{
-  width:55px;height:55px;
-  margin-bottom:10px;
-  transition:.6s;
-  fill:var(--second);
-}
-.card:hover .icon svg{
-  transform:rotate(360deg);
-}
-
-/* زر */
-.btn{
-  padding:12px 30px;
-  background:var(--gradient);
-  color:#fff;
-  border-radius:12px;
-  font-weight:700;
-  transition:.3s;
-}
-.btn:hover{
-  transform:scale(1.05);
-  box-shadow:0 6px 18px rgba(0,0,0,.15);
-}
-
-/* الفوتر */
-footer{
-  background:var(--footer-bg);
-  color:#fff;
-  text-align:center;
-  padding:30px;
-  font-weight:600;
-  border-top-left-radius:25px;
-  border-top-right-radius:25px;
-  transition: background 0.3s;
-}
-
-/* واتساب */
-.whatsapp{
-  position:fixed;
-  bottom:25px;
-  left:25px;
-  width:65px;height:65px;
-  background:#25D366;
-  border-radius:50%;
-  display:flex;align-items:center;justify-content:center;
-  box-shadow:0 5px 15px rgba(0,0,0,.2);
-  transition:.3s;
-}
-.whatsapp:hover{transform:scale(1.1);}
-.whatsapp img{width:36px;}
+body{font-family:'Cairo',sans-serif;background:#f0f2f8;color:#333;line-height:1.6;scroll-behavior:smooth;}
+:root{--main:#1e3c72;--second:#4a69ff;--gradient:linear-gradient(135deg,#1e3c72,#4a69ff);--card-bg:#fff;--card-hover:#f0f4ff;--alert-bg:#fff5f5;}
+body.dark{--main:#a6c1ff;--second:#5a7dff;--gradient:linear-gradient(135deg,#1a1a2e,#162447);--card-bg:#1f1f2e;--card-hover:#2a2a3c;--alert-bg:#3a3a4f;color:#ddd;}
+header{height:180px;background:var(--gradient);display:flex;align-items:center;justify-content:center;color:#fff;text-align:center;border-bottom-left-radius:25px;border-bottom-right-radius:25px;box-shadow:0 5px 15px rgba(0,0,0,0.15);}
+header .moving-text{font-size:1.5rem;font-weight:800;animation:moveText 12s linear infinite;white-space:nowrap;}
+@keyframes moveText{0%{transform:translateX(100%);}50%{transform:translateX(-100%);}100%{transform:translateX(100%);}}
+nav{position:fixed;top:0;width:100%;background:#fff;box-shadow:0 5px 20px rgba(0,0,0,.12);display:flex;justify-content:center;gap:12px;padding:14px 0;font-weight:600;z-index:1000;}
+nav a{padding:10px 16px;border-radius:12px;color:var(--main);font-weight:600;transition:.3s;}
+nav a:hover{background:var(--main);color:#fff;}
+#darkModeToggle{position:fixed;top:18px;right:20px;padding:10px 16px;background:var(--gradient);color:#fff;border:none;border-radius:10px;cursor:pointer;z-index:1001;}
+section{max-width:1150px;margin:120px auto 60px auto;padding:30px 25px;text-align:center;border-radius:20px;}
+section h2{font-size:2rem;margin-bottom:25px;color:var(--main);font-weight:800;position:relative;}
+section h2::after{content:"";width:80px;height:4px;background:var(--second);display:block;margin:10px auto 0 auto;border-radius:5px;}
+.alert-counter-box{background:var(--card-bg);border-radius:15px;padding:15px;margin-bottom:20px;display:flex;justify-content:center;gap:12px;align-items:center;font-size:1.1rem;font-weight:700;}
+.alert-number{background:#ff4747;color:#fff;padding:6px 14px;border-radius:50px;font-size:1rem;}
+#alerts .cards{display:flex;flex-wrap:wrap;gap:20px;justify-content:center;}
+#alerts .card{width:240px;background:var(--alert-bg);padding:18px;border-radius:18px;box-shadow:0 6px 18px rgba(0,0,0,.12);opacity:0;transform:translateY(30px);transition:.6s;}
+#alerts .card.visible{opacity:1;transform:translateY(0);}
+#alerts .card h3{color:#b00020;margin-bottom:6px;}
+#alerts .icon svg{width:40px;height:40px;fill:#ff5c5c;margin-bottom:10px;}
 </style>
 </head>
 <body>
@@ -267,144 +38,98 @@ footer{
 </header>
 
 <nav>
-  <a href="#alerts">تنبيهات الموظفين</a>
-  <a href="#carAlerts">تنبيهات السيارات</a>
+  <a href="#alerts">تنبيهات</a>
   <a href="#services">الخدمات</a>
-  <a href="employees.html">الموظفين</a>
-  <a href="cars.html">السيارات</a>
-  <a href="records.html">السجلات الرسمية</a>
-  <a href="#contact">التواصل</a>
 </nav>
 
-<!-- قسم تنبيهات الموظفين والإقامة -->
 <section id="alerts">
-<h2>تنبيهات قرب انتهاء الإقامة</h2>
+<h2>تنبيهات الموظفين والإقامة</h2>
 <div class="alert-counter-box">
-  🔔 عدد التنبيهات:
-  <span class="alert-number" id="alertCount">0</span>
+  🔔 عدد التنبيهات الحالية :
+  <span class="alert-number" id="alertCountResidency">0</span>
 </div>
-<div class="cards" id="alertCards">
-  <div class="card visible">
-    <div class="icon"><svg><circle cx="20" cy="20" r="18"/></svg></div>
-    <h3>جار تحميل البيانات...</h3>
-    <p>يرجى الانتظار</p>
-  </div>
-</div>
-</section>
+<div class="cards" id="alertCardsResidency"></div>
 
-<!-- قسم تنبيهات السيارات -->
-<section id="carAlerts">
 <h2>تنبيهات السيارات</h2>
 <div class="alert-counter-box">
-  🚗 عدد التنبيهات:
-  <span class="alert-number" id="carAlertCount">0</span>
+  🚗 عدد تنبيهات السيارات :
+  <span class="alert-number" id="alertCountCars">0</span>
 </div>
-<div class="cards" id="carAlertCards">
-  <div class="card visible">
-    <div class="icon"><svg><circle cx="20" cy="20" r="18"/></svg></div>
-    <h3>جار تحميل البيانات...</h3>
-    <p>يرجى الانتظار</p>
-  </div>
-</div>
+<div class="cards" id="alertCardsCars"></div>
 </section>
 
-<!-- قسم الخدمات -->
 <section id="services">
 <h2>خدماتنا</h2>
 <div class="cards">
-  <div class="card visible">
-  <a href="employees.html">
-    <div class="icon"><svg viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5s-3 1.34-3 3 1.34 3 3 3zM8 11c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V20h14v-3.5C15 14.17 10.33 13 8 13zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V20h6v-3.5C23 14.17 18.33 13 16 13z"/></svg></div>
-    <h3>الموظفين</h3>
-    <p>عرض جميع بيانات الموظفين</p>
-  </a>
-  </div>
-
-  <div class="card visible">
-  <a href="cars.html">
-    <div class="icon"><svg viewBox="0 0 24 24"><path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.21.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99z"/></svg></div>
-    <h3>السيارات</h3>
-    <p>إدارة المركبات والسجلات</p>
-  </a>
-  </div>
+  <div class="card visible"><a href="employees.html"><h3>الموظفين</h3><p>عرض جميع بيانات الموظفين</p></a></div>
+  <div class="card visible"><a href="cars.html"><h3>السيارات</h3><p>إدارة المركبات والسجلات</p></a></div>
 </div>
 </section>
 
-<section id="contact">
-<h2>تواصل معنا</h2>
-<a class="btn" href="mailto:hwk2@hotmail.com">راسلنا عبر البريد</a>
-</section>
-
-<footer>جميع الحقوق محفوظة © 2025</footer>
-
-<a class="whatsapp" href="https://wa.me/966558020154" target="_blank">
-<img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg">
-</a>
-
-<script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
 <script>
-const csvUrlResidency = "YOUR_RESIDENCY_CSV_URL";
-const csvUrlCars = "YOUR_CARS_CSV_URL";
+// بيانات وهمية للاختبار
+const residencyData = [
+  { "الاسم":"أحمد","تاريخ انتهاء الاقامة":"2025-12-30" },
+  { "الاسم":"سارة","تاريخ انتهاء الاقامة":"2025-12-10" },
+  { "الاسم":"محمد","تاريخ انتهاء الاقامة":"2025-11-20" }
+];
 
+const carsData = [
+  { "اسم السيارة":"تويوتا","رقم اللوحة":"1234","انتهاء الفحص":"2025-12-28","انتهاء الاستمارة":"2025-12-25","انتهاء بطاقة التشغيل":"2025-12-30","انتهاء التامين":"2025-11-28" },
+  { "اسم السيارة":"نيسان","رقم اللوحة":"5678","انتهاء الفحص":"2025-11-20","انتهاء الاستمارة":"2025-11-25","انتهاء بطاقة التشغيل":"2025-12-05","انتهاء التامين":"2025-12-10" }
+];
+
+// دوال التاريخ
 function parseDate(str){ if(!str) return null; let d=Date.parse(str); if(!isNaN(d)) return new Date(d); return null; }
-function daysUntil(date){ if(!date) return null; const t=new Date(); t.setHours(0,0,0,0); date.setHours(0,0,0,0); return Math.ceil((date-t)/(86400000)); }
+function daysUntil(date){ if(!date) return null; const t=new Date(); t.setHours(0,0,0,0); date.setHours(0,0,0,0); return Math.ceil((date-t)/(1000*60*60*24)); }
 
-function renderAlerts(residencyData, carsData){
-  const container = document.getElementById("alertCards");
-  const counter = document.getElementById("alertCount");
-  container.innerHTML = "";
-  let count = 0;
-
-  residencyData.forEach(row=>{
-    const res = daysUntil(parseDate(row["تاريخ انتهاء الاقامة"]));
-    if(res!==null && res<=30){
+// تنبيهات الإقامة
+function renderResidencyAlerts(data){
+  const container=document.getElementById("alertCardsResidency");
+  const counter=document.getElementById("alertCountResidency");
+  container.innerHTML=""; let count=0;
+  data.forEach(row=>{
+    const days=daysUntil(parseDate(row["تاريخ انتهاء الاقامة"]));
+    if(days!==null && days<=30){
       count++;
-      const card = document.createElement("div");
-      card.className = "card";
-      card.innerHTML = `<div class="icon"><svg viewBox="0 0 24 24"><path d="M1 21h22L12 2 1 21z"/></svg></div>
-      <h3>${row["الاسم"]||"-"}</h3>
-      <p>تنتهي الإقامة بعد ${res} يوم</p>`;
+      let card=document.createElement("div");
+      card.className="card visible";
+      card.innerHTML=`<div class="icon"><svg viewBox="0 0 24 24"><path d="M1 21h22L12 2 1 21z"/></svg></div>
+      <h3>${row["الاسم"]}</h3>
+      <p>${days>=0 ? "تنتهي بعد "+days+" يوم" : "انتهت"}</p>`;
       container.appendChild(card);
     }
   });
-  counter.textContent = count;
-  if(count===0){
-    container.innerHTML = `<div class="card visible"><div class="icon"><svg viewBox="0 0 24 24"><path d="M9 16.17 4.83 12 3.41 13.41 9 19l12-12-1.41-1.41z"/></svg></div><h3>لا توجد تنبيهات</h3><p>كل شيء سليم</p></div>`;
-  }
-  document.querySelectorAll('#alertCards .card').forEach(c=>{ setTimeout(()=>c.classList.add('visible'),300); });
+  counter.textContent=count;
+  if(count===0) container.innerHTML=`<div class="card visible"><div class="icon"><svg viewBox="0 0 24 24"><path d="M9 16.17 4.83 12 3.41 13.41 9 19l12-12-1.41-1.41z"/></svg></div><h3>لا توجد تنبيهات</h3><p>كل شيء سليم</p></div>`;
+}
 
-  // تنبيهات السيارات
-  const carContainer = document.getElementById("carAlertCards");
-  const carCounter = document.getElementById("carAlertCount");
-  carContainer.innerHTML="";
-  let carCount=0;
-  carsData.forEach(car=>{
-    const fields = ["انتهاء الفحص","انتهاء الاستمارة","انتهاء بطاقة التشغيل","انتهاء التامين"];
-    fields.forEach(field=>{
-      const d = daysUntil(parseDate(car[field]));
-      if(d!==null && d<=30){
-        carCount++;
-        const card = document.createElement("div");
-        card.className="card";
-        const status = d<0 ? "انتهت" : `تنتهي بعد ${d} يوم`;
-        card.innerHTML = `<div class="icon"><svg viewBox="0 0 24 24"><path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.21.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99z"/></svg></div>
-        <h3>${car["اسم السيارة"]||"-"} - ${car["رقم اللوحة"]||"-"}</h3>
-        <p>${field}: ${status}</p>`;
-        carContainer.appendChild(card);
+// تنبيهات السيارات
+function renderCarAlerts(data){
+  const container=document.getElementById("alertCardsCars");
+  const counter=document.getElementById("alertCountCars");
+  container.innerHTML=""; let count=0;
+  data.forEach(car=>{
+    ["انتهاء الفحص","انتهاء الاستمارة","انتهاء بطاقة التشغيل","انتهاء التامين"].forEach(field=>{
+      const days=daysUntil(parseDate(car[field]));
+      if(days!==null && days<=30){
+        count++;
+        let card=document.createElement("div");
+        card.className="card visible";
+        card.innerHTML=`<div class="icon"><svg viewBox="0 0 24 24"><path d="M3 3h18v18H3z"/></svg></div>
+        <h3>${car["اسم السيارة"]} - ${car["رقم اللوحة"]}</h3>
+        <p>${field} : ${days>=0 ? "بعد "+days+" يوم" : "انتهت"}</p>`;
+        container.appendChild(card);
       }
     });
   });
-  carCounter.textContent=carCount;
-  if(carCount===0){
-    carContainer.innerHTML=`<div class="card visible"><div class="icon"><svg viewBox="0 0 24 24"><path d="M9 16.17 4.83 12 3.41 13.41 9 19l12-12-1.41-1.41z"/></svg></div><h3>لا توجد تنبيهات</h3><p>كل شيء سليم</p></div>`;
-  }
-  document.querySelectorAll('#carAlertCards .card').forEach(c=>{ setTimeout(()=>c.classList.add('visible'),300); });
+  counter.textContent=count;
+  if(count===0) container.innerHTML=`<div class="card visible"><div class="icon"><svg viewBox="0 0 24 24"><path d="M9 16.17 4.83 12 3.41 13.41 9 19l12-12-1.41-1.41z"/></svg></div><h3>لا توجد تنبيهات</h3><p>كل شيء سليم</p></div>`;
 }
 
-// تحميل CSV
-let residencyData=[], carsData=[];
-Papa.parse(csvUrlResidency,{download:true,header:true,complete:function(results){ residencyData=results.data; if(carsData.length) renderAlerts(residencyData,carsData); }});
-Papa.parse(csvUrlCars,{download:true,header:true,complete:function(results){ carsData=results.data; if(residencyData.length) renderAlerts(residencyData,carsData); }});
+// تفعيل الكل
+renderResidencyAlerts(residencyData);
+renderCarAlerts(carsData);
 
 // Dark Mode
 const toggle = document.getElementById("darkModeToggle");
@@ -417,5 +142,6 @@ toggle.addEventListener("click", ()=>{
   updateButtonText();
 });
 </script>
+
 </body>
 </html>
