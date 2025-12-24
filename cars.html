@@ -25,6 +25,21 @@ h1{text-align:center;color:#1e3c72;margin-bottom:20px;}
     font-size:15px;
 }
 
+.alerts-container{
+    margin-bottom:20px;
+    display:flex;
+    flex-direction:column;
+    gap:5px;
+}
+.alert-top{
+    background:#f1c40f;
+    padding:10px;
+    border-radius:10px;
+    color:#856404;
+    font-weight:bold;
+}
+.alert-top.expired{background:#e74c3c;color:white;}
+
 .filters{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-bottom:20px;}
 .filters select,input{padding:8px 12px;border-radius:8px;border:1px solid #ccc;font-size:0.95rem;}
 
@@ -67,10 +82,11 @@ h1{text-align:center;color:#1e3c72;margin-bottom:20px;}
 <div class="top-bar">
     <div></div>
     <h1>بيانات السيارات - مصحح</h1>
-
-    <!-- زر الرجوع -->
     <button class="back-btn" onclick="window.location.href='index.html'">⬅ الرجوع للصفحة الرئيسية</button>
 </div>
+
+<!-- تنبيهات السيارات -->
+<div class="alerts-container" id="mainAlerts"></div>
 
 <div class="filters">
   <input type="text" id="searchInput" placeholder="ابحث باسم السيارة، رقم اللوحة أو أي شيء...">
@@ -114,7 +130,7 @@ function createCard(car){
 
   // التنبيه العلوي
   let alertHTML='';
-  ['انتهاء الفحص','انتهاء الاستمارة','انتهاء بطاقة التشغيل','انتهاء التامين','انتهاء التفويض'].forEach(field=>{
+  ['انتهاء الفحص','انتهاء الاستمارة','انتهاء بطاقة التشغيل','انتهاء التامين'].forEach(field=>{
     const status=getStatus(car[field]);
     if(status==='expired'){
       alertHTML='<div class="alert expired">منتهي</div>';
@@ -144,7 +160,6 @@ function createCard(car){
         <p><span class="tag ${getStatus(car['انتهاء الاستمارة'])}">📄 انتهاء الاستمارة: ${car['انتهاء الاستمارة'] || 'لا يوجد'}</span></p>
         <p><span class="tag ${getStatus(car['انتهاء بطاقة التشغيل'])}">💳 انتهاء بطاقة التشغيل: ${car['انتهاء بطاقة التشغيل'] || 'لا يوجد'}</span></p>
         <p><span class="tag ${getStatus(car['انتهاء التامين'])}">🛡 انتهاء التأمين: ${car['انتهاء التامين'] || 'لا يوجد'}</span></p>
-        <p><span class="tag ${getStatus(car['انتهاء التفويض'])}">✍ انتهاء التفويض: ${car['انتهاء التفويض'] || 'لا يوجد'}</span></p>
     </div>
   `;
   return card;
@@ -157,26 +172,22 @@ function renderCards(data){
   data.forEach(car=>container.appendChild(createCard(car)));
 }
 
-// حساب التنبيهات وتسجيلها للصفحة الرئيسية
-function updateMainAlerts(data){
-  let alertCount = 0;
+// إنشاء التنبيهات العلوية
+function renderMainAlerts(data){
+  const container = document.getElementById('mainAlerts');
+  container.innerHTML = '';
+  const alertFields = ['انتهاء الفحص','انتهاء الاستمارة','انتهاء بطاقة التشغيل','انتهاء التامين'];
 
-  data.forEach(car=>{
-    const fields = ['انتهاء الفحص','انتهاء الاستمارة','انتهاء بطاقة التشغيل','انتهاء التامين','انتهاء التفويض'];
-    for(let f of fields){
-        const s = getStatus(car[f]);
-        if(s === 'expired' || s === 'near-expiry'){
-            alertCount++;
-            break; // سيارة واحدة تحسب مرة واحدة
-        }
+  alertFields.forEach(field=>{
+    const alertCars = data.filter(car => getStatus(car[field])==='near-expiry');
+    if(alertCars.length>0){
+      const div = document.createElement('div');
+      div.classList.add('alert-top');
+      div.innerHTML = `<strong>${field} قريب الانتهاء (${alertCars.length}):</strong> ` +
+        alertCars.map(c=>`${c['اسم السيارة'] || 'لا يوجد'} (${c['رقم اللوحة'] || 'لا يوجد'})`).join(' | ');
+      container.appendChild(div);
     }
   });
-
-  if(alertCount > 0){
-    localStorage.setItem("systemAlerts", alertCount);
-  } else {
-    localStorage.removeItem("systemAlerts");
-  }
 }
 
 // الفلاتر
@@ -200,7 +211,7 @@ Papa.parse(csvUrl,{
     carsData=results.data;
     populateFilters(carsData);
     renderCards(carsData);
-    updateMainAlerts(carsData); // ← أهم سطر (يحدث التنبيه)
+    renderMainAlerts(carsData); // ← تنبيهات أعلى الصفحة
   }
 });
 
@@ -219,6 +230,7 @@ function filterData(){
     return matchesSearch && matchesUsage && matchesType && matchesModel;
   });
   renderCards(filtered);
+  renderMainAlerts(filtered); // تحديث التنبيهات بعد الفلترة
 }
 
 searchInput.addEventListener('input',filterData);
@@ -229,4 +241,3 @@ filterModel.addEventListener('change',filterData);
 
 </body>
 </html>
-
