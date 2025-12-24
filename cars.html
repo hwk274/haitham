@@ -80,28 +80,29 @@ function renderEmployees(data){
 
  data.forEach(r=>{
    r=Object.fromEntries(Object.entries(r).map(([k,v])=>[k.trim(),v?.trim()]));
-   if(r["الحالة"]==="نشط"){
+   const isActive = r["الحالة"]==="نشط";
+   if(isActive){
      active.push(r);
-     if(r["الجنسية"]==="سعودي") saudiCount++; else nonSaudiCount++;
-   } else { inactive.push(r); }
+     if(r["الجنسية"]==="سعودي") saudiCount++;
+     else if(r["الجنسية"]) nonSaudiCount++;
+   } else inactive.push(r);
  });
 
- const allOrdered = [...active, ...inactive];
+ const allOrdered=[...active,...inactive];
 
- allOrdered.forEach(row=>{
+ allOrdered.forEach(r=>{
    const alerts=[];
-   if(row["الحالة"]!=="نشط") alerts.push("❌ غير نشط");
-   const resDays=daysUntil(parseDate(row["تاريخ انتهاء الاقامة"]));
-   if(row["الحالة"]==="نشط" && resDays!==null && resDays<=30){
-     alerts.push(`⚠️ الإقامة تنتهي بعد ${resDays} يوم`);
-   }
+   if(r["الحالة"]!=="نشط") alerts.push("❌ غير نشط");
+   const resDays = daysUntil(parseDate(r["تاريخ انتهاء الاقامة"]));
+   if(r["الحالة"]==="نشط" && resDays!==null && resDays<=30) alerts.push(`⚠️ الإقامة تنتهي بعد ${resDays} يوم`);
 
    const card=document.createElement("div");
    card.className="card";
    card.innerHTML=`
-     <h3>${row["الاسم"]||"-"}</h3>
+     <h3>${r["الاسم"]||"-"}</h3>
      <p>${alerts.join(" | ")}</p>
-     <p>الجنسية: ${row["الجنسية"]||"-"} | الحالة: ${row["الحالة"]||"-"}</p>
+     <p>الجنسية: ${r["الجنسية"]||"-"} | الحالة: ${r["الحالة"]||"-"}</p>
+     <p>رقم الهوية: ${r["رقم الهوية"]||"-"} | رقم الجواز: ${r["رقم الجواز"]||"-"}</p>
    `;
    container.appendChild(card);
  });
@@ -109,7 +110,7 @@ function renderEmployees(data){
  const totalActive=saudiCount+nonSaudiCount;
  const saudization = totalActive>0 ? ((saudiCount/totalActive)*100).toFixed(1):0;
  document.getElementById("counters").innerText=
- `السعوديون النشطون: ${saudiCount} | غير السعوديين النشطين: ${nonSaudiCount} | نسبة السعودة: ${saudization}%`;
+   `السعوديون النشطون: ${saudiCount} | غير السعوديين النشطين: ${nonSaudiCount} | نسبة السعودة: ${saudization}%`;
 
  document.querySelectorAll(".card").forEach(c=>c.classList.add("visible"));
 }
@@ -135,14 +136,13 @@ async function exportPDF(){
  const doc=new jsPDF();
  let y=10;
  doc.setFontSize(14);
- doc.text("تقرير الموظفين",10,y);
- y+=10;
+ doc.text("تقرير الموظفين",10,y); y+=10;
 
  globalData.forEach(r=>{
    r=Object.fromEntries(Object.entries(r).map(([k,v])=>[k.trim(),v?.trim()]));
-   const resDays=daysUntil(parseDate(r["تاريخ انتهاء الاقامة"]));
    const alerts=[];
    if(r["الحالة"]!=="نشط") alerts.push("غير نشط");
+   const resDays = daysUntil(parseDate(r["تاريخ انتهاء الاقامة"]));
    if(r["الحالة"]==="نشط" && resDays!==null && resDays<=30) alerts.push(`الإقامة تنتهي بعد ${resDays} يوم`);
 
    doc.setFontSize(11);
