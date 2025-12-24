@@ -7,27 +7,63 @@
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'Cairo',sans-serif;background:#f9f9f9;color:#333;line-height:1.6}
+body{font-family:'Cairo',sans-serif;background:#f4f6fb;color:#333;line-height:1.6;scroll-behavior:smooth}
 
 /* الرأس */
-header{color:#1e3c72;text-align:center;padding:80px 20px}
-header h1{font-size:2.8rem;margin-bottom:12px}
-header p{font-size:1.2rem}
+header{
+  color:#fff;
+  text-align:center;
+  padding:120px 20px;
+  background:linear-gradient(135deg,#1e3c72,#2a5298);
+  position:relative;
+  overflow:hidden;
+}
+header h1{
+  font-size:3rem;
+  margin-bottom:15px;
+  animation:fadeInDown 1s ease forwards;
+}
+header p{
+  font-size:1.3rem;
+  opacity:0;
+  animation:fadeInUp 1s 0.5s ease forwards;
+}
+@keyframes fadeInDown{from{opacity:0;transform:translateY(-20px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeInUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
 
 /* القوائم */
-nav{background:#fff;display:flex;justify-content:center;gap:10px;box-shadow:0 2px 8px rgba(0,0,0,.1);position:sticky;top:0;z-index:1000}
-nav a{padding:12px 22px;font-weight:600;border-radius:6px;color:#1e3c72;transition:0.3s}
-nav a:hover{background:#1e3c72;color:#fff}
+nav{
+  background:#fff;
+  display:flex;
+  justify-content:center;
+  gap:12px;
+  box-shadow:0 4px 12px rgba(0,0,0,.1);
+  position:sticky;
+  top:0;
+  z-index:1000;
+  padding:8px 0;
+}
+nav a{
+  padding:12px 26px;
+  font-weight:600;
+  border-radius:8px;
+  color:#1e3c72;
+  transition:0.3s;
+  text-decoration:none;
+}
+nav a:hover{
+  background:#1e3c72;color:#fff;transform:scale(1.05);
+}
 
 /* 🔔 شريط التنبيه */
 .alert-bar{
-  background:#ffe8e8;
+  background:#fff4f4;
   border:2px solid #ff4d4d;
   color:#b30000;
-  padding:15px;
-  margin:15px auto;
+  padding:16px;
+  margin:20px auto;
   max-width:1100px;
-  border-radius:14px;
+  border-radius:16px;
   text-align:center;
   font-weight:700;
   font-size:1.1rem;
@@ -35,53 +71,134 @@ nav a:hover{background:#1e3c72;color:#fff}
   animation:pulse 1.5s infinite;
   cursor:pointer;
 }
-@keyframes pulse{
-  0%{transform:scale(1)}
-  50%{transform:scale(1.02)}
-  100%{transform:scale(1)}
-}
+@keyframes pulse{0%{transform:scale(1)}50%{transform:scale(1.02)}100%{transform:scale(1)}}
 .alert-bar span{font-size:1.4rem;margin-left:8px}
 
-/* السلايدر */
-.slider{position:relative;overflow:hidden;border-radius:18px;box-shadow:0 8px 20px rgba(0,0,0,.1);margin:30px auto;max-width:1100px}
-.slides{display:flex;transition:0.6s}
-.slide{min-width:100%;position:relative}
-.slide img{width:90%;max-height:400px;display:block;margin:0 auto;border-radius:18px;object-fit:cover}
-
 /* الأقسام */
-section{max-width:1200px;margin:60px auto;padding:20px;text-align:center}
-section h2{font-size:2rem;margin-bottom:25px;color:#1e3c72}
-.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px;margin-top:30px}
+section{
+  max-width:1200px;
+  margin:60px auto;
+  padding:20px;
+  text-align:center;
+}
+section h2{
+  font-size:2rem;
+  margin-bottom:30px;
+  color:#1e3c72;
+  position:relative;
+}
+section h2::after{
+  content:"";
+  width:60px;
+  height:4px;
+  background:#1e3c72;
+  display:block;
+  margin:10px auto 0;
+  border-radius:2px;
+}
 
 /* الكروت */
-.card{background:#fff;padding:30px 20px;border-radius:22px;box-shadow:0 6px 20px rgba(0,0,0,.08);transition:transform .3s ease,box-shadow .3s ease,background .3s ease;position:relative;overflow:hidden;cursor:pointer;text-align:center}
-.card:hover{transform:translateY(-6px) scale(1.03);box-shadow:0 12px 28px rgba(0,0,0,.15)}
-.card .icon{font-size:3.5rem;margin-bottom:15px;display:block;transition:transform .5s,color .3s;color:#2563eb}
-.card:hover .icon{transform:rotate(360deg) scale(1.1);color:#1e3c72}
-.card h3{margin-bottom:12px;font-size:1.2rem;color:#1e3c72;transition:color .3s}
-.card p{font-size:0.95rem;color:#555;transition:color .3s}
+.cards{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:25px;
+  margin-top:30px;
+}
+.card{
+  background:linear-gradient(145deg,#fff,#f0f3f8);
+  padding:30px 20px;
+  border-radius:24px;
+  box-shadow:0 8px 28px rgba(0,0,0,.1);
+  transition:transform .3s ease,box-shadow .3s ease,background .3s ease;
+  position:relative;
+  overflow:hidden;
+  cursor:pointer;
+  text-align:center;
+}
+.card:hover{
+  transform:translateY(-8px) scale(1.03);
+  box-shadow:0 14px 32px rgba(0,0,0,.2);
+  background:linear-gradient(145deg,#e0e5f1,#fff);
+}
+.card .icon{
+  font-size:3.5rem;
+  margin-bottom:15px;
+  display:block;
+  transition:transform .5s,color .3s;
+  color:#2563eb;
+}
+.card:hover .icon{
+  transform:rotate(360deg) scale(1.2);
+  color:#1e3c72;
+}
+.card h3{
+  margin-bottom:12px;
+  font-size:1.2rem;
+  color:#1e3c72;
+  transition:color .3s;
+}
+.card p{
+  font-size:0.95rem;
+  color:#555;
+  transition:color .3s;
+}
 .card:hover h3,.card:hover p{color:#0f172a}
 
 /* الأزرار */
-.btn{display:inline-block;margin-top:20px;padding:12px 28px;background:#1e3c72;color:#fff;border-radius:8px;transition:0.3s}
-.btn:hover{background:#203a43}
+.btn{
+  display:inline-block;
+  margin-top:20px;
+  padding:14px 30px;
+  background:#1e3c72;
+  color:#fff;
+  border-radius:10px;
+  font-weight:600;
+  transition:0.3s;
+  text-decoration:none;
+}
+.btn:hover{background:#203a43;transform:scale(1.05)}
 
 /* الفوتر */
-footer{background:#1e3c72;color:#fff;text-align:center;padding:30px;margin-top:50px}
+footer{
+  background:#1e3c72;
+  color:#fff;
+  text-align:center;
+  padding:40px 20px;
+  margin-top:50px;
+  font-size:0.95rem;
+}
 
 /* أيقونة واتساب */
-.whatsapp{position:fixed;bottom:20px;left:20px;width:55px;height:55px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 5px 15px rgba(0,0,0,.35);z-index:1000}
-.whatsapp img{width:32px}
+.whatsapp{
+  position:fixed;
+  bottom:20px;
+  left:20px;
+  width:60px;
+  height:60px;
+  background:#25D366;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  box-shadow:0 5px 20px rgba(0,0,0,.35);
+  z-index:1000;
+}
+.whatsapp img{width:34px}
 
 /* Responsive */
-@media(max-width:768px){header h1{font-size:1.8rem}header p{font-size:1rem}nav{flex-wrap:wrap}}
+@media(max-width:768px){
+  header h1{font-size:2rem}
+  header p{font-size:1.1rem}
+  nav{flex-wrap:wrap}
+  .cards{grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:15px}
+}
 </style>
 </head>
 <body>
 
 <header>
 <h1>مرحبا بكم في الموقع الاحترافي</h1>
-<p>حلول احترافية لإدارة الموظفين والمخزون</p>
+<p>حلول حديثة وذكية لإدارة الموظفين والمخزون</p>
 </header>
 
 <nav>
@@ -98,13 +215,8 @@ footer{background:#1e3c72;color:#fff;text-align:center;padding:30px;margin-top:5
 </div>
 
 <section id="home">
-<div class="slider">
-  <div class="slides">
-    <div class="slide">
-      <img src="images/photo1.png" alt="صورة رئيسية">
-    </div>
-  </div>
-</div>
+<h2>الرئيسية</h2>
+<p>مرحباً بك في منصتنا الحديثة لإدارة كل ما يتعلق بالموظفين، السيارات، المخزون، والسجلات الرسمية بطريقة ذكية واحترافية.</p>
 </section>
 
 <section id="services">
@@ -176,14 +288,6 @@ footer{background:#1e3c72;color:#fff;text-align:center;padding:30px;margin-top:5
 
 <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
 <script>
-// السلايدر
-let i=0;
-const slides=document.querySelector('.slides');
-const total=document.querySelectorAll('.slide').length;
-function update(){slides.style.transform=`translateX(-${i*100}%)`;}
-function next(){i=(i+1)%total;update();}
-setInterval(next,4000);
-
 // الكروت
 document.querySelectorAll('.card').forEach(card=>{
   card.addEventListener('mousedown',()=>card.style.transform='scale(0.97)');
@@ -210,7 +314,6 @@ function parseDate(dateStr){
   }
   return null;
 }
-
 function daysUntil(date){
   if(!date) return 9999;
   const today=new Date(); today.setHours(0,0,0,0);
@@ -237,7 +340,6 @@ Papa.parse(csvUrl,{
     }
   }
 });
-
 alertBar.addEventListener("click",()=>{window.location.href="employees.html"});
 </script>
 
