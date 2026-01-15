@@ -44,6 +44,12 @@ header::after{
   border-radius:50%;
   background:rgba(255,255,255,.06);
 }
+header img{
+  width:120px;
+  margin-bottom:20px;
+  border-radius:12px;
+  box-shadow:0 8px 20px rgba(0,0,0,0.2);
+}
 header h1{
   font-size:3rem;
   margin-bottom:15px;
@@ -202,6 +208,7 @@ footer{
 
 /* موبايل */
 @media(max-width:768px){
+  header img{width:90px;margin-bottom:15px;}
   header h1{font-size:2rem}
   header p{font-size:1.1rem}
 }
@@ -211,6 +218,9 @@ footer{
 <body>
 
 <header>
+  <!-- اللوجو -->
+  <img src="logo%20haitham.png" alt="Logo Haitham">
+  
   <h1>مرحبا بكم في الموقع الاحترافي</h1>
   <p>حلول حديثة وذكية لإدارة الموظفين والمخزون</p>
 </header>
