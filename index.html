@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>موقع هيثم الاحترافي</title>
+<title>منصة هيثم الاحترافية</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800&display=swap" rel="stylesheet">
 
@@ -27,37 +27,65 @@ body{
 /* ===== الهيدر ===== */
 header{
   text-align:center;
-  padding:140px 20px;
+  padding:150px 20px;
   background:
-    radial-gradient(circle at top right, rgba(255,255,255,.15), transparent 60%),
-    linear-gradient(135deg,var(--green-dark),var(--green-main));
-  color:#fff;
+    radial-gradient(circle at top right, rgba(47,165,106,.08), transparent 60%),
+    linear-gradient(180deg,#ffffff,#f3faf6);
+  border-bottom:1px solid #e5efe9;
+  overflow:hidden;
 }
 
+/* ===== الشعار ===== */
 header img{
   width:150px;
-  margin-bottom:25px;
-  background:#fff;
-  padding:14px;
-  border-radius:24px;
-  box-shadow:0 15px 35px rgba(0,0,0,.35);
+  margin-bottom:30px;
+  animation:logoFloat 3s ease-in-out infinite,
+            logoEnter 1.2s ease forwards;
+  opacity:0;
+}
+
+/* حركة دخول */
+@keyframes logoEnter{
+  from{
+    opacity:0;
+    transform:translateY(-30px) scale(.9);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0) scale(1);
+  }
+}
+
+/* حركة تنفس خفيفة */
+@keyframes logoFloat{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-8px)}
 }
 
 header h1{
   font-size:3rem;
   margin-bottom:15px;
+  animation:fadeUp 1s .3s ease forwards;
+  opacity:0;
 }
 
 header p{
   font-size:1.3rem;
-  opacity:.95;
+  color:#374151;
+  animation:fadeUp 1s .6s ease forwards;
+  opacity:0;
+}
+
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(20px)}
+  to{opacity:1;transform:translateY(0)}
 }
 
 /* ===== الناف بار ===== */
 nav{
   background:#ffffffee;
   backdrop-filter:blur(12px);
-  box-shadow:0 6px 20px rgba(0,0,0,.1);
+  box-shadow:0 6px 20px rgba(0,0,0,.08);
   display:flex;
   justify-content:center;
   gap:12px;
@@ -121,7 +149,6 @@ section h2::after{
   transition:.35s;
   text-decoration:none;
   color:inherit;
-  cursor:pointer;
 }
 
 .card:hover{
@@ -137,11 +164,6 @@ section h2::after{
 .card h3{
   color:var(--green-dark);
   margin-bottom:10px;
-}
-
-.card p{
-  font-size:.95rem;
-  opacity:.85;
 }
 
 /* ===== زر ===== */
@@ -196,8 +218,9 @@ footer{
 <body>
 
 <header>
+  <!-- الشعار بدون خلفية (PNG أو SVG شفاف) -->
   <img src="logo_haitham.png" alt="Haitham Logo">
-  <h1>مرحبا بكم في المنصة الاحترافية</h1>
+  <h1>مرحبًا بكم في المنصة الاحترافية</h1>
   <p>حلول ذكية لإدارة الموظفين والمخزون والسجلات</p>
 </header>
 
@@ -211,8 +234,8 @@ footer{
 <section id="home">
   <h2>الرئيسية</h2>
   <p>
-    منصة متكاملة لإدارة الموظفين، السيارات، المخزون والعقود
-    بأسلوب احترافي يعكس هوية مؤسستك.
+    منصة متكاملة لإدارة الموارد بأسلوب عصري
+    يعكس هوية مؤسستك الاحترافية.
   </p>
 </section>
 
@@ -222,32 +245,25 @@ footer{
     <a class="card" href="employees.html">
       <div class="icon">🧑‍💼</div>
       <h3>الموظفين</h3>
-      <p>متابعة الإقامات والجوازات والعقود</p>
     </a>
-
     <a class="card" href="documents.html">
       <div class="icon">📂</div>
       <h3>سجلات رسمية</h3>
-      <p>إدارة الوثائق والملفات</p>
     </a>
-
     <a class="card" href="cars.html">
       <div class="icon">🚗</div>
       <h3>السيارات</h3>
-      <p>بيانات المركبات والصيانة</p>
     </a>
-
     <a class="card" href="inventory.php">
       <div class="icon">📦</div>
       <h3>المخزون</h3>
-      <p>إدارة الأصناف والكميات</p>
     </a>
   </div>
 </section>
 
 <section id="idea">
   <h2>الفكرة والتنفيذ</h2>
-  <p>تصميم وتنفيذ: <strong>هيثم واشحت قرشي</strong></p>
+  <p><strong>هيثم واشحت قرشي</strong></p>
   <a href="idea.html" class="btn">تفاصيل أكثر</a>
 </section>
 
