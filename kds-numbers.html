@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>الأرقام</title>
+
+<style>
+body { font-family: Tahoma; background:#e8f7ff; text-align:center; }
+header { background:#4fc3f7; color:white; padding:15px; font-size:24px; }
+button {
+  font-size: 40px;
+  padding: 20px 30px;
+  margin: 10px;
+  border-radius: 20px;
+  background: #ff6f91;
+  color: white;
+  border: none;
+}
+</style>
+</head>
+
+<body>
+<header>🔢 الأرقام</header>
+
+<button onclick="speak('واحد')">1</button>
+<button onclick="speak('اثنان')">2</button>
+<button onclick="speak('ثلاثة')">3</button>
+<button onclick="speak('أربعة')">4</button>
+<button onclick="speak('خمسة')">5</button>
+
+<script>
+function speak(t){
+ let m = new SpeechSynthesisUtterance(t);
+ m.lang = "ar-SA";
+ speechSynthesis.speak(m);
+}
+</script>
+
+</body>
+</html>
