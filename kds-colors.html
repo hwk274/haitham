@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>الألوان</title>
+
+<style>
+body { font-family: Tahoma; background:#fffbe6; text-align:center; }
+header { background:#ffb703; color:white; padding:15px; font-size:24px; }
+button {
+  font-size: 22px;
+  padding: 20px 25px;
+  margin: 10px;
+  border-radius: 18px;
+  color: white;
+  border: none;
+}
+</style>
+</head>
+
+<body>
+<header>🎨 الألوان</header>
+
+<button style="background:red" onclick="speak('أحمر')">أحمر</button>
+<button style="background:blue" onclick="speak('أزرق')">أزرق</button>
+<button style="background:green" onclick="speak('أخضر')">أخضر</button>
+<button style="background:yellow;color:black" onclick="speak('أصفر')">أصفر</button>
+
+<script>
+function speak(t){
+ let m = new SpeechSynthesisUtterance(t);
+ m.lang = "ar-SA";
+ speechSynthesis.speak(m);
+}
+</script>
+
+</body>
+</html>
