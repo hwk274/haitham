@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>الحروف العربية</title>
+
+<style>
+body { font-family: Tahoma; background:#fff7e6; text-align:center; }
+header { background:#ff6f91; color:white; padding:15px; font-size:24px; }
+button {
+  font-size: 48px;
+  padding: 18px 30px;
+  margin: 8px;
+  border-radius: 22px;
+  background: #4fc3f7;
+  color: white;
+  border: none;
+}
+</style>
+</head>
+
+<body>
+<header>🔤 الحروف العربية</header>
+
+<div id="letters"></div>
+
+<script>
+let letters = ["أ","ب","ت","ث","ج","ح","خ","د","ذ","ر","ز","س","ش","ص","ض","ط","ظ","ع","غ","ف","ق","ك","ل","م","ن","ه","و","ي"];
+
+let box = document.getElementById("letters");
+
+letters.forEach(l => {
+  let btn = document.createElement("button");
+  btn.innerText = l;
+  btn.onclick = () => speak(l);
+  box.appendChild(btn);
+});
+
+function speak(t){
+  let msg = new SpeechSynthesisUtterance(t);
+  msg.lang = "ar-SA";
+  speechSynthesis.speak(msg);
+}
+</script>
+
+</body>
+</html>
