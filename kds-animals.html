@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>الحيوانات</title>
+
+<style>
+body { font-family: Tahoma; background:#fff0f6; text-align:center; }
+header { background:#9b5de5; color:white; padding:15px; font-size:24px; }
+button {
+  font-size: 22px;
+  padding: 18px 25px;
+  margin: 10px;
+  border-radius: 18px;
+  background: #00bbf9;
+  color: white;
+  border: none;
+}
+</style>
+</head>
+
+<body>
+<header>🐶 الحيوانات</header>
+
+<button onclick="speak('أسد')">🦁 أسد</button>
+<button onclick="speak('قطة')">🐱 قطة</button>
+<button onclick="speak('كلب')">🐶 كلب</button>
+<button onclick="speak('فيل')">🐘 فيل</button>
+
+<script>
+function speak(t){
+ let m = new SpeechSynthesisUtterance(t);
+ m.lang = "ar-SA";
+ speechSynthesis.speak(m);
+}
+</script>
+
+</body>
+</html>
