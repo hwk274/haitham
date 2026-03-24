@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>موقع العائلة الاحترافي</title>
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800&display=swap" rel="stylesheet">
-
 <style>
 /* ===== إعدادات عامة ===== */
 *{margin:0;padding:0;box-sizing:border-box;}
@@ -18,166 +17,40 @@
   --text-light:#fff;
   --shadow:0 12px 28px rgba(0,0,0,.12);
 }
-body{
-  font-family:'Cairo',sans-serif;
-  background:var(--light);
-  color:var(--text-dark);
-  line-height:1.7;
-  scroll-behavior:smooth;
-}
-
-/* ===== الهيدر ===== */
-header{
-  text-align:center;
-  padding:120px 20px;
-  background:linear-gradient(180deg, var(--light), #ffffff);
-  border-bottom:1px solid #e0dcd5;
-}
-header img{
-  width:150px;
-  margin-bottom:20px;
-}
-header h1{
-  font-size:2.8rem;
-  margin-bottom:10px;
-}
-header p{
-  font-size:1.2rem;
-  color:var(--dark);
-}
-
-/* ===== الناف بار ===== */
-nav{
-  background:#ffffffee;
-  backdrop-filter:blur(10px);
-  box-shadow:0 6px 20px rgba(0,0,0,.08);
-  display:flex;
-  justify-content:center;
-  flex-wrap:wrap;
-  gap:12px;
-  position:sticky;
-  top:0;
-  z-index:1000;
-  padding:12px 0;
-}
-nav a{
-  padding:10px 24px;
-  border-radius:30px;
-  color:var(--dark);
-  font-weight:700;
-  text-decoration:none;
-  transition:.3s;
-}
-nav a:hover{
-  background:var(--primary);
-  color:var(--text-light);
-  transform:translateY(-2px);
-}
-
-/* ===== الأقسام ===== */
-section{
-  max-width:1150px;
-  margin:60px auto;
-  padding:10px 20px;
-  text-align:center;
-}
-section h2{
-  font-size:2.1rem;
-  margin-bottom:25px;
-  color:var(--secondary);
-  position:relative;
-}
-section h2::after{
-  content:"";
-  width:70px;
-  height:4px;
-  background:var(--primary);
-  display:block;
-  margin:12px auto;
-  border-radius:3px;
-}
-
-/* ===== الكروت ===== */
-.cards{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-  gap:25px;
-  margin-top:20px;
-}
-.card{
-  background:#fff;
-  padding:28px 20px;
-  border-radius:20px;
-  box-shadow:var(--shadow);
-  transition:.35s;
-  text-decoration:none;
-  color:inherit;
-}
-.card:hover{
-  transform:translateY(-8px) scale(1.03);
-  box-shadow:0 25px 50px rgba(0,0,0,.18);
-}
-.card .icon{
-  font-size:2.8rem;
-  margin-bottom:10px;
-}
-.card h3{
-  color:var(--secondary);
-  margin-bottom:8px;
-  font-size:1.2rem;
-}
-
-/* ===== زر ===== */
-.btn{
-  display:inline-block;
-  background:var(--primary);
-  padding:12px 28px;
-  border-radius:14px;
-  color:#fff;
-  text-decoration:none;
-  font-weight:700;
-  transition:.3s;
-  margin-top:12px;
-}
-.btn:hover{
-  background:var(--secondary);
-  transform:translateY(-2px);
-}
-
-/* ===== الفوتر ===== */
-footer{
-  background:var(--secondary);
-  color:#fff;
-  text-align:center;
-  padding:30px;
-  margin-top:60px;
-  font-weight:600;
-}
-
-/* واتساب */
-.whatsapp{
-  position:fixed;
-  bottom:18px;
-  left:18px;
-  width:64px;
-  height:64px;
-  border-radius:50%;
-  background:#25D366;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  box-shadow:0 6px 20px rgba(0,0,0,.35);
-  transition:.3s;
-}
+body{font-family:'Cairo',sans-serif;background:var(--light);color:var(--text-dark);line-height:1.7;scroll-behavior:smooth;}
+header{text-align:center;padding:120px 20px;background:linear-gradient(180deg, var(--light), #ffffff);border-bottom:1px solid #e0dcd5;}
+header img{width:150px;margin-bottom:20px;}
+header h1{font-size:2.8rem;margin-bottom:10px;}
+header p{font-size:1.2rem;color:var(--dark);}
+nav{background:#ffffffee;backdrop-filter:blur(10px);box-shadow:0 6px 20px rgba(0,0,0,.08);display:flex;justify-content:center;flex-wrap:wrap;gap:12px;position:sticky;top:0;z-index:1000;padding:12px 0;}
+nav a{padding:10px 24px;border-radius:30px;color:var(--dark);font-weight:700;text-decoration:none;transition:.3s;}
+nav a:hover{background:var(--primary);color:var(--text-light);transform:translateY(-2px);}
+section{max-width:1150px;margin:60px auto;padding:10px 20px;text-align:center;}
+section h2{font-size:2.1rem;margin-bottom:25px;color:var(--secondary);position:relative;}
+section h2::after{content:"";width:70px;height:4px;background:var(--primary);display:block;margin:12px auto;border-radius:3px;}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:25px;margin-top:20px;}
+.card{background:#fff;padding:28px 20px;border-radius:20px;box-shadow:var(--shadow);transition:.35s;text-decoration:none;color:inherit;}
+.card:hover{transform:translateY(-8px) scale(1.03);box-shadow:0 25px 50px rgba(0,0,0,.18);}
+.card .icon{font-size:2.8rem;margin-bottom:10px;}
+.card h3{color:var(--secondary);margin-bottom:8px;font-size:1.2rem;}
+.btn{display:inline-block;background:var(--primary);padding:12px 28px;border-radius:14px;color:#fff;text-decoration:none;font-weight:700;transition:.3s;margin-top:12px;}
+.btn:hover{background:var(--secondary);transform:translateY(-2px);}
+footer{background:var(--secondary);color:#fff;text-align:center;padding:30px;margin-top:60px;font-weight:600;}
+.whatsapp{position:fixed;bottom:18px;left:18px;width:64px;height:64px;border-radius:50%;background:#25D366;display:flex;justify-content:center;align-items:center;box-shadow:0 6px 20px rgba(0,0,0,.35);transition:.3s;}
 .whatsapp:hover{transform:scale(1.1);}
-.whatsapp img{width:34px}
+.whatsapp img{width:34px;}
+@media(max-width:768px){header img{width:120px} header h1{font-size:2rem} header p{font-size:1rem;}}
 
-/* موبايل */
-@media(max-width:768px){
-  header img{width:120px}
-  header h1{font-size:2rem}
-  header p{font-size:1rem}
-}
+/* ===== Lightbox للألبوم ===== */
+#lightbox{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.8);display:none;justify-content:center;align-items:center;z-index:2000;}
+#lightbox img{max-width:90%;max-height:90%;border-radius:12px;box-shadow:0 12px 28px rgba(0,0,0,.5);}
+#lightbox span{position:absolute;top:20px;right:30px;font-size:2rem;color:#fff;cursor:pointer;}
+/* ===== التقويم ===== */
+.calendar{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin-top:20px;}
+.day{background:#fff;padding:18px 12px;border-radius:12px;box-shadow:var(--shadow);width:120px;transition:.3s;}
+.day:hover{transform:translateY(-4px);box-shadow:0 20px 40px rgba(0,0,0,.15);}
+.day h4{color:var(--primary);margin-bottom:6px;}
+.day p{font-size:.9rem;color:var(--dark);}
 </style>
 </head>
 
@@ -212,31 +85,33 @@ footer{
 <section id="album">
   <h2>الألبوم</h2>
   <div class="cards">
-    <div class="card">
-      <div class="icon">📸</div>
-      <h3>أحدث الصور</h3>
-      <p>استمتعوا بمشاهدة أجمل ذكرياتنا العائلية.</p>
-    </div>
-    <div class="card">
-      <div class="icon">🎥</div>
-      <h3>فيديوهات ممتعة</h3>
-      <p>لقطات عائلية مميزة من حفلاتنا وأحداثنا.</p>
-    </div>
+    <img src="photo1.jpg" class="album-photo card" alt="ذكرى 1">
+    <img src="photo2.jpg" class="album-photo card" alt="ذكرى 2">
+    <img src="photo3.jpg" class="album-photo card" alt="ذكرى 3">
+    <img src="photo4.jpg" class="album-photo card" alt="ذكرى 4">
   </div>
 </section>
 
+<!-- Lightbox -->
+<div id="lightbox">
+  <span onclick="document.getElementById('lightbox').style.display='none'">&times;</span>
+  <img id="lightbox-img" src="">
+</div>
+
 <section id="events">
   <h2>المناسبات</h2>
-  <div class="cards">
-    <div class="card">
-      <div class="icon">🎉</div>
-      <h3>أعياد الميلاد</h3>
-      <p>تذكّروا جميع أعياد ميلاد أفراد العائلة هنا.</p>
+  <div class="calendar">
+    <div class="day">
+      <h4>25 مارس</h4>
+      <p>عيد ميلاد محمد</p>
     </div>
-    <div class="card">
-      <div class="icon">📅</div>
-      <h3>الحفلات واللقاءات</h3>
-      <p>جدول كامل لجميع اللقاءات والفعاليات العائلية.</p>
+    <div class="day">
+      <h4>10 إبريل</h4>
+      <p>حفلة عائلية</p>
+    </div>
+    <div class="day">
+      <h4>1 مايو</h4>
+      <p>لقاء العائلة السنوي</p>
     </div>
   </div>
 </section>
@@ -244,16 +119,8 @@ footer{
 <section id="recipes">
   <h2>الوصفات العائلية</h2>
   <div class="cards">
-    <div class="card">
-      <div class="icon">🍲</div>
-      <h3>وصفات منزلية</h3>
-      <p>تعلموا وصفاتنا المميزة خطوة بخطوة.</p>
-    </div>
-    <div class="card">
-      <div class="icon">🍰</div>
-      <h3>حلويات العائلة</h3>
-      <p>استمتعوا بألذ الحلويات العائلية التقليدية.</p>
-    </div>
+    <div class="card"><div class="icon">🍲</div><h3>وصفات منزلية</h3><p>تعلموا وصفاتنا المميزة خطوة بخطوة.</p></div>
+    <div class="card"><div class="icon">🍰</div><h3>حلويات العائلة</h3><p>استمتعوا بألذ الحلويات العائلية التقليدية.</p></div>
   </div>
 </section>
 
@@ -269,13 +136,23 @@ footer{
   <a href="mailto:hwk2@hotmail.com" class="btn">راسلنا عبر البريد</a>
 </section>
 
-<footer>
-  جميع الحقوق محفوظة © 2026
-</footer>
+<footer>جميع الحقوق محفوظة © 2026</footer>
 
-<a class="whatsapp" href="https://wa.me/966558020154" target="_blank">
-  <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg">
-</a>
+<a class="whatsapp" href="https://wa.me/966558020154" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg"></a>
+
+<script>
+// Lightbox
+const albumPhotos = document.querySelectorAll('.album-photo');
+const lightbox = document.getElementById('lightbox');
+const lightboxImg = document.getElementById('lightbox-img');
+
+albumPhotos.forEach(photo=>{
+  photo.addEventListener('click', ()=>{
+    lightbox.style.display='flex';
+    lightboxImg.src = photo.src;
+  });
+});
+</script>
 
 </body>
 </html>
