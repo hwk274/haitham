@@ -3,24 +3,24 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>منصة هيثم الاحترافية</title>
+<title>موقع العائلة الاحترافي</title>
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800&display=swap" rel="stylesheet">
 
 <style>
 /* ===== إعدادات عامة ===== */
 *{margin:0;padding:0;box-sizing:border-box;}
 :root{
-  --green-main:#2fa56a;
-  --green-dark:#1f7a52;
-  --green-light:#eaf7f1;
-  --text-dark:#1f2937;
+  --primary:#f4a261;
+  --secondary:#2a9d8f;
+  --light:#ffe8d6;
+  --dark:#264653;
+  --text-dark:#264653;
   --text-light:#fff;
-  --shadow:0 15px 35px rgba(0,0,0,.12);
+  --shadow:0 12px 28px rgba(0,0,0,.12);
 }
-
 body{
   font-family:'Cairo',sans-serif;
-  background:linear-gradient(180deg,#f6fffb,#ffffff);
+  background:var(--light);
   color:var(--text-dark);
   line-height:1.7;
   scroll-behavior:smooth;
@@ -29,74 +29,47 @@ body{
 /* ===== الهيدر ===== */
 header{
   text-align:center;
-  padding:150px 20px;
-  background:
-    radial-gradient(circle at top right, rgba(47,165,106,.08), transparent 60%),
-    linear-gradient(180deg,#ffffff,#f3faf6);
-  border-bottom:1px solid #e5efe9;
-  overflow:hidden;
+  padding:120px 20px;
+  background:linear-gradient(180deg, var(--light), #ffffff);
+  border-bottom:1px solid #e0dcd5;
 }
-
 header img{
   width:150px;
-  margin-bottom:30px;
-  animation:logoFloat 3s ease-in-out infinite,
-            logoEnter 1.2s ease forwards;
-  opacity:0;
+  margin-bottom:20px;
 }
-
-@keyframes logoEnter{
-  from{opacity:0;transform:translateY(-30px) scale(.9);}
-  to{opacity:1;transform:translateY(0) scale(1);}
-}
-@keyframes logoFloat{
-  0%,100%{transform:translateY(0)}
-  50%{transform:translateY(-8px)}
-}
-
 header h1{
-  font-size:3rem;
-  margin-bottom:15px;
-  animation:fadeUp 1s .3s ease forwards;
-  opacity:0;
+  font-size:2.8rem;
+  margin-bottom:10px;
 }
 header p{
-  font-size:1.3rem;
-  color:#374151;
-  animation:fadeUp 1s .6s ease forwards;
-  opacity:0;
-}
-@keyframes fadeUp{
-  from{opacity:0;transform:translateY(20px)}
-  to{opacity:1;transform:translateY(0)}
+  font-size:1.2rem;
+  color:var(--dark);
 }
 
 /* ===== الناف بار ===== */
 nav{
   background:#ffffffee;
-  backdrop-filter:blur(12px);
+  backdrop-filter:blur(10px);
   box-shadow:0 6px 20px rgba(0,0,0,.08);
   display:flex;
   justify-content:center;
+  flex-wrap:wrap;
   gap:12px;
   position:sticky;
   top:0;
   z-index:1000;
   padding:12px 0;
-  transition:.3s;
 }
-
 nav a{
   padding:10px 24px;
   border-radius:30px;
-  color:var(--green-dark);
+  color:var(--dark);
   font-weight:700;
   text-decoration:none;
   transition:.3s;
 }
-
 nav a:hover{
-  background:var(--green-main);
+  background:var(--primary);
   color:var(--text-light);
   transform:translateY(-2px);
 }
@@ -104,21 +77,21 @@ nav a:hover{
 /* ===== الأقسام ===== */
 section{
   max-width:1150px;
-  margin:70px auto;
+  margin:60px auto;
   padding:10px 20px;
   text-align:center;
 }
 section h2{
   font-size:2.1rem;
   margin-bottom:25px;
-  color:var(--green-dark);
+  color:var(--secondary);
   position:relative;
 }
 section h2::after{
   content:"";
   width:70px;
   height:4px;
-  background:var(--green-main);
+  background:var(--primary);
   display:block;
   margin:12px auto;
   border-radius:3px;
@@ -127,57 +100,57 @@ section h2::after{
 /* ===== الكروت ===== */
 .cards{
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
-  gap:28px;
-  margin-top:25px;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:25px;
+  margin-top:20px;
 }
 .card{
   background:#fff;
-  padding:32px 22px;
-  border-radius:28px;
+  padding:28px 20px;
+  border-radius:20px;
   box-shadow:var(--shadow);
   transition:.35s;
   text-decoration:none;
   color:inherit;
 }
 .card:hover{
-  transform:translateY(-12px) scale(1.03);
+  transform:translateY(-8px) scale(1.03);
   box-shadow:0 25px 50px rgba(0,0,0,.18);
 }
-.icon{
-  font-size:3rem;
-  margin-bottom:12px;
+.card .icon{
+  font-size:2.8rem;
+  margin-bottom:10px;
 }
 .card h3{
-  color:var(--green-dark);
-  margin-bottom:10px;
-  font-size:1.25rem;
+  color:var(--secondary);
+  margin-bottom:8px;
+  font-size:1.2rem;
 }
 
 /* ===== زر ===== */
 .btn{
   display:inline-block;
-  background:var(--green-main);
-  padding:14px 30px;
-  border-radius:16px;
+  background:var(--primary);
+  padding:12px 28px;
+  border-radius:14px;
   color:#fff;
   text-decoration:none;
-  font-weight:800;
+  font-weight:700;
   transition:.3s;
-  margin-top:15px;
+  margin-top:12px;
 }
 .btn:hover{
-  background:var(--green-dark);
+  background:var(--secondary);
   transform:translateY(-2px);
 }
 
 /* ===== الفوتر ===== */
 footer{
-  background:linear-gradient(135deg,var(--green-dark),var(--green-main));
+  background:var(--secondary);
   color:#fff;
   text-align:center;
-  padding:35px;
-  margin-top:80px;
+  padding:30px;
+  margin-top:60px;
   font-weight:600;
 }
 
@@ -202,8 +175,8 @@ footer{
 /* موبايل */
 @media(max-width:768px){
   header img{width:120px}
-  header h1{font-size:2.1rem}
-  header p{font-size:1.1rem}
+  header h1{font-size:2rem}
+  header p{font-size:1rem}
 }
 </style>
 </head>
@@ -211,56 +184,88 @@ footer{
 <body>
 
 <header>
-  <img src="logo_haitham.png" alt="Haitham Logo">
-  <h1>مرحبًا بكم في المنصة الاحترافية</h1>
-  <p>حلول ذكية لإدارة الموظفين والمخزون والسجلات</p>
+  <img src="family_logo.png" alt="شعار العائلة">
+  <h1>أهلاً بكم في موقع عائلتنا</h1>
+  <p>مساحة دافئة لمشاركة الأخبار، الصور، والمناسبات العائلية</p>
 </header>
 
 <nav>
   <a href="#home">الرئيسية</a>
-  <a href="#services">الخدمات</a>
-  <a href="#idea">الفكرة</a>
-  <a href="#contact">التواصل</a>
+  <a href="#about">عن العائلة</a>
+  <a href="#album">الألبوم</a>
+  <a href="#events">المناسبات</a>
+  <a href="#recipes">الوصفات</a>
+  <a href="#messages">الرسائل</a>
+  <a href="#contact">تواصل</a>
 </nav>
 
 <section id="home">
   <h2>الرئيسية</h2>
-  <p>
-    منصة متكاملة لإدارة الموارد بأسلوب عصري
-    يعكس هوية مؤسستك الاحترافية.
-  </p>
+  <p>مرحباً بكم في موقع العائلة! تابعوا أحدث الأخبار والذكريات الجميلة.</p>
 </section>
 
-<section id="services">
-  <h2>خدماتنا</h2>
+<section id="about">
+  <h2>عن العائلة</h2>
+  <p>عائلة هيثم المحترمة، تجمع بين الأصالة والود، تحرص على مشاركة كل لحظة جميلة مع أفرادها.</p>
+</section>
+
+<section id="album">
+  <h2>الألبوم</h2>
   <div class="cards">
-    <a class="card" href="employees.html">
-      <div class="icon">🧑‍💼</div>
-      <h3>الموظفين</h3>
-    </a>
-    <a class="card" href="documents.html">
-      <div class="icon">📂</div>
-      <h3>سجلات رسمية</h3>
-    </a>
-    <a class="card" href="cars.html">
-      <div class="icon">🚗</div>
-      <h3>السيارات</h3>
-    </a>
-    <a class="card" href="inventory.php">
-      <div class="icon">📦</div>
-      <h3>المخزون</h3>
-    </a>
+    <div class="card">
+      <div class="icon">📸</div>
+      <h3>أحدث الصور</h3>
+      <p>استمتعوا بمشاهدة أجمل ذكرياتنا العائلية.</p>
+    </div>
+    <div class="card">
+      <div class="icon">🎥</div>
+      <h3>فيديوهات ممتعة</h3>
+      <p>لقطات عائلية مميزة من حفلاتنا وأحداثنا.</p>
+    </div>
   </div>
 </section>
 
-<section id="idea">
-  <h2>الفكرة والتنفيذ</h2>
-  <p><strong>هيثم واشحت قرشي</strong></p>
-  <a href="idea.html" class="btn">تفاصيل أكثر</a>
+<section id="events">
+  <h2>المناسبات</h2>
+  <div class="cards">
+    <div class="card">
+      <div class="icon">🎉</div>
+      <h3>أعياد الميلاد</h3>
+      <p>تذكّروا جميع أعياد ميلاد أفراد العائلة هنا.</p>
+    </div>
+    <div class="card">
+      <div class="icon">📅</div>
+      <h3>الحفلات واللقاءات</h3>
+      <p>جدول كامل لجميع اللقاءات والفعاليات العائلية.</p>
+    </div>
+  </div>
+</section>
+
+<section id="recipes">
+  <h2>الوصفات العائلية</h2>
+  <div class="cards">
+    <div class="card">
+      <div class="icon">🍲</div>
+      <h3>وصفات منزلية</h3>
+      <p>تعلموا وصفاتنا المميزة خطوة بخطوة.</p>
+    </div>
+    <div class="card">
+      <div class="icon">🍰</div>
+      <h3>حلويات العائلة</h3>
+      <p>استمتعوا بألذ الحلويات العائلية التقليدية.</p>
+    </div>
+  </div>
+</section>
+
+<section id="messages">
+  <h2>الرسائل</h2>
+  <p>شاركوا التهاني، الملاحظات، والذكريات مع أفراد العائلة.</p>
+  <a href="mailto:hwk2@hotmail.com" class="btn">أرسل رسالة</a>
 </section>
 
 <section id="contact">
   <h2>تواصل معنا</h2>
+  <p>لأي استفسارات أو اقتراحات، تواصلوا معنا عبر البريد أو واتساب.</p>
   <a href="mailto:hwk2@hotmail.com" class="btn">راسلنا عبر البريد</a>
 </section>
 
