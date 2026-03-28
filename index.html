@@ -1,119 +1,39 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="ar">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>موقع العائلة المبهج</title>
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800&display=swap" rel="stylesheet">
-<style>
-*{margin:0;padding:0;box-sizing:border-box;}
-:root{
-  --primary:#FF6B6B;
-  --secondary:#56CCF2;
-  --highlight:#FFD93D;
-  --bg:#FFFFFF;
-  --text-dark:#333;
-}
-body{font-family:'Cairo',sans-serif;background:var(--bg);color:var(--text-dark);line-height:1.7;scroll-behavior:smooth;}
-header{text-align:center;padding:120px 20px;background:linear-gradient(135deg,#FFDEE9,#B5FFFC);border-bottom:2px solid var(--highlight);}
-header img{width:150px;margin-bottom:20px;}
-header h1{font-size:2.8rem;margin-bottom:10px;color:var(--secondary);}
-header p{font-size:1.2rem;color:var(--primary);}
-nav{background:#ffffffee;backdrop-filter:blur(10px);box-shadow:0 6px 20px rgba(0,0,0,.08);display:flex;justify-content:center;flex-wrap:wrap;gap:12px;position:sticky;top:0;z-index:1000;padding:12px 0;}
-nav a{padding:10px 24px;border-radius:30px;color:var(--secondary);font-weight:700;text-decoration:none;transition:.3s;}
-nav a:hover{background:var(--primary);color:#fff;transform:translateY(-2px);}
-section{max-width:1150px;margin:60px auto;padding:10px 20px;text-align:center;}
-section h2{font-size:2.1rem;margin-bottom:25px;color:var(--secondary);}
-section h2::after{content:"";width:70px;height:4px;background:var(--primary);display:block;margin:12px auto;border-radius:3px;}
-.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:25px;margin-top:20px;}
-.card{background:var(--highlight);padding:20px;border-radius:20px;box-shadow:0 12px 28px rgba(0,0,0,.12);transition:.35s;text-decoration:none;color:var(--text-dark);}
-.card:hover{transform:translateY(-8px) scale(1.03);}
-.card img{width:100%;border-radius:12px;cursor:pointer;}
-footer{background:var(--secondary);color:#fff;text-align:center;padding:30px;margin-top:60px;}
-.whatsapp{position:fixed;bottom:18px;left:18px;width:64px;height:64px;border-radius:50%;background:#25D366;display:flex;justify-content:center;align-items:center;box-shadow:0 6px 20px rgba(0,0,0,.35);}
-.whatsapp:hover{transform:scale(1.1);}
-.whatsapp img{width:34px;}
-@media(max-width:768px){header img{width:120px} header h1{font-size:2rem} header p{font-size:1rem;}}
-
-/* Lightbox */
-#lightbox{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.8);display:none;justify-content:center;align-items:center;z-index:2000;}
-#lightbox img{max-width:90%;max-height:90%;border-radius:12px;box-shadow:0 12px 28px rgba(0,0,0,.5);}
-#lightbox span{position:absolute;top:20px;right:30px;font-size:2rem;color:#fff;cursor:pointer;}
-</style>
+<title>مولد الصور AI</title>
+<link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
-<header>
-  <img src="family_logo.png" alt="شعار العائلة">
-  <h1>أهلاً بكم في موقع العائلة المبهج</h1>
-  <p>مساحة ممتعة لمشاركة الأخبار، الصور، والمناسبات العائلية</p>
-</header>
+<div class="container">
+    <h1>🎨 مولد الصور بالذكاء الاصطناعي</h1>
 
-<nav>
-  <a href="#home">الرئيسية</a>
-  <a href="#about">عن العائلة</a>
-  <a href="#album">الألبوم</a>
-  <a href="#events">المناسبات</a>
-  <a href="#recipes">الوصفات</a>
-  <a href="#contact">تواصل</a>
-</nav>
+    <input id="prompt" placeholder="اكتب وصف الصورة">
 
-<section id="home">
-  <h2>الرئيسية</h2>
-  <p>مرحباً بكم في موقع العائلة! تابعوا أحدث الأخبار والذكريات الجميلة.</p>
-</section>
+    <select id="style">
+        <option value="realistic">واقعي</option>
+        <option value="anime">أنمي</option>
+        <option value="3d">3D</option>
+        <option value="cinematic">سينمائي</option>
+    </select>
 
-<section id="about">
-  <h2>عن العائلة</h2>
-  <p>عائلة هيثم المحترمة، تجمع بين الأصالة والود، وتحافظ على ذكرياتها الجميلة.</p>
-</section>
+    <br><br>
 
-<section id="album">
-  <h2>الألبوم</h2>
-  <div class="cards">
-    <!-- ضع الصور هنا -->
-    <div class="card"><img src="uploads/photo1.jpg" alt="صورة 1"></div>
-    <div class="card"><img src="uploads/photo2.jpg" alt="صورة 2"></div>
-    <div class="card"><img src="uploads/photo3.jpg" alt="صورة 3"></div>
-  </div>
-</section>
+    <button onclick="generate()">توليد الصورة</button>
 
-<div id="lightbox">
-  <span onclick="document.getElementById('lightbox').style.display='none'">&times;</span>
-  <img id="lightbox-img" src="">
+    <br>
+
+    <img id="output">
+
+    <br>
+    <a id="download" download="image.png">⬇ تحميل الصورة</a>
+
 </div>
 
-<section id="events">
-  <h2>المناسبات</h2>
-  <p>تسجيل الأحداث والاحتفالات العائلية.</p>
-</section>
-
-<section id="recipes">
-  <h2>الوصفات العائلية</h2>
-  <p>تعلم وصفات العائلة المميزة.</p>
-</section>
-
-<section id="contact">
-  <h2>تواصل معنا</h2>
-  <a href="mailto:hwk2@hotmail.com" class="btn">راسلنا عبر البريد</a>
-</section>
-
-<footer>جميع الحقوق محفوظة © 2026</footer>
-
-<a class="whatsapp" href="https://wa.me/966558020154" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg"></a>
-
-<script>
-// Lightbox
-const albumPhotos = document.querySelectorAll('.card img');
-const lightbox = document.getElementById('lightbox');
-const lightboxImg = document.getElementById('lightbox-img');
-albumPhotos.forEach(photo=>{
-  photo.addEventListener('click', ()=>{
-    lightbox.style.display='flex';
-    lightboxImg.src = photo.src;
-  });
-});
-</script>
+<script src="script.js"></script>
 
 </body>
 </html>
