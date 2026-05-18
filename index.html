@@ -1,39 +1,56 @@
-<!DOCTYPE html>
-<html lang="ar">
-<head>
-<meta charset="UTF-8">
-<title>مولد الصور AI</title>
-<link rel="stylesheet" href="style.css">
-</head>
+<?php
+include "header.php";
+include "config.php";
+?>
 
-<body>
-
-<div class="container">
-    <h1>🎨 مولد الصور بالذكاء الاصطناعي</h1>
-
-    <input id="prompt" placeholder="اكتب وصف الصورة">
-
-    <select id="style">
-        <option value="realistic">واقعي</option>
-        <option value="anime">أنمي</option>
-        <option value="3d">3D</option>
-        <option value="cinematic">سينمائي</option>
-    </select>
-
-    <br><br>
-
-    <button onclick="generate()">توليد الصورة</button>
-
-    <br>
-
-    <img id="output">
-
-    <br>
-    <a id="download" download="image.png">⬇ تحميل الصورة</a>
-
+<!-- زر الرجوع -->
+<div class="mb-4 text-center">
+ <a href="index.php" 
+    class="btn shadow rounded-circle"
+    style="width:60px;height:60px;display:inline-flex;align-items:center;justify-content:center;background:#fff;border:none;overflow:hidden;">
+    <img src="logo_haitham.png" style="width:80%;height:80%;object-fit:contain;">
+ </a>
+ <p class="mt-2">الصفحة الرئيسية</p>
 </div>
 
-<script src="script.js"></script>
+<h3 class="mb-2">مركز الأدوات الذكية</h3>
+<p class="text-muted">جميع الأدوات في مكان واحد</p>
 
-</body>
-</html>
+<?php
+$tools = [
+    ["name"=>"تحويل العملات","desc"=>"تحويل العملات مباشرة","icon"=>"💱","link"=>"currency.php","color"=>"primary"],
+    ["name"=>"تحويل الطول","desc"=>"متر - سم - إنش","icon"=>"📏","link"=>"length.php","color"=>"success"],
+    ["name"=>"تحويل الوزن","desc"=>"كيلو إلى باوند","icon"=>"⚖️","link"=>"weight.php","color"=>"warning"],
+    ["name"=>"حاسبة","desc"=>"عمليات حسابية سريعة","icon"=>"🧮","link"=>"calc.php","color"=>"danger"],
+    ["name"=>"تحويل الوقت","desc"=>"ساعات ودقائق","icon"=>"⏱️","link"=>"time.php","color"=>"info"],
+    ["name"=>"مولد كلمات مرور","desc"=>"إنشاء كلمات قوية","icon"=>"🔐","link"=>"password.php","color"=>"dark"]
+];
+?>
+
+<div class="row">
+<?php foreach($tools as $t): ?>
+<div class="col-md-4 mb-3">
+ <div class="card shadow-sm border-0 h-100">
+  <div class="card-body text-center">
+   <div style="font-size:40px"><?php echo $t['icon']; ?></div>
+   <h5 class="mt-2"><?php echo $t['name']; ?></h5>
+   <p class="text-muted"><?php echo $t['desc']; ?></p>
+   <a href="<?php echo $t['link']; ?>" class="btn btn-<?php echo $t['color']; ?> w-100">
+    فتح الأداة
+   </a>
+  </div>
+ </div>
+</div>
+<?php endforeach; ?>
+</div>
+
+<hr>
+
+<div class="card shadow-sm">
+ <div class="card-body text-center">
+  <h5>إحصائيات الاستخدام</h5>
+  <p class="text-muted">لوحة متابعة الأدوات قيد التطوير</p>
+ </div>
+</div>
+
+<?php include "footer.php"; ?>
