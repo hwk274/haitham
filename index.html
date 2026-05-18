@@ -1,56 +1,66 @@
-<?php
-include "header.php";
-include "config.php";
-?>
+import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { motion } from "framer-motion";
+import { useState } from "react";
 
-<!-- زر الرجوع -->
-<div class="mb-4 text-center">
- <a href="index.php" 
-    class="btn shadow rounded-circle"
-    style="width:60px;height:60px;display:inline-flex;align-items:center;justify-content:center;background:#fff;border:none;overflow:hidden;">
-    <img src="logo_haitham.png" style="width:80%;height:80%;object-fit:contain;">
- </a>
- <p class="mt-2">الصفحة الرئيسية</p>
-</div>
+export default function ToolsHomePage() {
+  const [search, setSearch] = useState("");
 
-<h3 class="mb-2">مركز الأدوات الذكية</h3>
-<p class="text-muted">جميع الأدوات في مكان واحد</p>
+  const tools = [
+    { name: "تحويل العملات", desc: "تحويل سريع بين العملات المختلفة", icon: "💱" },
+    { name: "تحويل الطول", desc: "تحويل بين متر، سم، إنش وغيرها", icon: "📏" },
+    { name: "تحويل الوزن", desc: "تحويل الكيلو إلى باوند والعكس", icon: "⚖️" },
+    { name: "حاسبة بسيطة", desc: "عمليات حسابية سريعة", icon: "🧮" },
+    { name: "تحويل الوقت", desc: "تحويل الساعات والدقائق", icon: "⏱️" },
+    { name: "مولد كلمات مرور", desc: "إنشاء كلمات مرور قوية", icon: "🔐" }
+  ];
 
-<?php
-$tools = [
-    ["name"=>"تحويل العملات","desc"=>"تحويل العملات مباشرة","icon"=>"💱","link"=>"currency.php","color"=>"primary"],
-    ["name"=>"تحويل الطول","desc"=>"متر - سم - إنش","icon"=>"📏","link"=>"length.php","color"=>"success"],
-    ["name"=>"تحويل الوزن","desc"=>"كيلو إلى باوند","icon"=>"⚖️","link"=>"weight.php","color"=>"warning"],
-    ["name"=>"حاسبة","desc"=>"عمليات حسابية سريعة","icon"=>"🧮","link"=>"calc.php","color"=>"danger"],
-    ["name"=>"تحويل الوقت","desc"=>"ساعات ودقائق","icon"=>"⏱️","link"=>"time.php","color"=>"info"],
-    ["name"=>"مولد كلمات مرور","desc"=>"إنشاء كلمات قوية","icon"=>"🔐","link"=>"password.php","color"=>"dark"]
-];
-?>
+  const filtered = tools.filter(t =>
+    t.name.includes(search) || t.desc.includes(search)
+  );
 
-<div class="row">
-<?php foreach($tools as $t): ?>
-<div class="col-md-4 mb-3">
- <div class="card shadow-sm border-0 h-100">
-  <div class="card-body text-center">
-   <div style="font-size:40px"><?php echo $t['icon']; ?></div>
-   <h5 class="mt-2"><?php echo $t['name']; ?></h5>
-   <p class="text-muted"><?php echo $t['desc']; ?></p>
-   <a href="<?php echo $t['link']; ?>" class="btn btn-<?php echo $t['color']; ?> w-100">
-    فتح الأداة
-   </a>
-  </div>
- </div>
-</div>
-<?php endforeach; ?>
-</div>
+  return (
+    <div className="min-h-screen bg-gradient-to-b from-slate-50 to-slate-200 p-6">
+      {/* Header */}
+      <div className="text-center mb-10">
+        <h1 className="text-4xl font-bold mb-2">موقع الأدوات الذكية</h1>
+        <p className="text-gray-600">كل الأدوات التي تحتاجها في مكان واحد</p>
+      </div>
 
-<hr>
+      {/* Search */}
+      <div className="max-w-xl mx-auto mb-10">
+        <Input
+          placeholder="ابحث عن أداة..."
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+        />
+      </div>
 
-<div class="card shadow-sm">
- <div class="card-body text-center">
-  <h5>إحصائيات الاستخدام</h5>
-  <p class="text-muted">لوحة متابعة الأدوات قيد التطوير</p>
- </div>
-</div>
+      {/* Tools Grid */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {filtered.map((tool, i) => (
+          <motion.div
+            key={i}
+            whileHover={{ scale: 1.05 }}
+            transition={{ duration: 0.2 }}
+          >
+            <Card className="rounded-2xl shadow-md hover:shadow-xl transition">
+              <CardContent className="p-6 text-center">
+                <div className="text-4xl mb-3">{tool.icon}</div>
+                <h2 className="text-xl font-semibold mb-2">{tool.name}</h2>
+                <p className="text-gray-500 mb-4">{tool.desc}</p>
+                <Button className="w-full">فتح الأداة</Button>
+              </CardContent>
+            </Card>
+          </motion.div>
+        ))}
+      </div>
 
-<?php include "footer.php"; ?>
+      {/* Footer */}
+      <div className="text-center mt-16 text-gray-500 text-sm">
+        جميع الحقوق محفوظة © موقع الأدوات الذكية
+      </div>
+    </div>
+  );
+}
