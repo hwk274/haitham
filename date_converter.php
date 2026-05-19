@@ -1,0 +1,183 @@
+<?php
+session_start();
+date_default_timezone_set("Asia/Riyadh");
+
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
+
+function hijriToGregorian($h, $m, $d) {
+    $jd = intval((11 * $h + 3) / 30) + 354 * $h + 30 * $m - intval(($m - 1) / 2) + $d + 1948440 - 385;
+    $l = $jd + 68569;
+    $n = intval((4 * $l) / 146097);
+    $l = $l - intval((146097 * $n + 3) / 4);
+    $i = intval((4000 * ($l + 1)) / 1461001);
+    $l = $l - intval((1461 * $i) / 4) + 31;
+    $j = intval((80 * $l) / 2447);
+    $day = $l - intval((2447 * $j) / 80);
+    $l = intval($j / 11);
+    $month = $j + 2 - (12 * $l);
+    $year = 100 * ($n - 49) + $i + $l;
+    return "$year-$month-$day";
+}
+
+function gregorianToHijriLocal($gYear, $gMonth, $gDay){
+    $jd = gregoriantojd($gMonth,$gDay,$gYear);
+    $l = $jd - 1948440 + 10632;
+    $n = intval(($l - 1)/10631);
+    $l = $l - 10631*$n + 354;
+    $j = (intval((10985 - $l)/5316)) * (intval((50*$l)/17719)) + (intval($l/5670)) * (intval((43*$l)/15238));
+    $l = $l - (intval((30 - $j)/15)) * (intval((17719*$j)/50)) - (intval($j/16)) * (intval((15238*$j)/43)) + 29;
+    $m = intval((24*$l)/709);
+    $d = $l - intval((709*$m)/24);
+    $y = 30*$n + $j - 30;
+    $months_ar = ['محرم','صفر','ربيع الأول','ربيع الآخر','جمادى الأولى','جمادى الآخرة','رجب','شعبان','رمضان','شوال','ذو القعدة','ذو الحجة'];
+    return $d.' '.$months_ar[$m-1].' '.$y;
+}
+
+if(isset($_POST['action'])){
+    if($_POST['action']=="h2g"){
+        echo hijriToGregorian($_POST['y'],$_POST['m'],$_POST['d']);
+    }
+    if($_POST['action']=="g2h"){
+        if(empty($_POST['date'])){
+            echo "⚠️ يرجى اختيار تاريخ صالح";
+        } else {
+            $parts = explode("-", $_POST['date']);
+            if(count($parts)==3){
+                $y = (int)$parts[0];
+                $m = (int)$parts[1];
+                $d = (int)$parts[2];
+                echo gregorianToHijriLocal($y,$m,$d);
+            } else {
+                echo "⚠️ التاريخ غير صالح";
+            }
+        }
+    }
+    if($_POST['action']=="diff"){
+        if(empty($_POST['d1']) || empty($_POST['d2'])){
+            echo "⚠️ يرجى إدخال كلا التاريخين";
+        } else {
+            $d1 = new DateTime($_POST['d1']);
+            $d2 = new DateTime($_POST['d2']);
+            $diff = $d1->diff($d2);
+            echo $diff->y." سنة، ".$diff->m." شهر، ".$diff->d." يوم (".$diff->days." يوم)";
+        }
+    }
+    if($_POST['action']=="add"){
+        if(empty($_POST['date']) || !is_numeric($_POST['days'])){
+            echo "⚠️ يرجى إدخال التاريخ وعدد الأيام الصحيح";
+        } else {
+            $date = new DateTime($_POST['date']);
+            $date->modify((int)$_POST['days']." days");
+            echo $date->format("Y-m-d");
+        }
+    }
+    if($_POST['action']=="today"){
+        $today = new DateTime();
+        echo gregorianToHijriLocal($today->format('Y'),$today->format('m'),$today->format('d'));
+    }
+    exit;
+}
+?>
+
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>لوحة أدوات التواريخ</title>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal&display=swap" rel="stylesheet">
+<style>
+body { font-family:'Tajawal',sans-serif; direction:rtl; background:#f5f7fa; margin:0; }
+.container { max-width:1000px; margin:auto; padding:40px 20px; }
+h2 { text-align:center; margin-bottom:30px; font-size:2.2em; color:#222; }
+.today { text-align:center; margin-bottom:30px; font-weight:bold; color:#ff5722; font-size:1.4em; }
+.grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(320px,1fr)); gap:30px; }
+.card { background:#fff; padding:30px; border-radius:25px; box-shadow:0 10px 30px rgba(0,0,0,0.15); transition:.4s; display:flex; flex-direction:column; }
+.card:hover { transform:translateY(-10px); box-shadow:0 15px 40px rgba(0,0,0,0.25); }
+.card h3 { color:#007bff; font-size:1.5em; margin-bottom:20px; text-align:center; }
+.card .inputs { display:flex; flex-direction:column; gap:12px; }
+.card .inputs input { padding:14px; font-size:1em; border-radius:12px; border:1px solid #ccc; }
+.card .inputs button { padding:14px; font-size:1em; border:none; border-radius:12px; background:#007bff; color:#fff; cursor:pointer; font-weight:bold; transition:.3s; }
+.card .inputs button:hover { background:#0056b3; }
+.result { margin-top:15px; padding:14px; background:#f0f8ff; border-radius:12px; font-weight:bold; font-size:1em; text-align:center; color:#222; word-wrap: break-word; }
+@media(max-width:600px){
+    .grid { grid-template-columns:1fr; }
+    h2 { font-size:1.7em; }
+    .today { font-size:1.2em; }
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+<h2>📅 نظام التواريخ (هجري / ميلادي)</h2>
+<div class="today" id="today"></div>
+<div class="grid">
+
+<div class="card">
+<h3>هجري → ميلادي</h3>
+<div class="inputs">
+<input id="h_d" placeholder="يوم">
+<input id="h_m" placeholder="شهر">
+<input id="h_y" placeholder="سنة">
+<button onclick="send('h2g')">تحويل</button>
+</div>
+<div class="result" id="r1"></div>
+</div>
+
+<div class="card">
+<h3>ميلادي → هجري</h3>
+<div class="inputs">
+<input type="date" id="g_date">
+<button onclick="send('g2h')">تحويل</button>
+</div>
+<div class="result" id="r2"></div>
+</div>
+
+<div class="card">
+<h3>الفرق بين تاريخين</h3>
+<div class="inputs">
+<input type="date" id="d1">
+<input type="date" id="d2">
+<button onclick="send('diff')">احسب</button>
+</div>
+<div class="result" id="r3"></div>
+</div>
+
+<div class="card">
+<h3>إضافة أيام</h3>
+<div class="inputs">
+<input type="date" id="ad_date">
+<input type="number" id="days" placeholder="عدد الأيام">
+<button onclick="send('add')">تنفيذ</button>
+</div>
+<div class="result" id="r4"></div>
+</div>
+
+</div>
+</div>
+
+<script>
+function send(type){
+    let data = new FormData();
+    data.append("action", type);
+
+    if(type=="h2g"){ data.append("d", h_d.value); data.append("m", h_m.value); data.append("y", h_y.value); r1.innerText = "جاري التحويل..."; }
+    if(type=="g2h"){ data.append("date", g_date.value); r2.innerText = "جاري التحويل..."; }
+    if(type=="diff"){ data.append("d1", d1.value); data.append("d2", d2.value); r3.innerText = "جاري الحساب..."; }
+    if(type=="add"){ data.append("date", ad_date.value); data.append("days", days.value); r4.innerText = "جاري التنفيذ..."; }
+    if(type=="today"){ fetch("", { method:"POST", body:data }).then(res=>res.text()).then(res=>{ document.getElementById("today").innerText = "📅 اليوم هجري: "+res; }); return; }
+
+    fetch("", { method:"POST", body:data }).then(res => res.text()).then(res => {
+        if(type=="h2g") r1.innerText = res;
+        if(type=="g2h") r2.innerText = res;
+        if(type=="diff") r3.innerText = res;
+        if(type=="add") r4.innerText = res;
+    });
+}
+send('today');
+</script>
+
+</body>
+</html>
