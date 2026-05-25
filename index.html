@@ -2,139 +2,145 @@
 <html lang="ar">
 <head>
 <meta charset="UTF-8">
-<title>ألعاب الأطفال الذكية</title>
+<title>تطبيق ألعاب الأطفال</title>
 
 <style>
 body {
     margin: 0;
-    font-family: "Arial";
-    background: linear-gradient(135deg, #e3f2fd, #fce4ec);
+    font-family: Arial;
+    background: linear-gradient(135deg,#e0f7fa,#fce4ec);
     text-align: center;
     direction: rtl;
 }
 
+/* الهيدر */
 header {
-    background: #1976d2;
+    background: #0d47a1;
     color: white;
-    padding: 20px;
-    font-size: 26px;
+    padding: 15px;
+    font-size: 22px;
     font-weight: bold;
 }
 
-.subtitle {
+/* النقاط */
+#scoreBox {
     margin: 10px;
-    color: #444;
+    font-size: 18px;
+    color: #333;
 }
 
-.game-area {
+/* منطقة اللعبة */
+.game {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    gap: 25px;
-    padding: 20px;
-}
-
-/* كروت الحيوانات */
-.card {
-    width: 220px;
-    height: 260px;
-    background: white;
-    border-radius: 20px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-    position: relative;
+    gap: 20px;
     padding: 10px;
 }
 
-/* منطقة التركيب */
+/* بطاقة الحيوان */
+.card {
+    width: 240px;
+    height: 300px;
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+    position: relative;
+}
+
+/* منطقة التجميع */
 .dropzone {
-    height: 140px;
+    height: 180px;
+    margin: 15px;
     border: 3px dashed #bbb;
     border-radius: 15px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 40px;
-    background: #fafafa;
+    font-size: 60px;
+    transition: 0.3s;
 }
 
 /* اسم الحيوان */
-.animal-name {
-    margin-top: 10px;
-    font-size: 18px;
+.title {
     font-weight: bold;
-    color: #333;
+    color: #444;
 }
 
 /* الأجزاء */
 .parts {
-    margin-top: 20px;
+    margin-top: 10px;
 }
 
 .part {
     display: inline-block;
-    padding: 12px 18px;
-    margin: 10px;
     background: #ffca28;
+    padding: 10px 15px;
+    margin: 8px;
     border-radius: 12px;
     cursor: grab;
     font-weight: bold;
     box-shadow: 0 5px 10px rgba(0,0,0,0.1);
-    transition: 0.3s;
+    transition: 0.2s;
 }
 
 .part:hover {
     transform: scale(1.1);
 }
 
-/* رسالة */
-#message {
-    margin-top: 20px;
-    font-size: 22px;
-    font-weight: bold;
-    color: green;
-}
-
-/* أنيميشن نجاح */
+/* نجاح */
 .success {
-    animation: pop 0.5s ease;
+    animation: pop 0.4s ease;
+    background: #c8e6c9 !important;
 }
 
 @keyframes pop {
     0% { transform: scale(0.5); }
     100% { transform: scale(1); }
 }
+
+/* رسالة */
+#msg {
+    margin: 10px;
+    font-size: 20px;
+    font-weight: bold;
+    color: green;
+}
+
+/* زر إعادة */
+button {
+    margin-top: 10px;
+    padding: 10px 20px;
+    border: none;
+    background: #1976d2;
+    color: white;
+    border-radius: 10px;
+    cursor: pointer;
+}
 </style>
 </head>
 
 <body>
 
-<header>🐾 ألعاب الأطفال الذكية - تركيب الحيوانات</header>
-<div class="subtitle">اسحب الأجزاء وضعها في المكان الصحيح</div>
+<header>🎮 تطبيق ألعاب الأطفال الذكي</header>
 
-<div class="game-area">
+<div id="scoreBox">⭐ النقاط: <span id="score">0</span></div>
 
-    <!-- حصان -->
+<div class="game">
+
     <div class="card">
-        <div class="dropzone" id="horseBox" ondrop="drop(event)" ondragover="allowDrop(event)">
-            🐴
-        </div>
-        <div class="animal-name">الحصان</div>
+        <div class="dropzone" id="horseBox" ondrop="drop(event)" ondragover="allowDrop(event)">🐴</div>
+        <div class="title">الحصان</div>
     </div>
 
-    <!-- بقرة -->
     <div class="card">
-        <div class="dropzone" id="cowBox" ondrop="drop(event)" ondragover="allowDrop(event)">
-            🐄
-        </div>
-        <div class="animal-name">البقرة</div>
+        <div class="dropzone" id="cowBox" ondrop="drop(event)" ondragover="allowDrop(event)">🐄</div>
+        <div class="title">البقرة</div>
     </div>
 
-    <!-- طائر -->
     <div class="card">
-        <div class="dropzone" id="birdBox" ondrop="drop(event)" ondragover="allowDrop(event)">
-            🐦
-        </div>
-        <div class="animal-name">الطائر</div>
+        <div class="dropzone" id="birdBox" ondrop="drop(event)" ondragover="allowDrop(event)">🐦</div>
+        <div class="title">الطائر</div>
     </div>
 
 </div>
@@ -142,38 +148,59 @@ header {
 <div class="parts">
     <div class="part" draggable="true" id="horse" ondragstart="drag(event)">رأس الحصان</div>
     <div class="part" draggable="true" id="cow" ondragstart="drag(event)">رأس البقرة</div>
-    <div class="part" draggable="true" id="bird" ondragstart="drag(event)">جسم الطائر</div>
+    <div class="part" draggable="true" id="bird" ondragstart="drag(event)">جناح الطائر</div>
 </div>
 
-<div id="message"></div>
+<div id="msg"></div>
+
+<button onclick="resetGame()">🔄 إعادة اللعب</button>
+
+<audio id="sound" src="https://www.soundjay.com/buttons/sounds/button-3.mp3"></audio>
 
 <script>
-function allowDrop(ev) {
+
+let score = localStorage.getItem("score") || 0;
+document.getElementById("score").innerText = score;
+
+function allowDrop(ev){
     ev.preventDefault();
 }
 
-function drag(ev) {
+function drag(ev){
     ev.dataTransfer.setData("text", ev.target.id);
 }
 
-function drop(ev) {
+function drop(ev){
     ev.preventDefault();
 
     let data = ev.dataTransfer.getData("text");
     let item = document.getElementById(data);
 
-    if (
-        (data === "horse" && ev.target.id === "horseBox") ||
-        (data === "cow" && ev.target.id === "cowBox") ||
-        (data === "bird" && ev.target.id === "birdBox")
-    ) {
+    if(
+        (data==="horse" && ev.target.id==="horseBox") ||
+        (data==="cow" && ev.target.id==="cowBox") ||
+        (data==="bird" && ev.target.id==="birdBox")
+    ){
         ev.target.appendChild(item);
         ev.target.classList.add("success");
-        document.getElementById("message").innerText = "🎉 ممتاز! أحسنت يا بطل!";
+
+        document.getElementById("msg").innerText = "🎉 ممتاز! أحسنت!";
+        
+        score++;
+        localStorage.setItem("score", score);
+        document.getElementById("score").innerText = score;
+
+        document.getElementById("sound").play();
+
     } else {
-        document.getElementById("message").innerText = "❌ حاول مرة أخرى";
+        document.getElementById("msg").innerText = "❌ حاول مرة أخرى";
     }
 }
+
+function resetGame(){
+    location.reload();
+}
+
 </script>
 
 </body>
