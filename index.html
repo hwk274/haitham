@@ -2,169 +2,82 @@
 <html lang="ar">
 <head>
 <meta charset="UTF-8">
-<title>تطبيق ألعاب الأطفال</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>لعبة الأطفال</title>
+
+<link rel="manifest" href="manifest.json">
 
 <style>
 body {
-    margin: 0;
+    margin:0;
     font-family: Arial;
-    background: linear-gradient(135deg,#e0f7fa,#fce4ec);
-    text-align: center;
-    direction: rtl;
+    background: linear-gradient(135deg,#e3f2fd,#fce4ec);
+    text-align:center;
+    direction:rtl;
 }
 
-/* الهيدر */
 header {
-    background: #0d47a1;
-    color: white;
-    padding: 15px;
-    font-size: 22px;
-    font-weight: bold;
+    background:#0d47a1;
+    color:white;
+    padding:15px;
+    font-size:22px;
 }
 
-/* النقاط */
-#scoreBox {
-    margin: 10px;
-    font-size: 18px;
-    color: #333;
-}
-
-/* منطقة اللعبة */
-.game {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 20px;
-    padding: 10px;
-}
-
-/* بطاقة الحيوان */
 .card {
-    width: 240px;
-    height: 300px;
-    background: white;
-    border-radius: 20px;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.15);
-    position: relative;
+    width:90%;
+    max-width:300px;
+    margin:20px auto;
+    background:white;
+    border-radius:20px;
+    padding:20px;
+    box-shadow:0 10px 20px rgba(0,0,0,0.2);
 }
 
-/* منطقة التجميع */
 .dropzone {
-    height: 180px;
-    margin: 15px;
-    border: 3px dashed #bbb;
-    border-radius: 15px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 60px;
-    transition: 0.3s;
-}
-
-/* اسم الحيوان */
-.title {
-    font-weight: bold;
-    color: #444;
-}
-
-/* الأجزاء */
-.parts {
-    margin-top: 10px;
+    height:180px;
+    border:3px dashed #aaa;
+    border-radius:15px;
+    font-size:60px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
 }
 
 .part {
-    display: inline-block;
-    background: #ffca28;
-    padding: 10px 15px;
-    margin: 8px;
-    border-radius: 12px;
-    cursor: grab;
-    font-weight: bold;
-    box-shadow: 0 5px 10px rgba(0,0,0,0.1);
-    transition: 0.2s;
+    display:inline-block;
+    background:#ffca28;
+    padding:10px;
+    margin:10px;
+    border-radius:10px;
+    cursor:grab;
 }
 
-.part:hover {
-    transform: scale(1.1);
-}
-
-/* نجاح */
-.success {
-    animation: pop 0.4s ease;
-    background: #c8e6c9 !important;
-}
-
-@keyframes pop {
-    0% { transform: scale(0.5); }
-    100% { transform: scale(1); }
-}
-
-/* رسالة */
 #msg {
-    margin: 10px;
-    font-size: 20px;
-    font-weight: bold;
-    color: green;
-}
-
-/* زر إعادة */
-button {
-    margin-top: 10px;
-    padding: 10px 20px;
-    border: none;
-    background: #1976d2;
-    color: white;
-    border-radius: 10px;
-    cursor: pointer;
+    margin-top:10px;
+    font-size:18px;
+    font-weight:bold;
+    color:green;
 }
 </style>
 </head>
 
 <body>
 
-<header>🎮 تطبيق ألعاب الأطفال الذكي</header>
+<header>🎮 تطبيق ألعاب الأطفال</header>
 
-<div id="scoreBox">⭐ النقاط: <span id="score">0</span></div>
-
-<div class="game">
-
-    <div class="card">
-        <div class="dropzone" id="horseBox" ondrop="drop(event)" ondragover="allowDrop(event)">🐴</div>
-        <div class="title">الحصان</div>
-    </div>
-
-    <div class="card">
-        <div class="dropzone" id="cowBox" ondrop="drop(event)" ondragover="allowDrop(event)">🐄</div>
-        <div class="title">البقرة</div>
-    </div>
-
-    <div class="card">
-        <div class="dropzone" id="birdBox" ondrop="drop(event)" ondragover="allowDrop(event)">🐦</div>
-        <div class="title">الطائر</div>
-    </div>
-
+<div class="card">
+    <div class="dropzone" id="box" ondrop="drop(event)" ondragover="allow(event)">🐴</div>
+    <p>الحصان</p>
 </div>
 
-<div class="parts">
-    <div class="part" draggable="true" id="horse" ondragstart="drag(event)">رأس الحصان</div>
-    <div class="part" draggable="true" id="cow" ondragstart="drag(event)">رأس البقرة</div>
-    <div class="part" draggable="true" id="bird" ondragstart="drag(event)">جناح الطائر</div>
+<div>
+    <div class="part" draggable="true" id="horse" ondragstart="drag(event)">رأس حصان</div>
 </div>
 
 <div id="msg"></div>
 
-<button onclick="resetGame()">🔄 إعادة اللعب</button>
-
-<audio id="sound" src="https://www.soundjay.com/buttons/sounds/button-3.mp3"></audio>
-
 <script>
-
-let score = localStorage.getItem("score") || 0;
-document.getElementById("score").innerText = score;
-
-function allowDrop(ev){
-    ev.preventDefault();
-}
+function allow(ev){ ev.preventDefault(); }
 
 function drag(ev){
     ev.dataTransfer.setData("text", ev.target.id);
@@ -172,35 +85,20 @@ function drag(ev){
 
 function drop(ev){
     ev.preventDefault();
-
     let data = ev.dataTransfer.getData("text");
-    let item = document.getElementById(data);
 
-    if(
-        (data==="horse" && ev.target.id==="horseBox") ||
-        (data==="cow" && ev.target.id==="cowBox") ||
-        (data==="bird" && ev.target.id==="birdBox")
-    ){
-        ev.target.appendChild(item);
-        ev.target.classList.add("success");
-
-        document.getElementById("msg").innerText = "🎉 ممتاز! أحسنت!";
-        
-        score++;
-        localStorage.setItem("score", score);
-        document.getElementById("score").innerText = score;
-
-        document.getElementById("sound").play();
-
+    if(data === "horse"){
+        ev.target.appendChild(document.getElementById(data));
+        document.getElementById("msg").innerText = "🎉 ممتاز!";
     } else {
         document.getElementById("msg").innerText = "❌ حاول مرة أخرى";
     }
 }
 
-function resetGame(){
-    location.reload();
+/* تسجيل Service Worker */
+if ("serviceWorker" in navigator) {
+    navigator.serviceWorker.register("service-worker.js");
 }
-
 </script>
 
 </body>
