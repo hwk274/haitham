@@ -1,6 +1,6 @@
 {
-"name": "لعبة الأطفال الذكية",
-"short_name": "KidsGame",
+"name": "Kids Learning App",
+"short_name": "KidsApp",
 "start_url": ".",
 "display": "standalone",
 "background_color": "#ffffff",
