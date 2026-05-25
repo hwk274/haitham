@@ -1,49 +1,64 @@
-let score = 0;
-let level = 1;
+let score=0;
+let level=1;
+let i=0;
 
-const animals = [
-    {emoji:"🐄", name:"البقرة"},
-    {emoji:"🐴", name:"الحصان"},
-    {emoji:"🐦", name:"العصفور"},
-    {emoji:"🐪", name:"الجمل"}
+const data=[
+{emoji:"🐄",name:"البقرة"},
+{emoji:"🐴",name:"الحصان"},
+{emoji:"🐪",name:"الجمل"},
+{emoji:"🐦",name:"العصفور"}
 ];
 
-let index = 0;
+function load(){
+document.getElementById("animal").innerText=data[i].emoji;
+document.getElementById("name").innerText=data[i].name;
+document.getElementById("msg").innerText="";
+}
 
 function speak(text){
-    let msg = new SpeechSynthesisUtterance(text);
-    msg.lang = "ar-SA";
-    speechSynthesis.speak(msg);
+let s=new SpeechSynthesisUtterance(text);
+s.lang="ar-SA";
+speechSynthesis.speak(s);
 }
 
-function load(){
-    document.getElementById("animal").innerText = animals[index].emoji;
-    document.getElementById("name").innerText = animals[index].name;
-    document.getElementById("msg").innerText = "";
+function answer(ok){
+if(ok){
+score++;
+document.getElementById("msg").innerText="🎉 ممتاز!";
+speak("ممتاز");
+
+if(score%3===0){
+level++;
+document.getElementById("level").innerText=level;
+}
+}else{
+document.getElementById("msg").innerText="❌ حاول مرة أخرى";
+speak("حاول مرة أخرى");
 }
 
-function answer(correct){
-    if(correct){
-        score++;
-        document.getElementById("msg").innerText = "🎉 ممتاز!";
-        speak("ممتاز");
-
-        if(score % 3 === 0){
-            level++;
-            document.getElementById("level").innerText = level;
-        }
-
-    } else {
-        document.getElementById("msg").innerText = "❌ حاول مرة أخرى";
-        speak("حاول مرة أخرى");
-    }
-
-    document.getElementById("score").innerText = score;
+document.getElementById("score").innerText=score;
 }
 
 function next(){
-    index = (index + 1) % animals.length;
-    load();
+i=(i+1)%data.length;
+load();
 }
 
 load();
+
+/* زر التثبيت PWA */
+let deferredPrompt;
+const btn=document.getElementById("installBtn");
+
+window.addEventListener("beforeinstallprompt",(e)=>{
+e.preventDefault();
+deferredPrompt=e;
+btn.style.display="block";
+
+btn.addEventListener("click",()=>{
+deferredPrompt.prompt();
+deferredPrompt.userChoice.then(()=>{
+deferredPrompt=null;
+});
+});
+});
