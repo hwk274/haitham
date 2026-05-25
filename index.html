@@ -2,78 +2,139 @@
 <html lang="ar">
 <head>
 <meta charset="UTF-8">
-<title>ألعاب الأطفال - تجميع الأشكال</title>
+<title>ألعاب الأطفال الذكية</title>
 
 <style>
 body {
-    font-family: Arial;
-    background: linear-gradient(135deg, #f0f9ff, #e0f7fa);
+    margin: 0;
+    font-family: "Arial";
+    background: linear-gradient(135deg, #e3f2fd, #fce4ec);
     text-align: center;
     direction: rtl;
 }
 
-h1 {
-    color: #0d47a1;
+header {
+    background: #1976d2;
+    color: white;
+    padding: 20px;
+    font-size: 26px;
+    font-weight: bold;
 }
 
-.container {
+.subtitle {
+    margin: 10px;
+    color: #444;
+}
+
+.game-area {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    gap: 30px;
-    margin-top: 30px;
+    gap: 25px;
+    padding: 20px;
 }
 
-.box {
-    width: 200px;
-    height: 200px;
-    border: 2px dashed #aaa;
-    border-radius: 15px;
+/* كروت الحيوانات */
+.card {
+    width: 220px;
+    height: 260px;
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
     position: relative;
-    background: #fff;
+    padding: 10px;
 }
 
-.part {
-    width: 60px;
-    height: 60px;
-    background: #4caf50;
-    margin: 10px;
-    border-radius: 10px;
-    cursor: grab;
-    display: inline-block;
+/* منطقة التركيب */
+.dropzone {
+    height: 140px;
+    border: 3px dashed #bbb;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 40px;
+    background: #fafafa;
 }
 
+/* اسم الحيوان */
+.animal-name {
+    margin-top: 10px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+}
+
+/* الأجزاء */
 .parts {
     margin-top: 20px;
 }
 
+.part {
+    display: inline-block;
+    padding: 12px 18px;
+    margin: 10px;
+    background: #ffca28;
+    border-radius: 12px;
+    cursor: grab;
+    font-weight: bold;
+    box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+    transition: 0.3s;
+}
+
+.part:hover {
+    transform: scale(1.1);
+}
+
+/* رسالة */
 #message {
     margin-top: 20px;
     font-size: 22px;
-    color: green;
     font-weight: bold;
+    color: green;
+}
+
+/* أنيميشن نجاح */
+.success {
+    animation: pop 0.5s ease;
+}
+
+@keyframes pop {
+    0% { transform: scale(0.5); }
+    100% { transform: scale(1); }
 }
 </style>
 </head>
 
 <body>
 
-<h1>🎮 ألعاب الأطفال - تجميع الحيوانات</h1>
-<p>اسحب الأجزاء وضعها في المكان الصحيح</p>
+<header>🐾 ألعاب الأطفال الذكية - تركيب الحيوانات</header>
+<div class="subtitle">اسحب الأجزاء وضعها في المكان الصحيح</div>
 
-<div class="container">
+<div class="game-area">
 
-    <!-- صندوق الحيوان -->
-    <div class="box" id="box1" ondrop="drop(event)" ondragover="allowDrop(event)">
-        🐴 حصان
+    <!-- حصان -->
+    <div class="card">
+        <div class="dropzone" id="horseBox" ondrop="drop(event)" ondragover="allowDrop(event)">
+            🐴
+        </div>
+        <div class="animal-name">الحصان</div>
     </div>
 
-    <div class="box" id="box2" ondrop="drop(event)" ondragover="allowDrop(event)">
-        🐄 بقرة
+    <!-- بقرة -->
+    <div class="card">
+        <div class="dropzone" id="cowBox" ondrop="drop(event)" ondragover="allowDrop(event)">
+            🐄
+        </div>
+        <div class="animal-name">البقرة</div>
     </div>
 
-    <div class="box" id="box3" ondrop="drop(event)" ondragover="allowDrop(event)">
-        🐦 طائر
+    <!-- طائر -->
+    <div class="card">
+        <div class="dropzone" id="birdBox" ondrop="drop(event)" ondragover="allowDrop(event)">
+            🐦
+        </div>
+        <div class="animal-name">الطائر</div>
     </div>
 
 </div>
@@ -97,16 +158,18 @@ function drag(ev) {
 
 function drop(ev) {
     ev.preventDefault();
-    var data = ev.dataTransfer.getData("text");
-    var item = document.getElementById(data);
+
+    let data = ev.dataTransfer.getData("text");
+    let item = document.getElementById(data);
 
     if (
-        (data === "horse" && ev.target.id === "box1") ||
-        (data === "cow" && ev.target.id === "box2") ||
-        (data === "bird" && ev.target.id === "box3")
+        (data === "horse" && ev.target.id === "horseBox") ||
+        (data === "cow" && ev.target.id === "cowBox") ||
+        (data === "bird" && ev.target.id === "birdBox")
     ) {
         ev.target.appendChild(item);
-        document.getElementById("message").innerText = "🎉 ممتاز! أحسنت!";
+        ev.target.classList.add("success");
+        document.getElementById("message").innerText = "🎉 ممتاز! أحسنت يا بطل!";
     } else {
         document.getElementById("message").innerText = "❌ حاول مرة أخرى";
     }
