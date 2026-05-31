@@ -1,64 +1,32 @@
-{
-  "siteName": "SiteBuilder",
-  "heroTitle": "منصة إنشاء المواقع العربية",
-  "heroDescription": "نعمل على إطلاق منصة احترافية لإنشاء المواقع والمتاجر الإلكترونية بدون برمجة.",
+"features": [
+  {
+    "title": "محرر بالسحب والإفلات",
+    "description": "أنشئ موقعك بسهولة بدون برمجة.",
+    "image": "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=1200"
+  },
+  {
+    "title": "متوافق مع الجوال",
+    "description": "تصميم متجاوب مع جميع الأجهزة.",
+    "image": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=1200"
+  },
+  {
+    "title": "متجر إلكتروني",
+    "description": "بيع منتجاتك وإدارة الطلبات بسهولة.",
+    "image": "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=1200"
+  }
+],
 
-  "phone": "00966558020154",
-  "email": "HW274@gmail.com",
-
-  "stats": [
-    {
-      "title": "عدد المواقع المنشأة",
-      "value": 2000,
-      "suffix": "+"
-    },
-    {
-      "title": "عدد العملاء",
-      "value": 150,
-      "suffix": "+"
-    },
-    {
-      "title": "عدد القوالب",
-      "value": 50,
-      "suffix": "+"
-    },
-    {
-      "title": "نسبة الجاهزية",
-      "value": 99,
-      "suffix": "%"
-    }
-  ],
-
-  "features": [
-    {
-      "title": "محرر بالسحب والإفلات",
-      "description": "تصميم موقعك بسهولة بدون أي خبرة برمجية.",
-      "image": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800"
-    },
-    {
-      "title": "متوافق مع الجوال",
-      "description": "جميع المواقع تعمل على الهواتف والأجهزة اللوحية.",
-      "image": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=800"
-    },
-    {
-      "title": "متجر إلكتروني",
-      "description": "إنشاء متجر إلكتروني متكامل خلال دقائق.",
-      "image": "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800"
-    }
-  ],
-
-  "templates": [
-    {
-      "title": "مواقع الشركات",
-      "image": "https://images.unsplash.com/photo-1497366754035-f200968a6e72?w=800"
-    },
-    {
-      "title": "المتاجر الإلكترونية",
-      "image": "https://images.unsplash.com/photo-1556740749-887f6717d7e4?w=800"
-    },
-    {
-      "title": "المطاعم والكافيهات",
-      "image": "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800"
-    }
-  ]
-}
+"templates": [
+  {
+    "title": "موقع شركة",
+    "image": "https://images.unsplash.com/photo-1497366754035-f200968a6e72?w=1200"
+  },
+  {
+    "title": "متجر إلكتروني",
+    "image": "https://images.unsplash.com/photo-1556740749-887f6717d7e4?w=1200"
+  },
+  {
+    "title": "مطعم وكافيه",
+    "image": "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1200"
+  }
+]
