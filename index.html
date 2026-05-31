@@ -3,10 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>منصة إنشاء المواقع - قريباً</title>
 
-<title>الموقع تحت الإنشاء</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
 
 <style>
 *{
@@ -16,162 +15,554 @@
     font-family:'Cairo',sans-serif;
 }
 
+html{
+    scroll-behavior:smooth;
+}
+
 body{
-    min-height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    background:linear-gradient(135deg,#0f172a,#1e293b,#334155);
-    overflow:hidden;
+    background:#0f172a;
+    color:#fff;
+}
+
+a{
+    text-decoration:none;
 }
 
 .container{
-    text-align:center;
-    color:#fff;
-    padding:40px;
-    max-width:700px;
+    width:90%;
+    max-width:1300px;
+    margin:auto;
+}
+
+/* Header */
+header{
+    position:fixed;
+    width:100%;
+    top:0;
+    z-index:999;
+    background:rgba(15,23,42,.95);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid rgba(255,255,255,.08);
+}
+
+.navbar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:20px 0;
 }
 
 .logo{
-    width:120px;
-    height:120px;
-    margin:auto;
-    margin-bottom:25px;
-    border-radius:50%;
-    background:rgba(255,255,255,.1);
+    font-size:28px;
+    font-weight:900;
+    color:#38bdf8;
+}
+
+.menu{
+    display:flex;
+    gap:25px;
+}
+
+.menu a{
+    color:#fff;
+    transition:.3s;
+}
+
+.menu a:hover{
+    color:#38bdf8;
+}
+
+/* Hero */
+.hero{
+    min-height:100vh;
     display:flex;
     align-items:center;
-    justify-content:center;
+    text-align:center;
+    background:linear-gradient(135deg,#0f172a,#1e293b,#334155);
+    padding-top:120px;
+}
+
+.hero h1{
     font-size:60px;
-    backdrop-filter:blur(10px);
-    animation:float 3s ease-in-out infinite;
+    margin-bottom:20px;
 }
 
-h1{
-    font-size:48px;
-    margin-bottom:15px;
-    font-weight:700;
-}
-
-p{
-    font-size:20px;
+.hero p{
+    max-width:850px;
+    margin:auto;
     color:#cbd5e1;
-    line-height:1.8;
-    margin-bottom:35px;
+    font-size:22px;
+    line-height:2;
+}
+
+.hero-buttons{
+    margin-top:35px;
+}
+
+.btn{
+    display:inline-block;
+    padding:15px 35px;
+    border-radius:50px;
+    margin:10px;
+    font-weight:bold;
+    transition:.3s;
+}
+
+.btn-primary{
+    background:#38bdf8;
+    color:#fff;
+}
+
+.btn-primary:hover{
+    transform:translateY(-3px);
+}
+
+.btn-secondary{
+    border:2px solid #38bdf8;
+    color:#38bdf8;
+}
+
+.btn-secondary:hover{
+    background:#38bdf8;
+    color:#fff;
+}
+
+/* Section */
+section{
+    padding:100px 0;
+}
+
+.section-title{
+    text-align:center;
+    margin-bottom:60px;
+}
+
+.section-title h2{
+    font-size:42px;
+    margin-bottom:15px;
+}
+
+.section-title p{
+    color:#94a3b8;
+}
+
+/* Features */
+.features-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:25px;
+}
+
+.feature-card{
+    background:#1e293b;
+    padding:30px;
+    border-radius:20px;
+    transition:.3s;
+    border:1px solid rgba(255,255,255,.05);
+}
+
+.feature-card:hover{
+    transform:translateY(-10px);
+    border-color:#38bdf8;
+}
+
+.feature-card h3{
+    margin:15px 0;
+}
+
+/* Templates */
+.templates{
+    background:#111827;
+}
+
+.template-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:25px;
+}
+
+.template{
+    background:#1f2937;
+    border-radius:20px;
+    overflow:hidden;
+}
+
+.template-img{
+    height:180px;
+    background:linear-gradient(45deg,#38bdf8,#06b6d4);
+}
+
+.template-content{
+    padding:20px;
+}
+
+/* Pricing */
+.pricing-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:25px;
+}
+
+.price-card{
+    background:#1e293b;
+    padding:35px;
+    border-radius:20px;
+    text-align:center;
+}
+
+.price{
+    font-size:50px;
+    color:#38bdf8;
+    margin:20px 0;
+}
+
+/* Stats */
+.stats{
+    background:#111827;
+}
+
+.stats-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+    gap:20px;
+    text-align:center;
+}
+
+.stat{
+    padding:30px;
+}
+
+.stat h3{
+    font-size:45px;
+    color:#38bdf8;
+}
+
+/* Construction */
+.construction{
+    text-align:center;
+    background:linear-gradient(135deg,#0284c7,#0ea5e9);
+}
+
+.construction h2{
+    font-size:50px;
+    margin-bottom:20px;
+}
+
+.construction p{
+    font-size:22px;
+    max-width:900px;
+    margin:auto;
+    line-height:2;
 }
 
 .loader{
-    width:250px;
-    height:10px;
-    background:rgba(255,255,255,.15);
-    border-radius:20px;
-    margin:auto;
+    width:300px;
+    height:12px;
+    background:rgba(255,255,255,.3);
+    border-radius:50px;
     overflow:hidden;
+    margin:40px auto;
 }
 
 .loader span{
     display:block;
     width:40%;
     height:100%;
-    background:linear-gradient(90deg,#38bdf8,#22c55e);
-    border-radius:20px;
+    background:#fff;
     animation:loading 2s infinite;
 }
 
-.footer{
-    margin-top:40px;
-    color:#94a3b8;
-    font-size:15px;
-}
-
 @keyframes loading{
-    0%{
-        transform:translateX(-120%);
-    }
-    100%{
-        transform:translateX(350%);
-    }
+    0%{transform:translateX(-150%);}
+    100%{transform:translateX(500%);}
 }
 
-@keyframes float{
-    0%,100%{
-        transform:translateY(0);
-    }
-    50%{
-        transform:translateY(-12px);
-    }
+/* Contact */
+.contact{
+    text-align:center;
 }
 
-.circle{
-    position:absolute;
-    border-radius:50%;
-    background:rgba(255,255,255,.05);
-    animation:move 12s linear infinite;
+.contact-box{
+    max-width:700px;
+    margin:auto;
+    background:#1e293b;
+    padding:40px;
+    border-radius:20px;
 }
 
-.circle:nth-child(1){
-    width:250px;
-    height:250px;
-    top:-100px;
-    right:-100px;
+footer{
+    text-align:center;
+    padding:30px;
+    border-top:1px solid rgba(255,255,255,.08);
+    color:#94a3b8;
 }
 
-.circle:nth-child(2){
-    width:180px;
-    height:180px;
-    bottom:-80px;
-    left:-80px;
-}
-
-@keyframes move{
-    50%{
-        transform:scale(1.2);
-    }
-}
-
+/* Mobile */
 @media(max-width:768px){
-    h1{
-        font-size:34px;
-    }
 
-    p{
-        font-size:18px;
-    }
+.hero h1{
+    font-size:38px;
+}
 
-    .logo{
-        width:90px;
-        height:90px;
-        font-size:45px;
-    }
+.hero p{
+    font-size:18px;
+}
+
+.section-title h2{
+    font-size:32px;
+}
+
+.menu{
+    display:none;
+}
+
+.construction h2{
+    font-size:36px;
+}
 }
 </style>
-
 </head>
+
 <body>
 
-<div class="circle"></div>
-<div class="circle"></div>
+<header>
+<div class="container navbar">
+<div class="logo">SiteBuilder</div>
+
+<div class="menu">
+<a href="#">الرئيسية</a>
+<a href="#features">المميزات</a>
+<a href="#templates">القوالب</a>
+<a href="#pricing">الباقات</a>
+<a href="#contact">تواصل معنا</a>
+</div>
+</div>
+</header>
+
+<!-- Hero -->
+<section class="hero">
+<div class="container">
+
+<h1>أنشئ موقعك الإلكتروني خلال دقائق</h1>
+
+<p>
+منصة عربية متكاملة لإنشاء المواقع والمتاجر الإلكترونية
+بدون برمجة وبواجهة سهلة واحترافية.
+</p>
+
+<div class="hero-buttons">
+<a href="#" class="btn btn-primary">ابدأ مجاناً</a>
+<a href="#" class="btn btn-secondary">شاهد المميزات</a>
+</div>
+
+</div>
+</section>
+
+<!-- Features -->
+<section id="features">
 
 <div class="container">
 
-    <div class="logo">🚀</div>
+<div class="section-title">
+<h2>مميزات المنصة</h2>
+<p>كل ما تحتاجه لإنشاء موقع احترافي</p>
+</div>
 
-    <h1>الموقع تحت الإنشاء</h1>
+<div class="features-grid">
 
-    <p>
-        نعمل حالياً على تطوير الموقع وتجهيز تجربة مميزة لكم.
-        سنعود قريباً بحلة جديدة وخدمات أفضل.
-    </p>
+<div class="feature-card">
+<h3>🎨 محرر بالسحب والإفلات</h3>
+<p>أنشئ صفحاتك بسهولة دون الحاجة إلى البرمجة.</p>
+</div>
 
-    <div class="loader">
-        <span></span>
-    </div>
+<div class="feature-card">
+<h3>📱 متوافق مع الجوال</h3>
+<p>جميع المواقع تعمل بشكل مثالي على كافة الأجهزة.</p>
+</div>
 
-    <div class="footer">
-        © 2026 جميع الحقوق محفوظة
-    </div>
+<div class="feature-card">
+<h3>⚡ سرعة عالية</h3>
+<p>استضافة قوية وأداء ممتاز لجميع المواقع.</p>
+</div>
+
+<div class="feature-card">
+<h3>🛒 متجر إلكتروني</h3>
+<p>بيع منتجاتك وإدارة الطلبات بسهولة.</p>
+</div>
+
+<div class="feature-card">
+<h3>🔍 SEO</h3>
+<p>تحسين محركات البحث للوصول إلى المزيد من العملاء.</p>
+</div>
+
+<div class="feature-card">
+<h3>🔒 حماية متقدمة</h3>
+<p>شهادات SSL وحماية كاملة للبيانات.</p>
+</div>
 
 </div>
+
+</div>
+
+</section>
+
+<!-- Templates -->
+<section class="templates" id="templates">
+
+<div class="container">
+
+<div class="section-title">
+<h2>القوالب الجاهزة</h2>
+<p>اختر التصميم المناسب لنشاطك</p>
+</div>
+
+<div class="template-grid">
+
+<div class="template">
+<div class="template-img"></div>
+<div class="template-content">
+<h3>موقع شركة</h3>
+</div>
+</div>
+
+<div class="template">
+<div class="template-img"></div>
+<div class="template-content">
+<h3>متجر إلكتروني</h3>
+</div>
+</div>
+
+<div class="template">
+<div class="template-img"></div>
+<div class="template-content">
+<h3>مطعم وكافيه</h3>
+</div>
+</div>
+
+<div class="template">
+<div class="template-img"></div>
+<div class="template-content">
+<h3>موقع عقاري</h3>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- Pricing -->
+<section id="pricing">
+
+<div class="container">
+
+<div class="section-title">
+<h2>الباقات</h2>
+<p>اختر الباقة المناسبة لك</p>
+</div>
+
+<div class="pricing-grid">
+
+<div class="price-card">
+<h3>مجانية</h3>
+<div class="price">0</div>
+<p>موقع أساسي</p>
+</div>
+
+<div class="price-card">
+<h3>احترافية</h3>
+<div class="price">49</div>
+<p>ريال / شهر</p>
+</div>
+
+<div class="price-card">
+<h3>شركات</h3>
+<div class="price">199</div>
+<p>ريال / شهر</p>
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- Stats -->
+<section class="stats">
+
+<div class="container">
+
+<div class="stats-grid">
+
+<div class="stat">
+<h3>5000+</h3>
+<p>موقع إلكتروني</p>
+</div>
+
+<div class="stat">
+<h3>1200+</h3>
+<p>متجر إلكتروني</p>
+</div>
+
+<div class="stat">
+<h3>99.9%</h3>
+<p>استقرار الخدمة</p>
+</div>
+
+<div class="stat">
+<h3>24/7</h3>
+<p>دعم فني</p>
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- Under Construction -->
+<section class="construction">
+
+<div class="container">
+
+<h2>🚀 المنصة تحت الإنشاء</h2>
+
+<p>
+نعمل حالياً على تطوير أفضل منصة عربية لإنشاء المواقع والمتاجر الإلكترونية،
+وسيتم إطلاق النسخة الرسمية قريباً.
+</p>
+
+<div class="loader">
+<span></span>
+</div>
+
+</div>
+
+</section>
+
+<!-- Contact -->
+<section id="contact">
+
+<div class="container">
+
+<div class="section-title">
+<h2>تواصل معنا</h2>
+<p>يسعدنا استقبال استفساراتكم</p>
+</div>
+
+<div class="contact-box">
+📧 info@yoursite.com<br><br>
+📱 +966 5XXXXXXXX
+</div>
+
+</div>
+
+</section>
+
+<footer>
+© 2026 SiteBuilder - جميع الحقوق محفوظة
+</footer>
 
 </body>
 </html>
