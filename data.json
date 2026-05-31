@@ -1,0 +1,30 @@
+{
+  "siteName": "SiteBuilder",
+  "description": "منصة عربية لإنشاء المواقع والمتاجر الإلكترونية",
+  "phone": "+966558020154",
+  "email": "HW274@gmail.com",
+
+  "features": [
+    {
+      "title": "محرر مرئي",
+      "description": "تصميم المواقع بالسحب والإفلات",
+      "image": "https://picsum.photos/400/250?1"
+    },
+    {
+      "title": "متوافق مع الجوال",
+      "description": "يعمل على جميع الأجهزة",
+      "image": "https://picsum.photos/400/250?2"
+    }
+  ],
+
+  "plans": [
+    {
+      "name": "مجانية",
+      "price": "0 ريال"
+    },
+    {
+      "name": "احترافية",
+      "price": "49 ريال"
+    }
+  ]
+}
