@@ -1,14 +1,12 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
-
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>SiteBuilder</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
 
 <style>
 
@@ -19,23 +17,51 @@ box-sizing:border-box;
 font-family:'Cairo',sans-serif;
 }
 
+html{
+scroll-behavior:smooth;
+}
+
 body{
 background:#0f172a;
-color:white;
+color:#fff;
+overflow-x:hidden;
+}
+
+/* Scroll */
+
+::-webkit-scrollbar{
+width:10px;
+}
+
+::-webkit-scrollbar-thumb{
+background:#38bdf8;
+border-radius:10px;
+}
+
+/* Header */
+
+header{
+position:fixed;
+top:0;
+right:0;
+left:0;
+z-index:999;
+background:rgba(15,23,42,.95);
+backdrop-filter:blur(15px);
+border-bottom:1px solid rgba(255,255,255,.08);
 }
 
 .container{
 width:90%;
-max-width:1300px;
+max-width:1400px;
 margin:auto;
 }
 
-header{
-background:#111827;
-padding:20px;
-position:sticky;
-top:0;
-z-index:999;
+.navbar{
+height:80px;
+display:flex;
+align-items:center;
+justify-content:space-between;
 }
 
 .logo{
@@ -44,64 +70,140 @@ font-weight:900;
 color:#38bdf8;
 }
 
+.menu{
+display:flex;
+gap:25px;
+}
+
+.menu a{
+color:#fff;
+text-decoration:none;
+font-weight:600;
+transition:.3s;
+}
+
+.menu a:hover{
+color:#38bdf8;
+}
+
+/* Hero */
+
 .hero{
-padding:140px 20px;
+height:100vh;
+position:relative;
+overflow:hidden;
+}
+
+.slider{
+position:absolute;
+top:0;
+left:0;
+width:100%;
+height:100%;
+}
+
+.slide{
+position:absolute;
+width:100%;
+height:100%;
+opacity:0;
+transition:1.5s;
+background-size:cover;
+background-position:center;
+}
+
+.slide.active{
+opacity:1;
+}
+
+.overlay{
+position:absolute;
+inset:0;
+background:rgba(0,0,0,.6);
+}
+
+.hero-content{
+position:relative;
+z-index:2;
+height:100%;
+display:flex;
+align-items:center;
+justify-content:center;
 text-align:center;
-background:linear-gradient(135deg,#0f172a,#1e293b);
+padding:20px;
 }
 
-.hero h1{
-font-size:60px;
+.hero-content h1{
+font-size:70px;
 margin-bottom:20px;
+font-weight:900;
 }
 
-.hero p{
-font-size:22px;
-color:#cbd5e1;
+.hero-content p{
+font-size:24px;
 max-width:900px;
 margin:auto;
+line-height:2;
+color:#e2e8f0;
 }
 
-.section{
-padding:90px 0;
+.btns{
+margin-top:35px;
+}
+
+.btn{
+display:inline-block;
+padding:15px 35px;
+border-radius:50px;
+text-decoration:none;
+font-weight:bold;
+margin:8px;
+transition:.3s;
+}
+
+.btn-primary{
+background:#38bdf8;
+color:#fff;
+}
+
+.btn-primary:hover{
+transform:translateY(-5px);
+}
+
+.btn-outline{
+border:2px solid #38bdf8;
+color:#38bdf8;
+}
+
+.btn-outline:hover{
+background:#38bdf8;
+color:#fff;
+}
+
+/* Sections */
+
+section{
+padding:100px 0;
 }
 
 .section-title{
 text-align:center;
-font-size:42px;
-margin-bottom:50px;
+margin-bottom:60px;
 }
 
-.grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-gap:25px;
+.section-title h2{
+font-size:45px;
+margin-bottom:15px;
 }
 
-.card{
-background:#1e293b;
-border-radius:20px;
-overflow:hidden;
-transition:.3s;
+.section-title p{
+color:#94a3b8;
 }
 
-.card:hover{
-transform:translateY(-10px);
-}
+/* Stats */
 
-.card img{
-width:100%;
-height:220px;
-object-fit:cover;
-}
-
-.content{
-padding:20px;
-}
-
-.stats-section{
+.stats{
 background:#111827;
-padding:100px 0;
 }
 
 .stats-grid{
@@ -118,24 +220,121 @@ text-align:center;
 }
 
 .counter{
-font-size:50px;
+font-size:55px;
 font-weight:900;
 color:#38bdf8;
 }
 
 .stat-title{
-margin-top:15px;
+margin-top:10px;
+font-size:18px;
 }
 
-.contact{
+/* Cards */
+
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+gap:25px;
+}
+
+.card{
+background:#1e293b;
+border-radius:20px;
+overflow:hidden;
+transition:.4s;
+}
+
+.card:hover{
+transform:translateY(-10px);
+box-shadow:0 15px 35px rgba(56,189,248,.25);
+}
+
+.card img{
+width:100%;
+height:220px;
+object-fit:cover;
+transition:.5s;
+}
+
+.card:hover img{
+transform:scale(1.08);
+}
+
+.content{
+padding:20px;
+}
+
+.content h3{
+margin-bottom:10px;
+color:#38bdf8;
+}
+
+/* Pricing */
+
+.pricing{
 background:#111827;
-padding:100px 20px;
+}
+
+.price-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+gap:25px;
+}
+
+.price-card{
+background:#1e293b;
+padding:40px;
+border-radius:20px;
+text-align:center;
+}
+
+.price-card h3{
+font-size:28px;
+}
+
+.price{
+font-size:60px;
+font-weight:900;
+color:#38bdf8;
+margin:20px 0;
+}
+
+/* Testimonials */
+
+.testimonials{
+background:#111827;
+}
+
+.testimonial{
+background:#1e293b;
+padding:30px;
+border-radius:20px;
+}
+
+/* FAQ */
+
+.faq-item{
+background:#1e293b;
+padding:20px;
+margin-bottom:15px;
+border-radius:15px;
+}
+
+.faq-item h3{
+margin-bottom:10px;
+color:#38bdf8;
+}
+
+/* Contact */
+
+.contact{
 text-align:center;
 }
 
 .flags{
 font-size:40px;
-margin-bottom:20px;
+margin-bottom:15px;
 }
 
 .phone{
@@ -146,124 +345,319 @@ margin:15px 0;
 
 .soon{
 display:inline-block;
-padding:10px 25px;
 background:#22c55e;
+padding:10px 25px;
 border-radius:50px;
-margin:20px 0;
 font-weight:bold;
+margin:15px 0;
 }
 
 .email{
-margin-top:20px;
-font-size:20px;
+font-size:22px;
 color:#38bdf8;
 }
 
 footer{
+background:#111827;
 padding:30px;
 text-align:center;
-background:#0b1220;
 color:#94a3b8;
 }
 
-@media(max-width:768px){
+/* Animation */
 
-.hero h1{
-font-size:38px;
+.hidden{
+opacity:0;
+transform:translateY(40px);
+transition:1s;
 }
 
-.hero p{
+.show{
+opacity:1;
+transform:translateY(0);
+}
+
+/* Mobile */
+
+@media(max-width:768px){
+
+.hero-content h1{
+font-size:40px;
+}
+
+.hero-content p{
 font-size:18px;
 }
 
-.section-title{
-font-size:28px;
+.menu{
+display:none;
+}
+
+.section-title h2{
+font-size:32px;
 }
 
 .counter{
-font-size:36px;
+font-size:38px;
+}
+
+.phone{
+font-size:22px;
 }
 
 }
 
 </style>
-
 </head>
-
 <body>
 
 <header>
-<div class="container">
+
+<div class="container navbar">
+
 <div class="logo" id="siteName">
 SiteBuilder
 </div>
+
+<nav class="menu">
+<a href="#features">المميزات</a>
+<a href="#templates">القوالب</a>
+<a href="#pricing">الباقات</a>
+<a href="#faq">الأسئلة</a>
+<a href="#contact">التواصل</a>
+</nav>
+
 </div>
+
 </header>
+
+<!-- HERO -->
 
 <section class="hero">
 
-<div class="container">
+<div class="slider">
 
-<h1 id="heroTitle"></h1>
+<div class="slide active"
+style="background-image:url('https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=1600');"></div>
 
-<p id="heroDescription"></p>
+<div class="slide"
+style="background-image:url('https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1600');"></div>
+
+<div class="slide"
+style="background-image:url('https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=1600');"></div>
+
+</div>
+
+<div class="overlay"></div>
+
+<div class="hero-content">
+
+<div>
+
+<h1 id="heroTitle">
+منصة إنشاء المواقع العربية
+</h1>
+
+<p id="heroDescription">
+أنشئ موقعك أو متجرك الإلكتروني خلال دقائق بدون برمجة.
+</p>
+
+<div class="btns">
+
+<a href="#pricing" class="btn btn-primary">
+ابدأ الآن
+</a>
+
+<a href="#features" class="btn btn-outline">
+استكشف المميزات
+</a>
+
+</div>
+
+</div>
 
 </div>
 
 </section>
 
-<section class="section">
+<!-- STATS -->
+
+<section class="stats">
 
 <div class="container">
 
-<h2 class="section-title">
-مميزات المنصة
-</h2>
+<div class="section-title">
+<h2>إحصائيات المنصة</h2>
+<p>أرقام تعكس طموح المنصة</p>
+</div>
 
-<div class="grid" id="features"></div>
+<div class="stats-grid" id="stats">
+
+<!-- app.js -->
+
+</div>
 
 </div>
 
 </section>
 
-<section class="section">
+<!-- FEATURES -->
+
+<section id="features">
 
 <div class="container">
 
-<h2 class="section-title">
-القوالب الجاهزة
-</h2>
+<div class="section-title">
+<h2>مميزات المنصة</h2>
+<p>كل ما تحتاجه لإنشاء موقع احترافي</p>
+</div>
 
-<div class="grid" id="templates"></div>
+<div class="grid" id="featuresContainer">
+
+</div>
 
 </div>
 
 </section>
 
-<section class="stats-section">
+<!-- TEMPLATES -->
+
+<section id="templates">
 
 <div class="container">
 
-<h2 class="section-title">
-إحصائيات المنصة
-</h2>
+<div class="section-title">
+<h2>القوالب الجاهزة</h2>
+<p>اختر القالب المناسب لنشاطك</p>
+</div>
 
-<div class="stats-grid" id="stats"></div>
+<div class="grid" id="templatesContainer">
+
+</div>
 
 </div>
 
 </section>
 
-<section class="contact">
+<!-- PRICING -->
 
+<section class="pricing" id="pricing">
+
+<div class="container">
+
+<div class="section-title">
+<h2>الباقات</h2>
+<p>أسعار مرنة تناسب الجميع</p>
+</div>
+
+<div class="price-grid">
+
+<div class="price-card">
+<h3>مجانية</h3>
+<div class="price">0</div>
+<p>ابدأ مجاناً</p>
+</div>
+
+<div class="price-card">
+<h3>احترافية</h3>
+<div class="price">49</div>
+<p>ريال / شهر</p>
+</div>
+
+<div class="price-card">
+<h3>شركات</h3>
+<div class="price">199</div>
+<p>ريال / شهر</p>
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- TESTIMONIALS -->
+
+<section class="testimonials">
+
+<div class="container">
+
+<div class="section-title">
+<h2>آراء العملاء</h2>
+<p>ماذا يقول عملاؤنا</p>
+</div>
+
+<div class="grid">
+
+<div class="testimonial">
+⭐⭐⭐⭐⭐
+<br><br>
+أفضل منصة عربية لإنشاء المواقع بسهولة.
+</div>
+
+<div class="testimonial">
+⭐⭐⭐⭐⭐
+<br><br>
+تصميم احترافي وسرعة ممتازة.
+</div>
+
+<div class="testimonial">
+⭐⭐⭐⭐⭐
+<br><br>
+واجهة سهلة جداً ودعم فني رائع.
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- FAQ -->
+
+<section id="faq">
+
+<div class="container">
+
+<div class="section-title">
+<h2>الأسئلة الشائعة</h2>
+</div>
+
+<div class="faq-item">
+<h3>هل أحتاج إلى خبرة برمجية؟</h3>
+<p>لا، المنصة مصممة للجميع.</p>
+</div>
+
+<div class="faq-item">
+<h3>هل يمكن إنشاء متجر إلكتروني؟</h3>
+<p>نعم، مع إدارة منتجات وطلبات كاملة.</p>
+</div>
+
+<div class="faq-item">
+<h3>هل يوجد دعم فني؟</h3>
+<p>نعم، دعم فني متواصل.</p>
+</div>
+
+</div>
+
+</section>
+
+<!-- CONTACT -->
+
+<section class="contact" id="contact">
+
+<div class="container">
+
+<div class="section-title">
 <h2>تواصل معنا</h2>
+</div>
 
 <div class="flags">
 🇸🇦 🇪🇬
 </div>
 
 <div class="phone">
-📞 <span id="phone"></span>
+📞 00966558020154
 </div>
 
 <div class="soon">
@@ -271,13 +665,15 @@ SiteBuilder
 </div>
 
 <div class="email">
-📧 <span id="email"></span>
+📧 HW274@gmail.com
+</div>
+
 </div>
 
 </section>
 
 <footer>
-© 2026 SiteBuilder - جميع الحقوق محفوظة
+© 2026 SiteBuilder جميع الحقوق محفوظة
 </footer>
 
 <script src="app.js"></script>
