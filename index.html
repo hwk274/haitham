@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>SiteBuilder | منصة إنشاء المواقع</title>
+<title>SiteBuilder</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
 
@@ -17,149 +18,60 @@ box-sizing:border-box;
 font-family:'Cairo',sans-serif;
 }
 
-html{
-scroll-behavior:smooth;
-}
-
 body{
 background:#0f172a;
-color:#fff;
-overflow-x:hidden;
-}
-
-a{
-text-decoration:none;
+color:white;
 }
 
 .container{
 width:90%;
-max-width:1400px;
+max-width:1300px;
 margin:auto;
 }
 
-/* Header */
-
 header{
-position:fixed;
+background:#111827;
+padding:20px;
+position:sticky;
 top:0;
-width:100%;
-z-index:999;
-background:rgba(15,23,42,.95);
-backdrop-filter:blur(15px);
-border-bottom:1px solid rgba(255,255,255,.08);
+z-index:1000;
 }
 
-.navbar{
-display:flex;
-justify-content:space-between;
-align-items:center;
-padding:20px 0;
-}
-
-.logo{
-font-size:30px;
+#siteName{
+font-size:28px;
 font-weight:900;
 color:#38bdf8;
 }
 
-.menu{
-display:flex;
-gap:25px;
-}
-
-.menu a{
-color:white;
-transition:.3s;
-}
-
-.menu a:hover{
-color:#38bdf8;
-}
-
-/* Hero */
-
 .hero{
-min-height:100vh;
-display:flex;
-align-items:center;
-background:
-linear-gradient(rgba(15,23,42,.75),rgba(15,23,42,.75)),
-url('https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=1600');
-background-size:cover;
-background-position:center;
+padding:120px 20px;
 text-align:center;
-padding-top:120px;
+background:linear-gradient(135deg,#0f172a,#1e293b);
 }
 
 .hero h1{
-font-size:65px;
+font-size:60px;
 margin-bottom:20px;
-font-weight:900;
 }
 
 .hero p{
 font-size:22px;
-max-width:900px;
+max-width:800px;
 margin:auto;
-line-height:2;
-color:#e2e8f0;
+color:#cbd5e1;
 }
 
-.hero-buttons{
-margin-top:40px;
-}
-
-.btn{
-display:inline-block;
-padding:15px 35px;
-border-radius:50px;
-font-weight:bold;
-margin:10px;
-transition:.3s;
-}
-
-.btn-primary{
-background:#38bdf8;
-color:white;
-}
-
-.btn-primary:hover{
-transform:translateY(-5px);
-}
-
-.btn-secondary{
-border:2px solid #38bdf8;
-color:#38bdf8;
-}
-
-.btn-secondary:hover{
-background:#38bdf8;
-color:white;
-}
-
-/* Sections */
-
-section{
-padding:100px 0;
+.section{
+padding:80px 0;
 }
 
 .section-title{
 text-align:center;
-margin-bottom:60px;
+font-size:40px;
+margin-bottom:50px;
 }
 
-.section-title h2{
-font-size:45px;
-margin-bottom:15px;
-}
-
-.section-title p{
-color:#94a3b8;
-}
-
-/* Features */
-
-.features-grid{
+.grid{
 display:grid;
 grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
 gap:25px;
@@ -170,12 +82,10 @@ background:#1e293b;
 border-radius:20px;
 overflow:hidden;
 transition:.3s;
-border:1px solid rgba(255,255,255,.05);
 }
 
 .card:hover{
 transform:translateY(-10px);
-border-color:#38bdf8;
 }
 
 .card img{
@@ -184,354 +94,142 @@ height:220px;
 object-fit:cover;
 }
 
-.card-content{
-padding:25px;
+.content{
+padding:20px;
 }
 
-.card-content h3{
+.content h3{
 margin-bottom:10px;
 }
 
-/* Templates */
-
-.templates{
-background:#111827;
-}
-
-/* Pricing */
-
-.pricing-grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-gap:25px;
-}
-
-.price-card{
+.plan{
 background:#1e293b;
 padding:40px;
-text-align:center;
 border-radius:20px;
+text-align:center;
 }
 
 .price{
-font-size:55px;
+font-size:40px;
 font-weight:900;
 color:#38bdf8;
-margin:20px 0;
+margin-top:15px;
 }
 
-/* Construction */
-
-.construction{
-background:linear-gradient(135deg,#0284c7,#06b6d4);
+.contact{
+background:#111827;
+padding:80px 20px;
 text-align:center;
 }
 
-.construction h2{
-font-size:55px;
-margin-bottom:20px;
+.contact h2{
+margin-bottom:25px;
 }
 
-.construction p{
+.contact p{
 font-size:22px;
 line-height:2;
-max-width:900px;
-margin:auto;
-}
-
-.loader{
-width:300px;
-height:12px;
-background:rgba(255,255,255,.3);
-border-radius:50px;
-overflow:hidden;
-margin:40px auto;
-}
-
-.loader span{
-display:block;
-height:100%;
-width:40%;
-background:white;
-animation:loading 2s infinite;
-}
-
-@keyframes loading{
-0%{transform:translateX(-150%);}
-100%{transform:translateX(500%);}
-}
-
-/* Contact */
-
-.contact-box{
-max-width:700px;
-margin:auto;
-background:#1e293b;
-padding:40px;
-border-radius:20px;
-text-align:center;
-font-size:22px;
-line-height:2.2;
-}
-
-.contact-box a{
-color:#38bdf8;
 }
 
 footer{
 padding:30px;
 text-align:center;
-border-top:1px solid rgba(255,255,255,.08);
+background:#0b1220;
 color:#94a3b8;
 }
-
-/* Mobile */
 
 @media(max-width:768px){
 
 .hero h1{
-font-size:40px;
+font-size:36px;
 }
 
 .hero p{
 font-size:18px;
 }
 
-.section-title h2{
-font-size:32px;
-}
-
-.menu{
-display:none;
-}
-
-.construction h2{
-font-size:35px;
-}
-
-.card img{
-height:180px;
+.section-title{
+font-size:28px;
 }
 
 }
 
 </style>
-</head>
 
+</head>
 <body>
 
 <header>
-
-<div class="container navbar">
-
-<div class="logo">SiteBuilder</div>
-
-<div class="menu">
-<a href="#">الرئيسية</a>
-<a href="#features">المميزات</a>
-<a href="#templates">القوالب</a>
-<a href="#pricing">الباقات</a>
-<a href="#contact">التواصل</a>
+<div class="container">
+<div id="siteName">SiteBuilder</div>
 </div>
-
-</div>
-
 </header>
 
-<!-- HERO -->
-
 <section class="hero">
+<div class="container">
+
+<h1 id="heroTitle"></h1>
+
+<p id="heroDescription"></p>
+
+</div>
+</section>
+
+<section class="section">
 
 <div class="container">
 
-<h1>أنشئ موقعك الإلكتروني خلال دقائق</h1>
+<h2 class="section-title">مميزات المنصة</h2>
 
-<p>
-منصة عربية احترافية لإنشاء المواقع والمتاجر الإلكترونية
-بدون برمجة مع قوالب جاهزة واستضافة سريعة ودعم كامل.
-</p>
-
-<div class="hero-buttons">
-<a href="#" class="btn btn-primary">ابدأ الآن</a>
-<a href="#" class="btn btn-secondary">استعراض القوالب</a>
-</div>
+<div class="grid" id="features"></div>
 
 </div>
 
 </section>
 
-<!-- FEATURES -->
-
-<section id="features">
+<section class="section">
 
 <div class="container">
 
-<div class="section-title">
-<h2>مميزات المنصة</h2>
-<p>كل الأدوات التي تحتاجها لإنشاء موقع احترافي</p>
-</div>
+<h2 class="section-title">القوالب الجاهزة</h2>
 
-<div class="features-grid">
-
-<div class="card">
-<img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1200">
-<div class="card-content">
-<h3>🎨 محرر مرئي</h3>
-<p>تصميم موقعك بالسحب والإفلات بسهولة تامة.</p>
-</div>
-</div>
-
-<div class="card">
-<img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1200">
-<div class="card-content">
-<h3>📱 متوافق مع الجوال</h3>
-<p>جميع المواقع تعمل باحترافية على كافة الأجهزة.</p>
-</div>
-</div>
-
-<div class="card">
-<img src="https://images.unsplash.com/photo-1556155092-490a1ba16284?q=80&w=1200">
-<div class="card-content">
-<h3>🛒 متجر إلكتروني</h3>
-<p>بيع منتجاتك وإدارة الطلبات والدفع بسهولة.</p>
-</div>
-</div>
-
-</div>
+<div class="grid" id="templates"></div>
 
 </div>
 
 </section>
 
-<!-- Templates -->
-
-<section class="templates" id="templates">
+<section class="section">
 
 <div class="container">
 
-<div class="section-title">
-<h2>القوالب الجاهزة</h2>
-<p>اختر قالبك وابدأ خلال دقائق</p>
-</div>
+<h2 class="section-title">الباقات</h2>
 
-<div class="features-grid">
-
-<div class="card">
-<img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1200">
-<div class="card-content">
-<h3>مواقع الشركات</h3>
-</div>
-</div>
-
-<div class="card">
-<img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?q=80&w=1200">
-<div class="card-content">
-<h3>المتاجر الإلكترونية</h3>
-</div>
-</div>
-
-<div class="card">
-<img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?q=80&w=1200">
-<div class="card-content">
-<h3>المطاعم والكافيهات</h3>
-</div>
-</div>
-
-</div>
+<div class="grid" id="plans"></div>
 
 </div>
 
 </section>
 
-<!-- Pricing -->
+<section class="contact">
 
-<section id="pricing">
-
-<div class="container">
-
-<div class="section-title">
-<h2>الباقات</h2>
-<p>أسعار تناسب الجميع</p>
-</div>
-
-<div class="pricing-grid">
-
-<div class="price-card">
-<h3>مجانية</h3>
-<div class="price">0</div>
-<p>موقع أساسي</p>
-</div>
-
-<div class="price-card">
-<h3>احترافية</h3>
-<div class="price">49</div>
-<p>ريال / شهر</p>
-</div>
-
-<div class="price-card">
-<h3>شركات</h3>
-<div class="price">199</div>
-<p>ريال / شهر</p>
-</div>
-
-</div>
-
-</div>
-
-</section>
-
-<!-- Under Construction -->
-
-<section class="construction">
-
-<div class="container">
-
-<h2>🚀 المنصة تحت الإنشاء</h2>
-
-<p>
-نعمل حالياً على تطوير منصة عربية متكاملة لإنشاء المواقع
-والمتاجر الإلكترونية بأحدث التقنيات وبواجهة احترافية.
-</p>
-
-<div class="loader">
-<span></span>
-</div>
-
-</div>
-
-</section>
-
-<!-- Contact -->
-
-<section id="contact">
-
-<div class="container">
-
-<div class="section-title">
 <h2>تواصل معنا</h2>
-<p>نسعد بخدمتكم والرد على جميع الاستفسارات</p>
-</div>
 
-<div class="contact-box">
+<p>
+📞 <span id="phone"></span>
+</p>
 
-📞 +966 55 802 0154
-
-<br><br>
-
-📧
-<a href="mailto:HW274@gmail.com">
-HW274@gmail.com
-</a>
-
-</div>
-
-</div>
+<p>
+📧 <span id="email"></span>
+</p>
 
 </section>
 
 <footer>
 © 2026 SiteBuilder - جميع الحقوق محفوظة
 </footer>
+
+<script src="app.js"></script>
 
 </body>
 </html>
