@@ -1,94 +1,126 @@
-{
-  "siteName": "SiteBuilder",
-
-  "heroTitle": "أنشئ موقعك الإلكتروني خلال دقائق",
-
-  "heroDescription": "منصة عربية احترافية لإنشاء المواقع والمتاجر الإلكترونية بدون برمجة، مع قوالب جاهزة، واستضافة سريعة، وتصميمات عصرية تناسب جميع الأنشطة التجارية.",
-
-  "phone": "00966558020154",
-
-  "email": "HW274@gmail.com",
-
-  "stats": [
-    {
-      "title": "عدد المواقع المنشأة",
-      "value": 2000,
-      "suffix": "+"
-    },
-    {
-      "title": "عدد العملاء",
-      "value": 150,
-      "suffix": "+"
-    },
-    {
-      "title": "عدد القوالب",
-      "value": 50,
-      "suffix": "+"
-    },
-    {
-      "title": "نسبة الجاهزية",
-      "value": 99,
-      "suffix": "%"
-    }
-  ],
-
-  "features": [
-    {
-      "title": "محرر بالسحب والإفلات",
-      "description": "صمم موقعك بسهولة باستخدام محرر مرئي متطور دون الحاجة إلى أي خبرة برمجية.",
-      "image": "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=1200"
-    },
-    {
-      "title": "متوافق مع الجوال",
-      "description": "جميع المواقع تعمل بشكل مثالي على الهواتف الذكية والأجهزة اللوحية وأجهزة الكمبيوتر.",
-      "image": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=1200"
-    },
-    {
-      "title": "متجر إلكتروني متكامل",
-      "description": "أنشئ متجرك الإلكتروني وأضف المنتجات واستقبل الطلبات بسهولة.",
-      "image": "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=1200"
-    },
-    {
-      "title": "استضافة فائقة السرعة",
-      "description": "خوادم قوية لضمان أفضل أداء وسرعة تحميل للمواقع.",
-      "image": "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1200"
-    },
-    {
-      "title": "تحسين محركات البحث SEO",
-      "description": "ساعد موقعك على الظهور في نتائج البحث وجذب المزيد من العملاء.",
-      "image": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1200"
-    },
-    {
-      "title": "حماية وأمان متقدم",
-      "description": "شهادات SSL وأنظمة حماية متطورة للحفاظ على بياناتك.",
-      "image": "https://images.unsplash.com/photo-1563986768609-322da13575f3?w=1200"
-    }
-  ],
-
-  "templates": [
-    {
-      "title": "قالب شركة",
-      "image": "https://images.unsplash.com/photo-1497366754035-f200968a6e72?w=1200"
-    },
-    {
-      "title": "متجر إلكتروني",
-      "image": "https://images.unsplash.com/photo-1556740749-887f6717d7e4?w=1200"
-    },
-    {
-      "title": "مطعم وكافيه",
-      "image": "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1200"
-    },
-    {
-      "title": "عيادة طبية",
-      "image": "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=1200"
-    },
-    {
-      "title": "عقارات",
-      "image": "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=1200"
-    },
-    {
-      "title": "محفظة أعمال شخصية",
-      "image": "https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?w=1200"
-    }
-  ]
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>SiteBuilder Pro</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Cairo,sans-serif}
+html{scroll-behavior:smooth}
+body{background:#020617;color:#fff;overflow-x:hidden}
+header{position:fixed;top:0;width:100%;z-index:1000;background:rgba(2,6,23,.85);backdrop-filter:blur(15px);border-bottom:1px solid rgba(255,255,255,.08)}
+.container{width:92%;max-width:1400px;margin:auto}
+.nav{height:80px;display:flex;justify-content:space-between;align-items:center}
+.logo{font-size:32px;font-weight:900;color:#38bdf8}
+.menu a{color:#fff;text-decoration:none;margin:0 12px}
+.hero{min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;position:relative;background:linear-gradient(135deg,#0f172a,#1e3a8a,#020617)}
+.hero h1{font-size:72px;margin-bottom:20px}
+.hero p{max-width:900px;font-size:24px;line-height:2}
+.btn{display:inline-block;padding:16px 35px;border-radius:50px;text-decoration:none;margin:8px}
+.primary{background:#38bdf8;color:#fff}
+.outline{border:2px solid #38bdf8;color:#38bdf8}
+section{padding:100px 0}
+.title{text-align:center;margin-bottom:50px}
+.title h2{font-size:44px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:25px}
+.card,.stat,.price{background:rgba(255,255,255,.05);backdrop-filter:blur(15px);border:1px solid rgba(255,255,255,.08);border-radius:24px;padding:25px;transition:.4s}
+.card:hover,.stat:hover,.price:hover{transform:translateY(-10px)}
+.card img{width:100%;height:220px;object-fit:cover;border-radius:16px}
+.stats{background:#0f172a}
+.counter{font-size:58px;color:#38bdf8;font-weight:900}
+.prices{background:#111827}
+.price .amount{font-size:60px;color:#38bdf8;font-weight:900}
+.contact{text-align:center}
+.whatsapp{position:fixed;bottom:25px;left:25px;background:#22c55e;width:65px;height:65px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;text-decoration:none;font-size:30px}
+footer{background:#111827;padding:40px;text-align:center}
+@media(max-width:768px){
+.hero h1{font-size:42px}
+.hero p{font-size:18px}
+.title h2{font-size:32px}
 }
+</style>
+</head>
+<body>
+
+<header>
+<div class="container nav">
+<div class="logo">SiteBuilder</div>
+<div class="menu">
+<a href="#features">المميزات</a>
+<a href="#templates">القوالب</a>
+<a href="#pricing">الباقات</a>
+<a href="#contact">التواصل</a>
+</div>
+</div>
+</header>
+
+<section class="hero">
+<div class="container">
+<h1 id="heroTitle">أنشئ موقعك الإلكتروني خلال دقائق</h1>
+<p id="heroDescription">منصة عربية احترافية لإنشاء المواقع والمتاجر الإلكترونية بدون برمجة.</p>
+<a class="btn primary" href="#pricing">ابدأ الآن</a>
+<a class="btn outline" href="#features">استكشف المميزات</a>
+</div>
+</section>
+
+<section class="stats">
+<div class="container">
+<div class="title"><h2>إحصائيات المنصة</h2></div>
+<div class="grid" id="stats">
+<div class="stat"><div class="counter">2000+</div><p>عدد المواقع المنشأة</p></div>
+<div class="stat"><div class="counter">150+</div><p>عدد العملاء</p></div>
+<div class="stat"><div class="counter">50+</div><p>عدد القوالب</p></div>
+<div class="stat"><div class="counter">99%</div><p>نسبة الجاهزية</p></div>
+</div>
+</div>
+</section>
+
+<section id="features">
+<div class="container">
+<div class="title"><h2>مميزات المنصة</h2></div>
+<div class="grid">
+<div class="card"><img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=1200"><h3>محرر بالسحب والإفلات</h3></div>
+<div class="card"><img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=1200"><h3>متوافق مع الجوال</h3></div>
+<div class="card"><img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=1200"><h3>متجر إلكتروني</h3></div>
+</div>
+</div>
+</section>
+
+<section id="templates">
+<div class="container">
+<div class="title"><h2>القوالب الجاهزة</h2></div>
+<div class="grid">
+<div class="card"><img src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?w=1200"><h3>قالب شركة</h3></div>
+<div class="card"><img src="https://images.unsplash.com/photo-1556740749-887f6717d7e4?w=1200"><h3>متجر إلكتروني</h3></div>
+<div class="card"><img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1200"><h3>مطعم وكافيه</h3></div>
+</div>
+</div>
+</section>
+
+<section class="prices" id="pricing">
+<div class="container">
+<div class="title"><h2>الباقات</h2></div>
+<div class="grid">
+<div class="price"><h3>مجانية</h3><div class="amount">0</div></div>
+<div class="price"><h3>احترافية</h3><div class="amount">49</div></div>
+<div class="price"><h3>شركات</h3><div class="amount">199</div></div>
+</div>
+</div>
+</section>
+
+<section class="contact" id="contact">
+<div class="container">
+<div class="title"><h2>تواصل معنا</h2></div>
+<h3>🇸🇦 🇪🇬</h3>
+<h2>00966558020154</h2>
+<p>HW274@gmail.com</p>
+</div>
+</section>
+
+<footer>© 2026 SiteBuilder جميع الحقوق محفوظة</footer>
+<a class="whatsapp" href="https://wa.me/966558020154">💬</a>
+
+<script src="app.js"></script>
+</body>
+</html>
