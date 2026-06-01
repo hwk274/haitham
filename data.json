@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>SiteBuilder Pro</title>
+<title>Haitham Pro</title>
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:Cairo,sans-serif}
@@ -45,7 +45,7 @@ footer{background:#111827;padding:40px;text-align:center}
 
 <header>
 <div class="container nav">
-<div class="logo">SiteBuilder</div>
+<div class="logo">Haitham</div>
 <div class="menu">
 <a href="#features">المميزات</a>
 <a href="#templates">القوالب</a>
@@ -118,7 +118,7 @@ footer{background:#111827;padding:40px;text-align:center}
 </div>
 </section>
 
-<footer>© 2026 SiteBuilder جميع الحقوق محفوظة</footer>
+<footer>© 2026 Haitham جميع الحقوق محفوظة</footer>
 <a class="whatsapp" href="https://wa.me/966558020154">💬</a>
 
 <script src="app.js"></script>
