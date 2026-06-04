@@ -1,334 +1,325 @@
-// ===============================
-// SiteBuilder App
-// ===============================
+/* =========================
+   HAITHAM Professional App
+========================= */
 
 document.addEventListener("DOMContentLoaded", () => {
 
-    // تحميل البيانات
-    fetch("data.json")
-    .then(response => response.json())
-    .then(data => {
+    /* =========================
+       Loader
+    ========================= */
 
-        loadSiteInfo(data);
-        loadFeatures(data.features);
-        loadTemplates(data.templates);
-        loadStats(data.stats);
+    const loader = document.getElementById("loader");
 
+    window.addEventListener("load", () => {
         setTimeout(() => {
-            startCounters();
-        }, 300);
-
-    })
-    .catch(error => {
-        console.error("خطأ في تحميل data.json:", error);
+            loader.style.opacity = "0";
+            loader.style.visibility = "hidden";
+        }, 800);
     });
 
-    startSlider();
-    scrollAnimations();
+    /* =========================
+       Header Scroll
+    ========================= */
 
-});
+    const header = document.getElementById("header");
 
-
-// ===============================
-// معلومات الموقع
-// ===============================
-
-function loadSiteInfo(data){
-
-    const siteName =
-    document.getElementById("siteName");
-
-    const heroTitle =
-    document.getElementById("heroTitle");
-
-    const heroDescription =
-    document.getElementById("heroDescription");
-
-    if(siteName)
-        siteName.textContent = data.siteName;
-
-    if(heroTitle)
-        heroTitle.textContent = data.heroTitle;
-
-    if(heroDescription)
-        heroDescription.textContent =
-        data.heroDescription;
-
-}
-
-
-// ===============================
-// المميزات
-// ===============================
-
-function loadFeatures(features){
-
-    const container =
-    document.getElementById("featuresContainer");
-
-    if(!container) return;
-
-    let html = "";
-
-    features.forEach(feature => {
-
-        html += `
-        <div class="card hidden">
-
-            <img
-            src="${feature.image}"
-            alt="${feature.title}"
-            loading="lazy">
-
-            <div class="content">
-
-                <h3>${feature.title}</h3>
-
-                <p>${feature.description}</p>
-
-            </div>
-
-        </div>
-        `;
-
+    window.addEventListener("scroll", () => {
+        if (window.scrollY > 80) {
+            header.classList.add("scrolled");
+        } else {
+            header.classList.remove("scrolled");
+        }
     });
 
-    container.innerHTML = html;
+    /* =========================
+       Mobile Menu
+    ========================= */
 
-    observeElements();
-}
+    const menuBtn = document.getElementById("menuBtn");
+    const navMenu = document.getElementById("navMenu");
 
-
-// ===============================
-// القوالب
-// ===============================
-
-function loadTemplates(templates){
-
-    const container =
-    document.getElementById("templatesContainer");
-
-    if(!container) return;
-
-    let html = "";
-
-    templates.forEach(template => {
-
-        html += `
-        <div class="card hidden">
-
-            <img
-            src="${template.image}"
-            alt="${template.title}"
-            loading="lazy">
-
-            <div class="content">
-
-                <h3>${template.title}</h3>
-
-            </div>
-
-        </div>
-        `;
-
+    menuBtn.addEventListener("click", () => {
+        navMenu.classList.toggle("active");
     });
 
-    container.innerHTML = html;
-
-    observeElements();
-}
-
-
-// ===============================
-// الإحصائيات
-// ===============================
-
-function loadStats(stats){
-
-    const container =
-    document.getElementById("stats");
-
-    if(!container) return;
-
-    let html = "";
-
-    stats.forEach(stat => {
-
-        html += `
-        <div class="stat-card hidden">
-
-            <div
-                class="counter"
-                data-target="${stat.value}"
-                data-suffix="${stat.suffix}">
-                0
-            </div>
-
-            <div class="stat-title">
-                ${stat.title}
-            </div>
-
-        </div>
-        `;
-
+    document.querySelectorAll("#navMenu a").forEach(link => {
+        link.addEventListener("click", () => {
+            navMenu.classList.remove("active");
+        });
     });
 
-    container.innerHTML = html;
+    /* =========================
+       Hero Slider
+    ========================= */
 
-    observeElements();
-}
+    const slides = document.querySelectorAll(".slide");
+    let currentSlide = 0;
 
+    function showSlide(index) {
 
-// ===============================
-// العدادات المتحركة
-// ===============================
+        slides.forEach(slide => {
+            slide.classList.remove("active");
+        });
 
-function startCounters(){
-
-    const counters =
-    document.querySelectorAll(".counter");
-
-    counters.forEach(counter => {
-
-        const target =
-        parseInt(counter.dataset.target);
-
-        const suffix =
-        counter.dataset.suffix || "";
-
-        let current = 0;
-
-        const increment =
-        Math.max(1, Math.ceil(target / 120));
-
-        const updateCounter = () => {
-
-            current += increment;
-
-            if(current < target){
-
-                counter.textContent =
-                current.toLocaleString() + suffix;
-
-                requestAnimationFrame(updateCounter);
-
-            }else{
-
-                counter.textContent =
-                target.toLocaleString() + suffix;
-            }
-
-        };
-
-        updateCounter();
-
-    });
-
-}
-
-
-// ===============================
-// السلايدر
-// ===============================
-
-function startSlider(){
-
-    const slides =
-    document.querySelectorAll(".slide");
-
-    if(slides.length === 0) return;
-
-    let current = 0;
+        slides[index].classList.add("active");
+    }
 
     setInterval(() => {
 
-        slides[current]
-        .classList.remove("active");
+        currentSlide++;
 
-        current++;
-
-        if(current >= slides.length){
-            current = 0;
+        if (currentSlide >= slides.length) {
+            currentSlide = 0;
         }
 
-        slides[current]
-        .classList.add("active");
+        showSlide(currentSlide);
 
     }, 5000);
 
-}
+    /* =========================
+       Top Button
+    ========================= */
 
+    const topBtn = document.getElementById("topBtn");
 
-// ===============================
-// ظهور العناصر أثناء التمرير
-// ===============================
+    window.addEventListener("scroll", () => {
 
-function observeElements(){
+        if (window.scrollY > 500) {
+            topBtn.style.display = "block";
+        } else {
+            topBtn.style.display = "none";
+        }
 
-    const hiddenElements =
-    document.querySelectorAll(".hidden");
+    });
 
-    const observer =
-    new IntersectionObserver(entries => {
+    topBtn.addEventListener("click", () => {
+
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+
+    });
+
+    /* =========================
+       Animation On Scroll
+    ========================= */
+
+    const observer = new IntersectionObserver(entries => {
 
         entries.forEach(entry => {
 
-            if(entry.isIntersecting){
-
+            if (entry.isIntersecting) {
                 entry.target.classList.add("show");
-
             }
 
         });
 
-    },{
-        threshold:0.15
+    }, {
+        threshold: 0.2
     });
 
-    hiddenElements.forEach(el => {
+    document.querySelectorAll(
+        ".card,.price-card,.testimonial,.faq-item,.stat-card"
+    ).forEach(el => {
+
+        el.classList.add("fade-up");
         observer.observe(el);
-    });
-
-}
-
-
-// ===============================
-// تفعيل التأثيرات
-// ===============================
-
-function scrollAnimations(){
-
-    observeElements();
-
-}
-
-
-// ===============================
-// تنعيم الانتقال بين الأقسام
-// ===============================
-
-document.querySelectorAll('a[href^="#"]')
-.forEach(anchor => {
-
-    anchor.addEventListener("click", function(e){
-
-        e.preventDefault();
-
-        const target =
-        document.querySelector(
-            this.getAttribute("href")
-        );
-
-        if(target){
-
-            window.scrollTo({
-                top:
-                target.offsetTop - 70,
-                behavior:"smooth"
-            });
-
-        }
 
     });
+
+    /* =========================
+       Load JSON Data
+    ========================= */
+
+    fetch("data.json")
+        .then(response => response.json())
+        .then(data => {
+
+            /* Site Info */
+
+            if (data.siteName) {
+                document.getElementById("siteName").textContent =
+                    data.siteName;
+            }
+
+            if (data.heroTitle) {
+                document.getElementById("heroTitle").textContent =
+                    data.heroTitle;
+            }
+
+            if (data.heroDescription) {
+                document.getElementById("heroDescription").textContent =
+                    data.heroDescription;
+            }
+
+            /* =========================
+               Stats
+            ========================= */
+
+            const statsContainer =
+                document.getElementById("statsContainer");
+
+            if (data.stats && statsContainer) {
+
+                statsContainer.innerHTML = "";
+
+                data.stats.forEach(stat => {
+
+                    statsContainer.innerHTML += `
+                        <div class="stat-card">
+                            <div class="counter" data-target="${stat.number}">
+                                0
+                            </div>
+                            <div class="stat-title">
+                                ${stat.title}
+                            </div>
+                        </div>
+                    `;
+
+                });
+
+                startCounters();
+            }
+
+            /* =========================
+               Features
+            ========================= */
+
+            const featuresContainer =
+                document.getElementById("featuresContainer");
+
+            if (data.features && featuresContainer) {
+
+                featuresContainer.innerHTML = "";
+
+                data.features.forEach(feature => {
+
+                    featuresContainer.innerHTML += `
+                        <div class="card">
+                            <div class="content">
+                                <h3>${feature.title}</h3>
+                                <p>${feature.description}</p>
+                            </div>
+                        </div>
+                    `;
+
+                });
+
+            }
+
+        })
+        .catch(error => {
+
+            console.error("JSON Error:", error);
+
+        });
+
+    /* =========================
+       Counter Animation
+    ========================= */
+
+    function startCounters() {
+
+        const counters =
+            document.querySelectorAll(".counter");
+
+        counters.forEach(counter => {
+
+            const target =
+                +counter.getAttribute("data-target");
+
+            let count = 0;
+
+            const speed = target / 100;
+
+            const updateCount = () => {
+
+                if (count < target) {
+
+                    count += speed;
+
+                    counter.innerText =
+                        Math.floor(count).toLocaleString();
+
+                    requestAnimationFrame(updateCount);
+
+                } else {
+
+                    counter.innerText =
+                        target.toLocaleString();
+
+                }
+
+            };
+
+            updateCount();
+
+        });
+
+    }
+
+    /* =========================
+       Contact Form
+    ========================= */
+
+    const contactForm =
+        document.querySelector(".contact-form");
+
+    if (contactForm) {
+
+        contactForm.addEventListener("submit", e => {
+
+            e.preventDefault();
+
+            const button =
+                contactForm.querySelector("button");
+
+            button.innerHTML =
+                "✓ تم إرسال الرسالة";
+
+            button.disabled = true;
+
+            setTimeout(() => {
+
+                button.innerHTML =
+                    "إرسال الرسالة";
+
+                button.disabled = false;
+
+                contactForm.reset();
+
+            }, 3000);
+
+        });
+
+    }
+
+    /* =========================
+       Lazy Loading Images
+    ========================= */
+
+    const images =
+        document.querySelectorAll("img");
+
+    images.forEach(img => {
+
+        img.setAttribute("loading", "lazy");
+
+    });
+
+    /* =========================
+       Current Year Footer
+    ========================= */
+
+    const footerText =
+        document.querySelector("footer p");
+
+    if (footerText) {
+
+        footerText.innerHTML =
+            `© ${new Date().getFullYear()} HAITHAM جميع الحقوق محفوظة`;
+
+    }
 
 });
