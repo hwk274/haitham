@@ -1,450 +1,85 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
+
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>SiteBuilder</title>
+<title>HAITHAM | منصة إنشاء المواقع والمتاجر</title>
+
+<meta name="description" content="إنشاء مواقع ومتاجر إلكترونية احترافية للشركات والأفراد">
+<meta name="keywords" content="تصميم مواقع, متاجر إلكترونية, برمجة, تطوير مواقع">
+<meta name="author" content="HAITHAM">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
 
-<style>
+<link rel="stylesheet" href="style.css">
 
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:'Cairo',sans-serif;
-}
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
-html{
-scroll-behavior:smooth;
-}
-
-body{
-background:#0f172a;
-color:#fff;
-overflow-x:hidden;
-}
-
-/* Scroll */
-
-::-webkit-scrollbar{
-width:10px;
-}
-
-::-webkit-scrollbar-thumb{
-background:#38bdf8;
-border-radius:10px;
-}
-
-/* Header */
-
-header{
-position:fixed;
-top:0;
-right:0;
-left:0;
-z-index:999;
-background:rgba(15,23,42,.95);
-backdrop-filter:blur(15px);
-border-bottom:1px solid rgba(255,255,255,.08);
-}
-
-.container{
-width:90%;
-max-width:1400px;
-margin:auto;
-}
-
-.navbar{
-height:80px;
-display:flex;
-align-items:center;
-justify-content:space-between;
-}
-
-.logo{
-font-size:30px;
-font-weight:900;
-color:#38bdf8;
-}
-
-.menu{
-display:flex;
-gap:25px;
-}
-
-.menu a{
-color:#fff;
-text-decoration:none;
-font-weight:600;
-transition:.3s;
-}
-
-.menu a:hover{
-color:#38bdf8;
-}
-
-/* Hero */
-
-.hero{
-height:100vh;
-position:relative;
-overflow:hidden;
-}
-
-.slider{
-position:absolute;
-top:0;
-left:0;
-width:100%;
-height:100%;
-}
-
-.slide{
-position:absolute;
-width:100%;
-height:100%;
-opacity:0;
-transition:1.5s;
-background-size:cover;
-background-position:center;
-}
-
-.slide.active{
-opacity:1;
-}
-
-.overlay{
-position:absolute;
-inset:0;
-background:rgba(0,0,0,.6);
-}
-
-.hero-content{
-position:relative;
-z-index:2;
-height:100%;
-display:flex;
-align-items:center;
-justify-content:center;
-text-align:center;
-padding:20px;
-}
-
-.hero-content h1{
-font-size:70px;
-margin-bottom:20px;
-font-weight:900;
-}
-
-.hero-content p{
-font-size:24px;
-max-width:900px;
-margin:auto;
-line-height:2;
-color:#e2e8f0;
-}
-
-.btns{
-margin-top:35px;
-}
-
-.btn{
-display:inline-block;
-padding:15px 35px;
-border-radius:50px;
-text-decoration:none;
-font-weight:bold;
-margin:8px;
-transition:.3s;
-}
-
-.btn-primary{
-background:#38bdf8;
-color:#fff;
-}
-
-.btn-primary:hover{
-transform:translateY(-5px);
-}
-
-.btn-outline{
-border:2px solid #38bdf8;
-color:#38bdf8;
-}
-
-.btn-outline:hover{
-background:#38bdf8;
-color:#fff;
-}
-
-/* Sections */
-
-section{
-padding:100px 0;
-}
-
-.section-title{
-text-align:center;
-margin-bottom:60px;
-}
-
-.section-title h2{
-font-size:45px;
-margin-bottom:15px;
-}
-
-.section-title p{
-color:#94a3b8;
-}
-
-/* Stats */
-
-.stats{
-background:#111827;
-}
-
-.stats-grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-gap:25px;
-}
-
-.stat-card{
-background:#1e293b;
-padding:35px;
-border-radius:20px;
-text-align:center;
-}
-
-.counter{
-font-size:55px;
-font-weight:900;
-color:#38bdf8;
-}
-
-.stat-title{
-margin-top:10px;
-font-size:18px;
-}
-
-/* Cards */
-
-.grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-gap:25px;
-}
-
-.card{
-background:#1e293b;
-border-radius:20px;
-overflow:hidden;
-transition:.4s;
-}
-
-.card:hover{
-transform:translateY(-10px);
-box-shadow:0 15px 35px rgba(56,189,248,.25);
-}
-
-.card img{
-width:100%;
-height:220px;
-object-fit:cover;
-transition:.5s;
-}
-
-.card:hover img{
-transform:scale(1.08);
-}
-
-.content{
-padding:20px;
-}
-
-.content h3{
-margin-bottom:10px;
-color:#38bdf8;
-}
-
-/* Pricing */
-
-.pricing{
-background:#111827;
-}
-
-.price-grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-gap:25px;
-}
-
-.price-card{
-background:#1e293b;
-padding:40px;
-border-radius:20px;
-text-align:center;
-}
-
-.price-card h3{
-font-size:28px;
-}
-
-.price{
-font-size:60px;
-font-weight:900;
-color:#38bdf8;
-margin:20px 0;
-}
-
-/* Testimonials */
-
-.testimonials{
-background:#111827;
-}
-
-.testimonial{
-background:#1e293b;
-padding:30px;
-border-radius:20px;
-}
-
-/* FAQ */
-
-.faq-item{
-background:#1e293b;
-padding:20px;
-margin-bottom:15px;
-border-radius:15px;
-}
-
-.faq-item h3{
-margin-bottom:10px;
-color:#38bdf8;
-}
-
-/* Contact */
-
-.contact{
-text-align:center;
-}
-
-.flags{
-font-size:40px;
-margin-bottom:15px;
-}
-
-.phone{
-font-size:30px;
-font-weight:bold;
-margin:15px 0;
-}
-
-.soon{
-display:inline-block;
-background:#22c55e;
-padding:10px 25px;
-border-radius:50px;
-font-weight:bold;
-margin:15px 0;
-}
-
-.email{
-font-size:22px;
-color:#38bdf8;
-}
-
-footer{
-background:#111827;
-padding:30px;
-text-align:center;
-color:#94a3b8;
-}
-
-/* Animation */
-
-.hidden{
-opacity:0;
-transform:translateY(40px);
-transition:1s;
-}
-
-.show{
-opacity:1;
-transform:translateY(0);
-}
-
-/* Mobile */
-
-@media(max-width:768px){
-
-.hero-content h1{
-font-size:40px;
-}
-
-.hero-content p{
-font-size:18px;
-}
-
-.menu{
-display:none;
-}
-
-.section-title h2{
-font-size:32px;
-}
-
-.counter{
-font-size:38px;
-}
-
-.phone{
-font-size:22px;
-}
-
-}
-
-</style>
 </head>
+
 <body>
 
-<header>
+<!-- Loader -->
+
+<div id="loader">
+<div class="spinner"></div>
+</div>
+
+<!-- Header -->
+
+<header id="header">
 
 <div class="container navbar">
 
-<div class="logo" id="siteName">
-SiteBuilder
-</div>
+<a href="#" class="logo">
+<img src="logo.png" alt="HAITHAM">
+<span id="siteName">HAITHAM</span>
+</a>
 
-<nav class="menu">
+<nav id="navMenu">
+
 <a href="#features">المميزات</a>
-<a href="#templates">القوالب</a>
+<a href="#portfolio">الأعمال</a>
 <a href="#pricing">الباقات</a>
+<a href="#partners">الشركاء</a>
+<a href="#blog">المدونة</a>
 <a href="#faq">الأسئلة</a>
 <a href="#contact">التواصل</a>
+
 </nav>
+
+<div id="menuBtn">
+<i class="fas fa-bars"></i>
+</div>
 
 </div>
 
 </header>
 
-<!-- HERO -->
+<!-- Hero -->
 
 <section class="hero">
 
 <div class="slider">
 
 <div class="slide active"
-style="background-image:url('https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=1600');"></div>
+style="background-image:url('https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=1600');">
+</div>
 
 <div class="slide"
-style="background-image:url('https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1600');"></div>
+style="background-image:url('https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1600');">
+</div>
 
 <div class="slide"
-style="background-image:url('https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=1600');"></div>
+style="background-image:url('https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=1600');">
+</div>
 
 </div>
 
@@ -455,21 +90,21 @@ style="background-image:url('https://images.unsplash.com/photo-1516321318423-f06
 <div>
 
 <h1 id="heroTitle">
-منصة إنشاء المواقع العربية
+منصة إنشاء المواقع والمتاجر الإلكترونية
 </h1>
 
 <p id="heroDescription">
-أنشئ موقعك أو متجرك الإلكتروني خلال دقائق بدون برمجة.
+أنشئ موقعك أو متجرك الإلكتروني خلال دقائق مع تصميم احترافي متوافق مع جميع الأجهزة.
 </p>
 
-<div class="btns">
+<div class="hero-buttons">
 
-<a href="#pricing" class="btn btn-primary">
+<a href="#pricing" class="btn primary">
 ابدأ الآن
 </a>
 
-<a href="#features" class="btn btn-outline">
-استكشف المميزات
+<a href="#portfolio" class="btn outline">
+مشاهدة الأعمال
 </a>
 
 </div>
@@ -480,18 +115,18 @@ style="background-image:url('https://images.unsplash.com/photo-1516321318423-f06
 
 </section>
 
-<!-- STATS -->
+<!-- Stats -->
 
 <section class="stats">
 
 <div class="container">
 
 <div class="section-title">
-<h2>إحصائيات المنصة</h2>
-<p>أرقام تعكس طموح المنصة</p>
+<h2>إحصائياتنا</h2>
+<p>أرقام تعكس نجاحنا</p>
 </div>
 
-<div class="stats-grid" id="stats">
+<div class="stats-grid" id="statsContainer">
 
 <!-- app.js -->
 
@@ -501,7 +136,7 @@ style="background-image:url('https://images.unsplash.com/photo-1516321318423-f06
 
 </section>
 
-<!-- FEATURES -->
+<!-- Features -->
 
 <section id="features">
 
@@ -509,7 +144,7 @@ style="background-image:url('https://images.unsplash.com/photo-1516321318423-f06
 
 <div class="section-title">
 <h2>مميزات المنصة</h2>
-<p>كل ما تحتاجه لإنشاء موقع احترافي</p>
+<p>كل ما تحتاجه لإطلاق مشروعك الرقمي</p>
 </div>
 
 <div class="grid" id="featuresContainer">
@@ -520,18 +155,57 @@ style="background-image:url('https://images.unsplash.com/photo-1516321318423-f06
 
 </section>
 
-<!-- TEMPLATES -->
+<!-- Portfolio -->
 
-<section id="templates">
+<section id="portfolio" class="dark">
 
 <div class="container">
 
 <div class="section-title">
-<h2>القوالب الجاهزة</h2>
-<p>اختر القالب المناسب لنشاطك</p>
+<h2>أحدث أعمالنا</h2>
+<p>نماذج من المشاريع التي قمنا بتنفيذها</p>
 </div>
 
-<div class="grid" id="templatesContainer">
+<div class="grid">
+
+<div class="card">
+
+<img src="https://images.unsplash.com/photo-1556740749-887f6717d7e4?w=900" alt="">
+
+<div class="content">
+<h3>متجر إلكتروني</h3>
+<p>
+تصميم متجر احترافي مع لوحة تحكم متكاملة.
+</p>
+</div>
+
+</div>
+
+<div class="card">
+
+<img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=900" alt="">
+
+<div class="content">
+<h3>شركة مقاولات</h3>
+<p>
+موقع شركة احترافي متوافق مع الجوال.
+</p>
+</div>
+
+</div>
+
+<div class="card">
+
+<img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=900" alt="">
+
+<div class="content">
+<h3>مركز طبي</h3>
+<p>
+نظام حجوزات ومواعيد إلكتروني متكامل.
+</p>
+</div>
+
+</div>
 
 </div>
 
@@ -539,35 +213,77 @@ style="background-image:url('https://images.unsplash.com/photo-1516321318423-f06
 
 </section>
 
-<!-- PRICING -->
+<!-- Pricing -->
 
-<section class="pricing" id="pricing">
+<section id="pricing">
 
 <div class="container">
 
 <div class="section-title">
 <h2>الباقات</h2>
-<p>أسعار مرنة تناسب الجميع</p>
+<p>اختر الخطة المناسبة لك</p>
 </div>
 
-<div class="price-grid">
+<div class="pricing-grid">
 
 <div class="price-card">
+
 <h3>مجانية</h3>
-<div class="price">0</div>
-<p>ابدأ مجاناً</p>
+
+<div class="price">
+0
 </div>
 
-<div class="price-card">
+<ul>
+<li>موقع أساسي</li>
+<li>دعم محدود</li>
+<li>قالب مجاني</li>
+</ul>
+
+<a href="#" class="btn primary">
+ابدأ
+</a>
+
+</div>
+
+<div class="price-card featured">
+
 <h3>احترافية</h3>
-<div class="price">49</div>
-<p>ريال / شهر</p>
+
+<div class="price">
+49
+</div>
+
+<ul>
+<li>دومين خاص</li>
+<li>دعم كامل</li>
+<li>قوالب احترافية</li>
+</ul>
+
+<a href="#" class="btn primary">
+اشترك
+</a>
+
 </div>
 
 <div class="price-card">
+
 <h3>شركات</h3>
-<div class="price">199</div>
-<p>ريال / شهر</p>
+
+<div class="price">
+199
+</div>
+
+<ul>
+<li>مواقع غير محدودة</li>
+<li>استضافة قوية</li>
+<li>مدير حساب</li>
+</ul>
+
+<a href="#" class="btn primary">
+اشترك
+</a>
+
 </div>
 
 </div>
@@ -576,35 +292,103 @@ style="background-image:url('https://images.unsplash.com/photo-1516321318423-f06
 
 </section>
 
-<!-- TESTIMONIALS -->
+<!-- Partners -->
 
-<section class="testimonials">
+<section id="partners" class="dark">
+
+<div class="container">
+
+<div class="section-title">
+<h2>شركاء النجاح</h2>
+<p>نفخر بثقة عملائنا</p>
+</div>
+
+<div class="partners">
+
+<div>Google</div>
+<div>Microsoft</div>
+<div>Amazon</div>
+<div>Meta</div>
+<div>Oracle</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- Testimonials -->
+
+<section>
 
 <div class="container">
 
 <div class="section-title">
 <h2>آراء العملاء</h2>
-<p>ماذا يقول عملاؤنا</p>
+<p>تجارب حقيقية</p>
 </div>
 
 <div class="grid">
 
 <div class="testimonial">
 ⭐⭐⭐⭐⭐
-<br><br>
-أفضل منصة عربية لإنشاء المواقع بسهولة.
+<p>
+أفضل تجربة لإنشاء موقع إلكتروني.
+</p>
 </div>
 
 <div class="testimonial">
 ⭐⭐⭐⭐⭐
-<br><br>
-تصميم احترافي وسرعة ممتازة.
+<p>
+فريق محترف وسرعة تنفيذ ممتازة.
+</p>
 </div>
 
 <div class="testimonial">
 ⭐⭐⭐⭐⭐
-<br><br>
-واجهة سهلة جداً ودعم فني رائع.
+<p>
+أنصح بها لكل أصحاب المشاريع.
+</p>
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- Blog -->
+
+<section id="blog" class="dark">
+
+<div class="container">
+
+<div class="section-title">
+<h2>أحدث المقالات</h2>
+<p>نصائح وتقنيات حديثة</p>
+</div>
+
+<div class="grid">
+
+<div class="card">
+<div class="content">
+<h3>كيفية إنشاء متجر إلكتروني ناجح</h3>
+<p>دليل شامل للمبتدئين.</p>
+</div>
+</div>
+
+<div class="card">
+<div class="content">
+<h3>أفضل طرق تحسين SEO</h3>
+<p>ارفع ترتيب موقعك في جوجل.</p>
+</div>
+</div>
+
+<div class="card">
+<div class="content">
+<h3>أهمية سرعة الموقع</h3>
+<p>تحسين تجربة المستخدم.</p>
+</div>
 </div>
 
 </div>
@@ -623,28 +407,32 @@ style="background-image:url('https://images.unsplash.com/photo-1516321318423-f06
 <h2>الأسئلة الشائعة</h2>
 </div>
 
+<div class="faq">
+
 <div class="faq-item">
 <h3>هل أحتاج إلى خبرة برمجية؟</h3>
-<p>لا، المنصة مصممة للجميع.</p>
+<p>لا، المنصة مناسبة للجميع.</p>
 </div>
 
 <div class="faq-item">
 <h3>هل يمكن إنشاء متجر إلكتروني؟</h3>
-<p>نعم، مع إدارة منتجات وطلبات كاملة.</p>
+<p>نعم مع إدارة كاملة للمنتجات والطلبات.</p>
 </div>
 
 <div class="faq-item">
 <h3>هل يوجد دعم فني؟</h3>
-<p>نعم، دعم فني متواصل.</p>
+<p>نعم دعم متواصل على مدار الساعة.</p>
+</div>
+
 </div>
 
 </div>
 
 </section>
 
-<!-- CONTACT -->
+<!-- Contact -->
 
-<section class="contact" id="contact">
+<section id="contact" class="contact">
 
 <div class="container">
 
@@ -665,15 +453,57 @@ style="background-image:url('https://images.unsplash.com/photo-1516321318423-f06
 </div>
 
 <div class="email">
-📧 HW274@gmail.com
+📧 hw274@gmail.com
 </div>
+
+<form class="contact-form">
+
+<input type="text" placeholder="الاسم">
+
+<input type="email" placeholder="البريد الإلكتروني">
+
+<textarea placeholder="اكتب رسالتك"></textarea>
+
+<button type="submit" class="btn primary">
+إرسال الرسالة
+</button>
+
+</form>
 
 </div>
 
 </section>
 
+<!-- WhatsApp -->
+
+<a href="https://wa.me/966558020154"
+target="_blank"
+class="whatsapp">
+
+<i class="fab fa-whatsapp"></i>
+
+</a>
+
+<!-- Top Button -->
+
+<button id="topBtn">
+
+<i class="fas fa-arrow-up"></i>
+
+</button>
+
+<!-- Footer -->
+
 <footer>
-© 2026 SiteBuilder جميع الحقوق محفوظة
+
+<div class="container">
+
+<p>
+© 2026 HAITHAM جميع الحقوق محفوظة
+</p>
+
+</div>
+
 </footer>
 
 <script src="app.js"></script>
